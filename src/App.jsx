@@ -4,13 +4,17 @@ import simplechoice from './data/simplechoice.json'
 import notCovered from './data/not_covered.json'
 
 const PLANS = [
-  { id: 'bcbsfl', label: 'ValueScript Rx', plan: 'Florida Blue', effective: 'April 2026', data: bcbsfl },
-  { id: 'simplechoice', label: 'ValueScript SimpleChoice', plan: 'Florida Blue', effective: 'April 2026', data: simplechoice },
+  { id: 'bcbsfl',      label: 'ValueScript Rx',         plan: 'Florida Blue', effective: 'April 2026', data: bcbsfl },
+  { id: 'simplechoice',label: 'ValueScript SimpleChoice',plan: 'Florida Blue', effective: 'April 2026', data: simplechoice },
 ]
 
 const TIER_LABELS = {
-  1: 'Preventive', 2: 'Condition Care Generic', 3: 'Low-Cost Generic',
-  4: 'Condition Care Brand', 5: 'High-Cost Generic / Preferred Brand', 6: 'Specialty / Non-Preferred',
+  1: 'Preventive',
+  2: 'Condition Care Generic',
+  3: 'Low-Cost Generic',
+  4: 'Condition Care Brand',
+  5: 'High-Cost Generic / Preferred Brand',
+  6: 'Specialty / Non-Preferred',
 }
 
 const SHEETS_URL = 'https://docs.google.com/spreadsheets/d/1ZYoF3KZVVOARGSa6zn2IVXfG9Lz31m0qykO37kUndwo/edit?usp=sharing'
@@ -22,9 +26,8 @@ function highlight(text, query) {
   if (idx === -1) return text
   return <>{text.slice(0, idx)}<mark>{text.slice(idx, idx + query.length)}</mark>{text.slice(idx + query.length)}</>
 }
-
 function drugMatchesQuery(drug, q) { return drug.name.toLowerCase().includes(q) }
-function nameMatchesQuery(name, q) { return name.toLowerCase().includes(q) }
+function nameMatchesQuery(name, q)  { return name.toLowerCase().includes(q) }
 
 const ChevronRight = ({ className }) => (
   <svg className={className} viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -89,17 +92,17 @@ function DrugSection({ drugs, query, type, defaultOpen }) {
 
 function ConditionBlock({ condition, query }) {
   const q = query.trim().toLowerCase()
-  const filteredClean = useMemo(() => q ? condition.clean.filter(d => drugMatchesQuery(d, q)) : condition.clean, [condition.clean, q])
+  const filteredClean      = useMemo(() => q ? condition.clean.filter(d => drugMatchesQuery(d, q))      : condition.clean,      [condition.clean, q])
   const filteredRestricted = useMemo(() => q ? condition.restricted.filter(d => drugMatchesQuery(d, q)) : condition.restricted, [condition.restricted, q])
   const totalMatch = filteredClean.length + filteredRestricted.length
   const hasMatch = q && totalMatch > 0
-  const noMatch = q && totalMatch === 0
+  const noMatch  = q && totalMatch === 0
   const [manualOpen, setManualOpen] = useState(null)
   const open = manualOpen !== null ? manualOpen : (hasMatch || false)
   const handleToggle = useCallback(() => setManualOpen(o => o === null ? !hasMatch : !o), [hasMatch])
   useMemo(() => { setManualOpen(null) }, [q])
   if (noMatch) return null
-  const cleanCount = q ? filteredClean.length : condition.clean.length
+  const cleanCount = q ? filteredClean.length      : condition.clean.length
   const reqCount   = q ? filteredRestricted.length : condition.restricted.length
   return (
     <div className={`condition-block ${open ? 'open' : ''} ${hasMatch ? 'has-match' : ''}`}>
@@ -108,13 +111,13 @@ function ConditionBlock({ condition, query }) {
         <span className="condition-name">{condition.condition}</span>
         <div className="condition-meta">
           {cleanCount > 0 && <span className="meta-pill clean">{cleanCount} open</span>}
-          {reqCount > 0 && <span className="meta-pill req">{reqCount} restriction</span>}
+          {reqCount   > 0 && <span className="meta-pill req">{reqCount} restriction</span>}
         </div>
       </button>
       {open && (
         <div className="condition-body">
-          <DrugSection drugs={q ? filteredClean : condition.clean} query={q} type="clean" defaultOpen={true} />
-          <DrugSection drugs={q ? filteredRestricted : condition.restricted} query={q} type="restricted" defaultOpen={!!q} />
+          <DrugSection drugs={q ? filteredClean      : condition.clean}      query={q} type="clean"      defaultOpen={true} />
+          <DrugSection drugs={q ? filteredRestricted : condition.restricted} query={q} type="restricted" defaultOpen={!!q}   />
         </div>
       )}
     </div>
@@ -130,7 +133,7 @@ function NonPreferredBlock({ planData, query }) {
     return q ? sorted.filter(d => drugMatchesQuery(d, q)) : sorted
   }, [planData, q])
   const hasMatch = q && tier6.length > 0
-  const noMatch = q && tier6.length === 0
+  const noMatch  = q && tier6.length === 0
   if (noMatch) return null
   const isOpen = open || hasMatch
   useMemo(() => { if (!q) setOpen(false) }, [q])
@@ -162,10 +165,10 @@ function NotCoveredBlock({ query }) {
   const [open, setOpen] = useState(false)
   const [showAppendix, setShowAppendix] = useState(false)
   const q = query.trim().toLowerCase()
-  const filtered = useMemo(() => q ? notCovered.main.filter(d => nameMatchesQuery(d, q)) : notCovered.main, [q])
+  const filtered    = useMemo(() => q ? notCovered.main.filter(d => nameMatchesQuery(d, q))     : notCovered.main,     [q])
   const filteredApp = useMemo(() => q ? notCovered.appendix.filter(d => nameMatchesQuery(d, q)) : notCovered.appendix, [q])
   const hasMatch = q && (filtered.length + filteredApp.length) > 0
-  const noMatch = q && filtered.length === 0 && filteredApp.length === 0
+  const noMatch  = q && filtered.length === 0 && filteredApp.length === 0
   if (noMatch) return null
   const isOpen = open || hasMatch
   useMemo(() => { if (!q) setOpen(false) }, [q])
@@ -203,22 +206,9 @@ function NotCoveredBlock({ query }) {
   )
 }
 
-function TierLegend() {
-  return (
-    <div className="tier-legend">
-      {Object.entries(TIER_LABELS).map(([t, label]) => (
-        <span key={t} className="legend-item">
-          <span className={`tier-badge tier-${t}`}>{t}</span><span>{label}</span>
-        </span>
-      ))}
-    </div>
-  )
-}
-
 export default function App() {
   const [activePlan, setActivePlan] = useState(PLANS[0])
   const [query, setQuery] = useState('')
-  const [showLegend, setShowLegend] = useState(false)
   const q = query.trim().toLowerCase()
 
   const totalMatches = useMemo(() => {
@@ -231,12 +221,19 @@ export default function App() {
 
   return (
     <>
+      {/* Header */}
       <header className="app-header">
         <div className="wordmark">Choice<span>Rx</span></div>
-        <div className="header-subtitle">myBlue formulary reference</div>
-        <div className="header-right">For clinical reference only. Always verify coverage with the plan.</div>
       </header>
 
+      {/* Sub-banner */}
+      <div className="sub-banner">
+        For reference only.&nbsp;
+        <span>Source: <a href={SOURCE_URL} target="_blank" rel="noopener noreferrer">Florida Blue Medication Guide</a></span>
+        &nbsp;·&nbsp;Updated April 2026
+      </div>
+
+      {/* Search */}
       <div className="search-wrap">
         <div className="search-inner">
           <SearchIcon className="search-icon" />
@@ -244,20 +241,16 @@ export default function App() {
             value={query} onChange={e => setQuery(e.target.value)} autoComplete="off" spellCheck={false} />
           {query && <button className="search-clear" onClick={() => setQuery('')} aria-label="Clear">✕</button>}
         </div>
-        {q ? (
+        {q && (
           <div className="search-count">
             {totalMatches === 0 ? 'No matches found' : `${totalMatches} drug${totalMatches !== 1 ? 's' : ''} matched`}
-          </div>
-        ) : (
-          <div className="search-count" style={{ cursor: 'pointer' }} onClick={() => setShowLegend(l => !l)}>
-            {showLegend ? '▲ Hide' : '▼ Show'} tier legend
           </div>
         )}
       </div>
 
-      {showLegend && !q && <TierLegend />}
-
       <main className="main-content">
+
+        {/* Formulary selector */}
         <div className="formulary-selector">
           <span className="formulary-label">Formulary</span>
           <div className="formulary-tabs">
@@ -271,20 +264,24 @@ export default function App() {
           </div>
         </div>
 
-        <div className="ref-links">
-          <a href={SOURCE_URL} target="_blank" rel="noopener noreferrer" className="ref-link">
-            Florida Blue Medication Guide <ExtIcon />
-          </a>
-          <a href={SHEETS_URL} target="_blank" rel="noopener noreferrer" className="ref-link">
-            Full Formulary Spreadsheet (Apr 2026) <ExtIcon />
-          </a>
-        </div>
-
+        {/* Special tiles */}
         <div className="special-grid">
           <NonPreferredBlock planData={activePlan.data} query={query} />
           <NotCoveredBlock query={query} />
         </div>
 
+        {/* Section heading + tier legend */}
+        <div className="section-heading">Search Covered Drugs by Condition</div>
+        <div className="tier-legend-inline">
+          {Object.entries(TIER_LABELS).map(([t, label]) => (
+            <span key={t} className="legend-item">
+              <span className={`tier-badge tier-${t}`}>{t}</span>
+              <span>{label}</span>
+            </span>
+          ))}
+        </div>
+
+        {/* Condition grid */}
         <div className="condition-grid">
           {activePlan.data.map(condition => (
             <ConditionBlock key={condition.condition} condition={condition} query={query} />
@@ -293,15 +290,28 @@ export default function App() {
 
         {q && totalMatches === 0 && (
           <div className="empty-state">
-            <p>No drugs matched "<strong>{query}</strong>" in this formulary.</p>
+            <p>No drugs matched "<strong>{query}</strong>".</p>
             <p style={{ marginTop: 6, fontSize: 12 }}>Try a partial name or the generic name.</p>
           </div>
         )}
+
+        {/* Resources */}
+        <div className="resources-section">
+          <div className="resources-label">Resources</div>
+          <div className="resources-links">
+            <a href={SHEETS_URL} target="_blank" rel="noopener noreferrer" className="resource-link">
+              Formulary Spreadsheet (Updated April 2026) <ExtIcon />
+            </a>
+            <a href={SOURCE_URL} target="_blank" rel="noopener noreferrer" className="resource-link">
+              Website: Florida Blue Medication Guides (Current) <ExtIcon />
+            </a>
+          </div>
+        </div>
+
       </main>
 
       <footer className="app-footer">
-        ChoiceRx · {activePlan.plan} {activePlan.label} · {activePlan.effective} ·{' '}
-        <a href={SOURCE_URL} target="_blank" rel="noopener noreferrer">Source</a>
+        ChoiceRx · myBlue · {activePlan.label} · {activePlan.effective}
       </footer>
     </>
   )
