@@ -477,7 +477,6 @@ body { min-height: 100vh; background: var(--bg); }
   letter-spacing: 0.5px;
   text-transform: uppercase;
   color: var(--text-muted);
-  margin-bottom: 10px;
 }
 .resources-links { display: flex; gap: 10px; flex-wrap: wrap; }
 .resource-link {
@@ -496,22 +495,44 @@ body { min-height: 100vh; background: var(--bg); }
 
 
 /* ── Impact Estimator ── */
-.estimator-link {
-  margin-top: 14px;
-  display: inline-block;
-  background: none;
-  border: none;
-  font-size: 11px;
-  color: var(--text-muted);
-  cursor: pointer;
-  padding: 0;
-  font-family: 'DM Sans', sans-serif;
-  letter-spacing: 0.2px;
-  text-decoration: underline;
-  text-underline-offset: 3px;
-  transition: color 0.15s;
+.resources-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
 }
-.estimator-link:hover { color: var(--text-mid); }
+
+.estimator-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--bg-3);
+  border: 1px solid var(--border-mid);
+  border-radius: var(--radius);
+  padding: 5px 12px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-mid);
+  cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
+  transition: border-color 0.15s, color 0.15s, background 0.15s;
+}
+.estimator-btn:hover {
+  border-color: var(--blue);
+  color: var(--blue);
+  background: var(--blue-dim);
+}
+
+.beta-tag {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+  background: rgba(59,130,246,0.15);
+  color: var(--blue);
+  padding: 1px 5px;
+  border-radius: 4px;
+}
 
 .estimator-overlay {
   position: fixed;

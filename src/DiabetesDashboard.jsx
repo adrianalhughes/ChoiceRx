@@ -133,9 +133,7 @@ export default function DiabetesDashboard() {
   return (
     <div style={S.wrap}>
       <div style={S.inner}>
-        <div style={S.subtitle}>Department of Pharmacy · Diabetes Total Cost of Care</div>
-        <h1 style={S.h1}>Do These Drugs Pay for Themselves?</h1>
-        <p style={S.lead}>Every green number is money we keep — complications avoided, hospitalizations prevented, downstream costs reduced</p>
+        <div style={{ ...S.subtitle, marginBottom: 20 }}>Impact Estimator · Diabetes Total Cost of Care</div>
 
         {/* Example patients */}
         <div style={{ marginBottom: 24 }}>

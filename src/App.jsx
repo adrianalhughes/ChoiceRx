@@ -299,7 +299,12 @@ export default function App() {
 
         {/* Resources */}
         <div className="resources-section">
-          <div className="resources-label">Resources</div>
+          <div className="resources-header">
+            <div className="resources-label">Resources</div>
+            <button className="estimator-btn" onClick={() => setShowEstimator(true)}>
+              Impact Estimator <span className="beta-tag">Beta</span>
+            </button>
+          </div>
           <div className="resources-links">
             <a href={SHEETS_URL} target="_blank" rel="noopener noreferrer" className="resource-link">
               Formulary Spreadsheet (Updated April 2026) <ExtIcon />
@@ -308,9 +313,7 @@ export default function App() {
               Website: Florida Blue Medication Guides (Current) <ExtIcon />
             </a>
           </div>
-          <button className="estimator-link" onClick={() => setShowEstimator(true)}>
-            Impact Estimator
-          </button>
+
         </div>
 
         {/* Impact Estimator modal */}
