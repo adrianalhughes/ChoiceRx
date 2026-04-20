@@ -1,5 +1,5 @@
-import { useState, useMemo, useCallback } from 'react'
 import DiabetesDashboard from './DiabetesDashboard'
+import { useState, useMemo, useCallback } from 'react'
 import bcbsfl from './data/bcbsfl.json'
 import simplechoice from './data/simplechoice.json'
 import notCovered from './data/not_covered.json'
@@ -208,8 +208,8 @@ function NotCoveredBlock({ query }) {
 }
 
 export default function App() {
-  const [view, setView] = useState('formulary')
   const [activePlan, setActivePlan] = useState(PLANS[0])
+  const [showEstimator, setShowEstimator] = useState(false)
   const [query, setQuery] = useState('')
   const q = query.trim().toLowerCase()
 
@@ -226,18 +226,8 @@ export default function App() {
       {/* Header */}
       <header className="app-header">
         <div className="wordmark">Choice<span>Rx</span></div>
-        <nav className="header-nav">
-          <button className={`nav-btn ${view === 'formulary' ? 'active' : ''}`} onClick={() => setView('formulary')}>
-            Formulary
-          </button>
-          <button className={`nav-btn ${view === 'diabetes' ? 'active' : ''}`} onClick={() => setView('diabetes')}>
-            Diabetes Cost Calculator
-          </button>
-        </nav>
       </header>
 
-      {view === 'diabetes' && <DiabetesDashboard />}
-      {view === 'formulary' && <>
       {/* Sub-banner */}
       <div className="sub-banner">
         For reference only.&nbsp;
@@ -318,16 +308,26 @@ export default function App() {
               Website: Florida Blue Medication Guides (Current) <ExtIcon />
             </a>
           </div>
+          <button className="estimator-link" onClick={() => setShowEstimator(true)}>
+            Impact Estimator
+          </button>
         </div>
+
+        {/* Impact Estimator modal */}
+        {showEstimator && (
+          <div className="estimator-overlay" onClick={e => { if (e.target === e.currentTarget) setShowEstimator(false) }}>
+            <div className="estimator-modal">
+              <button className="estimator-close" onClick={() => setShowEstimator(false)}>✕</button>
+              <DiabetesDashboard />
+            </div>
+          </div>
+        )}
 
       </main>
 
-      </>
-      }
-      {view === 'formulary' && <footer className="app-footer">
+      <footer className="app-footer">
         ChoiceRx · myBlue · {activePlan.label} · {activePlan.effective}
-      </footer>}
-
+      </footer>
     </>
   )
 }
