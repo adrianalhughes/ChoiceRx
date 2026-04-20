@@ -1,4 +1,5 @@
 import { useState, useMemo, useCallback } from 'react'
+import DiabetesDashboard from './DiabetesDashboard'
 import bcbsfl from './data/bcbsfl.json'
 import simplechoice from './data/simplechoice.json'
 import notCovered from './data/not_covered.json'
@@ -207,6 +208,7 @@ function NotCoveredBlock({ query }) {
 }
 
 export default function App() {
+  const [view, setView] = useState('formulary')
   const [activePlan, setActivePlan] = useState(PLANS[0])
   const [query, setQuery] = useState('')
   const q = query.trim().toLowerCase()
@@ -224,8 +226,18 @@ export default function App() {
       {/* Header */}
       <header className="app-header">
         <div className="wordmark">Choice<span>Rx</span></div>
+        <nav className="header-nav">
+          <button className={`nav-btn ${view === 'formulary' ? 'active' : ''}`} onClick={() => setView('formulary')}>
+            Formulary
+          </button>
+          <button className={`nav-btn ${view === 'diabetes' ? 'active' : ''}`} onClick={() => setView('diabetes')}>
+            Diabetes Cost Calculator
+          </button>
+        </nav>
       </header>
 
+      {view === 'diabetes' && <DiabetesDashboard />}
+      {view === 'formulary' && <>
       {/* Sub-banner */}
       <div className="sub-banner">
         For reference only.&nbsp;
@@ -310,9 +322,12 @@ export default function App() {
 
       </main>
 
-      <footer className="app-footer">
+      </>
+      }
+      {view === 'formulary' && <footer className="app-footer">
         ChoiceRx · myBlue · {activePlan.label} · {activePlan.effective}
-      </footer>
+      </footer>}
+
     </>
   )
 }

@@ -76,6 +76,36 @@ body { min-height: 100vh; background: var(--bg); }
   color: var(--text-muted);
 }
 
+
+/* ── Header nav ── */
+.header-nav {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 4px;
+  background: var(--bg-3);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 3px;
+}
+
+.nav-btn {
+  background: none;
+  border: none;
+  border-radius: 6px;
+  padding: 5px 14px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+  white-space: nowrap;
+  font-family: 'DM Sans', sans-serif;
+}
+.nav-btn:hover { background: var(--bg-4); color: var(--text); }
+.nav-btn.active { background: var(--blue); color: var(--white); font-weight: 600; }
+
 /* ── Sub-header banner ── */
 .sub-banner {
   background: var(--bg-3);
