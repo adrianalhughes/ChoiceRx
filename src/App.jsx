@@ -1,5 +1,5 @@
 import DiabetesDashboard from './DiabetesDashboard'
-import { useState, useMemo, useCallback } from 'react'
+import { useState, useMemo, useCallback, useEffect } from 'react'
 import bcbsfl from './data/bcbsfl.json'
 import simplechoice from './data/simplechoice.json'
 import notCovered from './data/not_covered.json'
@@ -101,7 +101,7 @@ function ConditionBlock({ condition, query }) {
   const [manualOpen, setManualOpen] = useState(null)
   const open = manualOpen !== null ? manualOpen : (hasMatch || false)
   const handleToggle = useCallback(() => setManualOpen(o => o === null ? !hasMatch : !o), [hasMatch])
-  useMemo(() => { setManualOpen(null) }, [q])
+  useEffect(() => { setManualOpen(null) }, [q])
   if (noMatch) return null
   const cleanCount = q ? filteredClean.length      : condition.clean.length
   const reqCount   = q ? filteredRestricted.length : condition.restricted.length
@@ -137,7 +137,7 @@ function NonPreferredBlock({ planData, query }) {
   const noMatch  = q && tier6.length === 0
   if (noMatch) return null
   const isOpen = open || hasMatch
-  useMemo(() => { if (!q) setOpen(false) }, [q])
+  useEffect(() => { if (!q) setOpen(false) }, [q])
   return (
     <div className={`condition-block special-block nonpreferred-block ${isOpen ? 'open' : ''} ${hasMatch ? 'has-match' : ''}`}>
       <button className="condition-header" onClick={() => setOpen(o => !o)} aria-expanded={isOpen}>
@@ -172,7 +172,7 @@ function NotCoveredBlock({ query }) {
   const noMatch  = q && filtered.length === 0 && filteredApp.length === 0
   if (noMatch) return null
   const isOpen = open || hasMatch
-  useMemo(() => { if (!q) setOpen(false) }, [q])
+  useEffect(() => { if (!q) setOpen(false) }, [q])
   return (
     <div className={`condition-block special-block notcovered-block ${isOpen ? 'open' : ''} ${hasMatch ? 'has-match' : ''}`}>
       <button className="condition-header" onClick={() => setOpen(o => !o)} aria-expanded={isOpen}>
@@ -228,12 +228,7 @@ export default function App() {
         <div className="wordmark">Choice<span>Rx</span></div>
       </header>
 
-      {/* Sub-banner */}
-      <div className="sub-banner">
-        For reference only.&nbsp;
-        <span>Source: <a href={SOURCE_URL} target="_blank" rel="noopener noreferrer">Florida Blue Medication Guide</a></span>
-        &nbsp;·&nbsp;Updated April 2026
-      </div>
+
 
       {/* Search */}
       <div className="search-wrap">
@@ -264,6 +259,13 @@ export default function App() {
               </button>
             ))}
           </div>
+        </div>
+
+        {/* Source note */}
+        <div className="source-note">
+          For reference only. Source:{' '}
+          <a href={SOURCE_URL} target="_blank" rel="noopener noreferrer">Florida Blue Medication Guide</a>
+          {' '}· Updated April 2026
         </div>
 
         {/* Special tiles */}
