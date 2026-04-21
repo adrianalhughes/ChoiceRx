@@ -233,6 +233,7 @@ export default function App() {
               <button key={plan.id}
                 className={`formulary-tab ${activePlan.id === plan.id ? 'active' : ''}`}
                 onClick={() => { setActivePlan(plan); setQuery('') }}>
+                <span className="tab-plan">myBlue</span>
                 <span className="tab-name">{plan.label}</span>
                 <span className="tab-date">{plan.effective}</span>
               </button>
@@ -308,12 +309,7 @@ export default function App() {
         )}
 
         <div className="resources-section">
-          <div className="resources-header">
-            <div className="resources-label">Resources</div>
-            <button className="estimator-btn" onClick={() => setShowEstimator(true)}>
-              Impact Estimator <span className="beta-tag">Beta</span>
-            </button>
-          </div>
+          <div className="resources-label">Resources</div>
           <div className="resources-links">
             <a href={SHEETS_URL} target="_blank" rel="noopener noreferrer" className="resource-link">
               Formulary Spreadsheet (Updated April 2026) <ExtIcon />
@@ -321,6 +317,9 @@ export default function App() {
             <a href={SOURCE_URL} target="_blank" rel="noopener noreferrer" className="resource-link">
               Website: Florida Blue Medication Guides (Current) <ExtIcon />
             </a>
+            <button className="resource-link estimator-btn" onClick={() => setShowEstimator(true)}>
+              Impact Estimator <span className="beta-tag">Beta</span>
+            </button>
           </div>
         </div>
 

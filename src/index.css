@@ -204,6 +204,14 @@ body { min-height: 100vh; background: var(--bg); }
   border-color: var(--blue);
   background: var(--blue-dim);
 }
+.tab-plan {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: var(--blue);
+  opacity: 0.7;
+}
 .tab-name {
   font-size: 13px;
   font-weight: 600;
@@ -507,32 +515,12 @@ body { min-height: 100vh; background: var(--bg); }
 
 
 /* ── Impact Estimator ── */
-.resources-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 10px;
-}
-
 .estimator-btn {
+  cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  background: var(--bg-3);
-  border: 1px solid var(--border-mid);
-  border-radius: var(--radius);
-  padding: 5px 12px;
-  font-size: 12px;
-  font-weight: 500;
-  color: var(--text-mid);
-  cursor: pointer;
-  font-family: 'DM Sans', sans-serif;
-  transition: border-color 0.15s, color 0.15s, background 0.15s;
-}
-.estimator-btn:hover {
-  border-color: var(--blue);
-  color: var(--blue);
-  background: var(--blue-dim);
 }
 
 .beta-tag {
