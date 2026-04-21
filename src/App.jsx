@@ -1,35 +1,37 @@
 import DiabetesDashboard from './DiabetesDashboard'
-import { useState, useMemo, useCallback, useEffect } from 'react'
+import { useState, useMemo } from 'react'
 import bcbsfl from './data/bcbsfl.json'
 import simplechoice from './data/simplechoice.json'
 import notCovered from './data/not_covered.json'
 
 const PLANS = [
-  { id: 'bcbsfl',      label: 'ValueScript Rx',         plan: 'Florida Blue', effective: 'April 2026', data: bcbsfl },
-  { id: 'simplechoice',label: 'ValueScript SimpleChoice',plan: 'Florida Blue', effective: 'April 2026', data: simplechoice },
+  { id: 'bcbsfl',       label: 'ValueScript Rx',          plan: 'Florida Blue', effective: 'April 2026', data: bcbsfl },
+  { id: 'simplechoice', label: 'ValueScript SimpleChoice', plan: 'Florida Blue', effective: 'April 2026', data: simplechoice },
 ]
 
 const TIER_LABELS = {
-  1: 'Preventive',
-  2: 'Condition Care Generic',
-  3: 'Low-Cost Generic',
-  4: 'Condition Care Brand',
-  5: 'High-Cost Generic / Preferred Brand',
-  6: 'Specialty / Non-Preferred',
+  1: 'Preventive', 2: 'Condition Care Generic', 3: 'Low-Cost Generic',
+  4: 'Condition Care Brand', 5: 'High-Cost Generic / Preferred Brand', 6: 'Specialty / Non-Preferred',
 }
 
 const SHEETS_URL = 'https://docs.google.com/spreadsheets/d/1ZYoF3KZVVOARGSa6zn2IVXfG9Lz31m0qykO37kUndwo/edit?usp=sharing'
 const SOURCE_URL = 'https://www.floridablue.com/members/tools-resources/pharmacy/medication-guide'
 
+// ── Helpers ───────────────────────────────────────────────────────────────────
 function highlight(text, query) {
   if (!query) return text
   const idx = text.toLowerCase().indexOf(query.toLowerCase())
   if (idx === -1) return text
-  return <>{text.slice(0, idx)}<mark>{text.slice(idx, idx + query.length)}</mark>{text.slice(idx + query.length)}</>
+  return (
+    <>
+      {text.slice(0, idx)}
+      <mark>{text.slice(idx, idx + query.length)}</mark>
+      {text.slice(idx + query.length)}
+    </>
+  )
 }
-function drugMatchesQuery(drug, q) { return drug.name.toLowerCase().includes(q) }
-function nameMatchesQuery(name, q)  { return name.toLowerCase().includes(q) }
 
+// ── Icons ─────────────────────────────────────────────────────────────────────
 const ChevronRight = ({ className }) => (
   <svg className={className} viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
     <polyline points="6 3 11 8 6 13" />
@@ -47,11 +49,12 @@ const ExtIcon = () => (
   </svg>
 )
 
-function DrugRow({ drug, query, showFlags }) {
+// ── Drug row ──────────────────────────────────────────────────────────────────
+function DrugRow({ drug, q, showFlags }) {
   const flags = showFlags ? [drug.pa && 'PA', drug.st && 'ST', drug.ql && 'QL'].filter(Boolean) : []
   return (
     <tr>
-      <td className="drug-name">{highlight(drug.name, query)}</td>
+      <td className="drug-name">{highlight(drug.name, q)}</td>
       <td style={{ textAlign: 'center' }}><span className={`tier-badge tier-${drug.tier}`}>{drug.tier}</span></td>
       {showFlags && (
         <>
@@ -63,19 +66,24 @@ function DrugRow({ drug, query, showFlags }) {
   )
 }
 
-function DrugSection({ drugs, query, type, defaultOpen }) {
-  const [open, setOpen] = useState(defaultOpen)
+// ── Drug section ──────────────────────────────────────────────────────────────
+function DrugSection({ drugs, q, type, startOpen }) {
+  const [open, setOpen] = useState(true)
   if (drugs.length === 0) return null
   const isClean = type === 'clean'
+  const isOpen = startOpen ? true : open
   return (
     <div>
-      <button className={`section-banner ${isClean ? 'clean-banner' : 'req-banner'} ${open ? 'banner-open' : ''}`}
-        onClick={() => setOpen(o => !o)} aria-expanded={open}>
+      <button
+        className={`section-banner ${isClean ? 'clean-banner' : 'req-banner'} ${isOpen ? 'banner-open' : ''}`}
+        onClick={() => setOpen(o => !o)}
+        aria-expanded={isOpen}
+      >
         <ChevronRight className="banner-chevron" />
         <span className="banner-label">{isClean ? 'Open — No Restrictions' : 'Restrictions Apply'}</span>
         <span className="banner-count">{drugs.length}</span>
       </button>
-      {open && (
+      {isOpen && (
         <table className="drug-table">
           <thead>
             <tr>
@@ -84,60 +92,49 @@ function DrugSection({ drugs, query, type, defaultOpen }) {
               {!isClean && <><th style={{ width: 90 }}>Criteria</th><th>Quantity Limit Detail</th></>}
             </tr>
           </thead>
-          <tbody>{drugs.map((d, i) => <DrugRow key={i} drug={d} query={query} showFlags={!isClean} />)}</tbody>
+          <tbody>
+            {drugs.map((d, i) => <DrugRow key={i} drug={d} q={q} showFlags={!isClean} />)}
+          </tbody>
         </table>
       )}
     </div>
   )
 }
 
-function ConditionBlock({ condition, query }) {
-  const q = query.trim().toLowerCase()
-  const filteredClean      = useMemo(() => q ? condition.clean.filter(d => drugMatchesQuery(d, q))      : condition.clean,      [condition.clean, q])
-  const filteredRestricted = useMemo(() => q ? condition.restricted.filter(d => drugMatchesQuery(d, q)) : condition.restricted, [condition.restricted, q])
-  const totalMatch = filteredClean.length + filteredRestricted.length
-  const hasMatch = q && totalMatch > 0
-  const noMatch  = q && totalMatch === 0
-  const [manualOpen, setManualOpen] = useState(null)
-  const open = manualOpen !== null ? manualOpen : (hasMatch || false)
-  const handleToggle = useCallback(() => setManualOpen(o => o === null ? !hasMatch : !o), [hasMatch])
-  useEffect(() => { setManualOpen(null) }, [q])
-  if (noMatch) return null
-  const cleanCount = q ? filteredClean.length      : condition.clean.length
-  const reqCount   = q ? filteredRestricted.length : condition.restricted.length
+// ── Condition block — receives already-filtered data, never unmounts ──────────
+function ConditionBlock({ condition, cleanDrugs, restrictedDrugs, q, visible, hasMatch }) {
+  const [open, setOpen] = useState(false)
+
+  // auto-open when search has match; auto-close when search cleared
+  const isOpen = hasMatch ? true : open
+
+  if (!visible) return null
+
   return (
-    <div className={`condition-block ${open ? 'open' : ''} ${hasMatch ? 'has-match' : ''}`}>
-      <button className="condition-header" onClick={handleToggle} aria-expanded={open}>
+    <div className={`condition-block ${isOpen ? 'open' : ''} ${hasMatch ? 'has-match' : ''}`}>
+      <button className="condition-header" onClick={() => setOpen(o => !o)} aria-expanded={isOpen}>
         <ChevronRight className="chevron" />
         <span className="condition-name">{condition.condition}</span>
         <div className="condition-meta">
-          {cleanCount > 0 && <span className="meta-pill clean">{cleanCount} open</span>}
-          {reqCount   > 0 && <span className="meta-pill req">{reqCount} restriction</span>}
+          {cleanDrugs.length > 0 && <span className="meta-pill clean">{cleanDrugs.length} open</span>}
+          {restrictedDrugs.length > 0 && <span className="meta-pill req">{restrictedDrugs.length} restriction</span>}
         </div>
       </button>
-      {open && (
+      {isOpen && (
         <div className="condition-body">
-          <DrugSection drugs={q ? filteredClean      : condition.clean}      query={q} type="clean"      defaultOpen={true} />
-          <DrugSection drugs={q ? filteredRestricted : condition.restricted} query={q} type="restricted" defaultOpen={!!q}   />
+          <DrugSection drugs={cleanDrugs} q={q} type="clean" startOpen={true} />
+          <DrugSection drugs={restrictedDrugs} q={q} type="restricted" startOpen={!!q} />
         </div>
       )}
     </div>
   )
 }
 
-function NonPreferredBlock({ planData, query }) {
+// ── Non-Preferred block ───────────────────────────────────────────────────────
+function NonPreferredBlock({ tier6, q, hasMatch, visible }) {
   const [open, setOpen] = useState(false)
-  const q = query.trim().toLowerCase()
-  const tier6 = useMemo(() => {
-    const all = planData.flatMap(c => [...c.clean.filter(d => d.tier === 6), ...c.restricted.filter(d => d.tier === 6)])
-    const sorted = all.sort((a, b) => a.name.localeCompare(b.name))
-    return q ? sorted.filter(d => drugMatchesQuery(d, q)) : sorted
-  }, [planData, q])
-  const hasMatch = q && tier6.length > 0
-  const noMatch  = q && tier6.length === 0
-  if (noMatch) return null
-  const isOpen = open || hasMatch
-  useEffect(() => { if (!q) setOpen(false) }, [q])
+  const isOpen = hasMatch ? true : open
+  if (!visible) return null
   return (
     <div className={`condition-block special-block nonpreferred-block ${isOpen ? 'open' : ''} ${hasMatch ? 'has-match' : ''}`}>
       <button className="condition-header" onClick={() => setOpen(o => !o)} aria-expanded={isOpen}>
@@ -148,13 +145,13 @@ function NonPreferredBlock({ planData, query }) {
       {isOpen && (
         <div className="condition-body">
           <div className="special-note nonpref-note">
-            Tier 6 = Specialty, Non-Preferred, and High-Cost drugs. Highest patient cost share. PA, ST, and QL restrictions noted where applicable.
+            Tier 6 = Specialty, Non-Preferred, and High-Cost drugs. Highest patient cost share. PA, ST, and QL restrictions noted.
           </div>
           <table className="drug-table">
             <thead>
               <tr><th>Drug Name</th><th className="center" style={{width:48}}>Tier</th><th style={{width:90}}>Criteria</th><th>Quantity Limit Detail</th></tr>
             </thead>
-            <tbody>{tier6.map((d, i) => <DrugRow key={i} drug={d} query={q} showFlags={true} />)}</tbody>
+            <tbody>{tier6.map((d, i) => <DrugRow key={i} drug={d} q={q} showFlags={true} />)}</tbody>
           </table>
         </div>
       )}
@@ -162,17 +159,12 @@ function NonPreferredBlock({ planData, query }) {
   )
 }
 
-function NotCoveredBlock({ query }) {
+// ── Not Covered block ─────────────────────────────────────────────────────────
+function NotCoveredBlock({ drugs, appendixDrugs, q, hasMatch, visible }) {
   const [open, setOpen] = useState(false)
   const [showAppendix, setShowAppendix] = useState(false)
-  const q = query.trim().toLowerCase()
-  const filtered    = useMemo(() => q ? notCovered.main.filter(d => nameMatchesQuery(d, q))     : notCovered.main,     [q])
-  const filteredApp = useMemo(() => q ? notCovered.appendix.filter(d => nameMatchesQuery(d, q)) : notCovered.appendix, [q])
-  const hasMatch = q && (filtered.length + filteredApp.length) > 0
-  const noMatch  = q && filtered.length === 0 && filteredApp.length === 0
-  if (noMatch) return null
-  const isOpen = open || hasMatch
-  useEffect(() => { if (!q) setOpen(false) }, [q])
+  const isOpen = hasMatch ? true : open
+  if (!visible) return null
   return (
     <div className={`condition-block special-block notcovered-block ${isOpen ? 'open' : ''} ${hasMatch ? 'has-match' : ''}`}>
       <button className="condition-header" onClick={() => setOpen(o => !o)} aria-expanded={isOpen}>
@@ -187,10 +179,13 @@ function NotCoveredBlock({ query }) {
           </div>
           <table className="drug-table">
             <thead><tr><th>Drug Name</th></tr></thead>
-            <tbody>{filtered.map((d, i) => <tr key={i}><td className="drug-name">{highlight(d, q)}</td></tr>)}</tbody>
+            <tbody>{drugs.map((d, i) => <tr key={i}><td className="drug-name">{highlight(d, q)}</td></tr>)}</tbody>
           </table>
-          <button className={`section-banner req-banner ${showAppendix ? 'banner-open' : ''}`}
-            onClick={() => setShowAppendix(s => !s)} style={{ marginTop: 1 }}>
+          <button
+            className={`section-banner req-banner ${showAppendix ? 'banner-open' : ''}`}
+            onClick={() => setShowAppendix(s => !s)}
+            style={{ marginTop: 1 }}
+          >
             <ChevronRight className="banner-chevron" />
             <span className="banner-label">Appendix A — Excluded Prenatal Vitamins</span>
             <span className="banner-count">{notCovered.appendix.length}</span>
@@ -198,7 +193,7 @@ function NotCoveredBlock({ query }) {
           {showAppendix && (
             <table className="drug-table">
               <thead><tr><th>Product Name</th></tr></thead>
-              <tbody>{filteredApp.map((d, i) => <tr key={i}><td className="drug-name">{highlight(d, q)}</td></tr>)}</tbody>
+              <tbody>{appendixDrugs.map((d, i) => <tr key={i}><td className="drug-name">{highlight(d, q)}</td></tr>)}</tbody>
             </table>
           )}
         </div>
@@ -207,52 +202,80 @@ function NotCoveredBlock({ query }) {
   )
 }
 
+// ── App ───────────────────────────────────────────────────────────────────────
 export default function App() {
   const [activePlan, setActivePlan] = useState(PLANS[0])
   const [showEstimator, setShowEstimator] = useState(false)
   const [query, setQuery] = useState('')
+
   const q = query.trim().toLowerCase()
 
-  const totalMatches = useMemo(() => {
-    if (!q) return null
-    const fm = activePlan.data.reduce((sum, c) =>
-      sum + c.clean.filter(d => drugMatchesQuery(d, q)).length + c.restricted.filter(d => drugMatchesQuery(d, q)).length, 0)
-    const nc = notCovered.main.filter(d => nameMatchesQuery(d, q)).length
-    return fm + nc
+  // All filtering in one place — no child component ever calls useMemo on search
+  const filtered = useMemo(() => {
+    const conditions = activePlan.data.map(c => {
+      const cleanDrugs      = q ? c.clean.filter(d => d.name.toLowerCase().includes(q))      : c.clean
+      const restrictedDrugs = q ? c.restricted.filter(d => d.name.toLowerCase().includes(q)) : c.restricted
+      const total = cleanDrugs.length + restrictedDrugs.length
+      return { condition: c, cleanDrugs, restrictedDrugs, hasMatch: q ? total > 0 : false, visible: q ? total > 0 : true }
+    })
+
+    const allTier6 = activePlan.data.flatMap(c => [
+      ...c.clean.filter(d => d.tier === 6),
+      ...c.restricted.filter(d => d.tier === 6),
+    ]).sort((a, b) => a.name.localeCompare(b.name))
+    const tier6 = q ? allTier6.filter(d => d.name.toLowerCase().includes(q)) : allTier6
+
+    const ncDrugs  = q ? notCovered.main.filter(d => d.toLowerCase().includes(q))     : notCovered.main
+    const ncAppend = q ? notCovered.appendix.filter(d => d.toLowerCase().includes(q)) : notCovered.appendix
+
+    const totalMatches = conditions.reduce((s, c) => s + c.cleanDrugs.length + c.restrictedDrugs.length, 0)
+      + tier6.length + ncDrugs.length
+
+    return { conditions, tier6, ncDrugs, ncAppend, totalMatches,
+      tier6HasMatch: q && tier6.length > 0,
+      tier6Visible:  q ? tier6.length > 0 : true,
+      ncHasMatch:    q && (ncDrugs.length + ncAppend.length) > 0,
+      ncVisible:     q ? (ncDrugs.length + ncAppend.length) > 0 : true,
+    }
   }, [activePlan.data, q])
 
   return (
     <>
-      {/* Header */}
       <header className="app-header">
         <div className="wordmark">Choice<span>Rx</span></div>
       </header>
 
-
-
-      {/* Search */}
       <div className="search-wrap">
         <div className="search-inner">
           <SearchIcon className="search-icon" />
-          <input className="search-input" type="text" placeholder="Search drug name..."
-            value={query} onChange={e => setQuery(e.target.value)} autoComplete="off" spellCheck={false} />
+          <input
+            className="search-input"
+            type="text"
+            placeholder="Search drug name..."
+            value={query}
+            onChange={e => setQuery(e.target.value)}
+            autoComplete="off"
+            spellCheck={false}
+          />
           {query && <button className="search-clear" onClick={() => setQuery('')} aria-label="Clear">✕</button>}
         </div>
         {q && (
           <div className="search-count">
-            {totalMatches === 0 ? 'No matches found' : `${totalMatches} drug${totalMatches !== 1 ? 's' : ''} matched`}
+            {filtered.totalMatches === 0
+              ? 'No matches found'
+              : `${filtered.totalMatches} drug${filtered.totalMatches !== 1 ? 's' : ''} matched`}
           </div>
         )}
       </div>
 
       <main className="main-content">
 
-        {/* Formulary selector */}
         <div className="formulary-selector">
           <span className="formulary-label">Formulary</span>
           <div className="formulary-tabs">
             {PLANS.map(plan => (
-              <button key={plan.id} className={`formulary-tab ${activePlan.id === plan.id ? 'active' : ''}`}
+              <button key={plan.id}
+                className={`formulary-tab ${activePlan.id === plan.id ? 'active' : ''}`}
                 onClick={() => { setActivePlan(plan); setQuery('') }}>
                 <span className="tab-name">{plan.label}</span>
                 <span className="tab-date">{plan.effective}</span>
@@ -261,20 +284,23 @@ export default function App() {
           </div>
         </div>
 
-        {/* Source note */}
         <div className="source-note">
           For reference only. Source:{' '}
           <a href={SOURCE_URL} target="_blank" rel="noopener noreferrer">Florida Blue Medication Guide</a>
           {' '}· Updated April 2026
         </div>
 
-        {/* Special tiles */}
         <div className="special-grid">
-          <NonPreferredBlock planData={activePlan.data} query={query} />
-          <NotCoveredBlock query={query} />
+          <NonPreferredBlock
+            tier6={filtered.tier6} q={q}
+            hasMatch={filtered.tier6HasMatch} visible={filtered.tier6Visible}
+          />
+          <NotCoveredBlock
+            drugs={filtered.ncDrugs} appendixDrugs={filtered.ncAppend} q={q}
+            hasMatch={filtered.ncHasMatch} visible={filtered.ncVisible}
+          />
         </div>
 
-        {/* Section heading + tier legend */}
         <div className="section-heading">Search Covered Drugs by Condition</div>
         <div className="tier-legend-inline">
           {Object.entries(TIER_LABELS).map(([t, label]) => (
@@ -285,21 +311,27 @@ export default function App() {
           ))}
         </div>
 
-        {/* Condition grid */}
         <div className="condition-grid">
-          {activePlan.data.map(condition => (
-            <ConditionBlock key={condition.condition} condition={condition} query={query} />
+          {filtered.conditions.map(({ condition, cleanDrugs, restrictedDrugs, hasMatch, visible }) => (
+            <ConditionBlock
+              key={condition.condition}
+              condition={condition}
+              cleanDrugs={cleanDrugs}
+              restrictedDrugs={restrictedDrugs}
+              q={q}
+              hasMatch={hasMatch}
+              visible={visible}
+            />
           ))}
         </div>
 
-        {q && totalMatches === 0 && (
+        {q && filtered.totalMatches === 0 && (
           <div className="empty-state">
             <p>No drugs matched "<strong>{query}</strong>".</p>
             <p style={{ marginTop: 6, fontSize: 12 }}>Try a partial name or the generic name.</p>
           </div>
         )}
 
-        {/* Resources */}
         <div className="resources-section">
           <div className="resources-header">
             <div className="resources-label">Resources</div>
@@ -315,10 +347,8 @@ export default function App() {
               Website: Florida Blue Medication Guides (Current) <ExtIcon />
             </a>
           </div>
-
         </div>
 
-        {/* Impact Estimator modal */}
         {showEstimator && (
           <div className="estimator-overlay" onClick={e => { if (e.target === e.currentTarget) setShowEstimator(false) }}>
             <div className="estimator-modal">
