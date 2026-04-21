@@ -77,13 +77,31 @@ body { min-height: 100vh; background: var(--bg); }
 }
 
 
+
+/* ── Plan bar ── */
+.plan-bar {
+  background: var(--bg-2);
+  border-bottom: 1px solid var(--border);
+  padding: 8px 24px;
+  position: sticky;
+  top: 56px;
+  z-index: 95;
+}
+.plan-bar-inner {
+  max-width: 680px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
 /* ── Search ── */
 .search-wrap {
   background: var(--bg-2);
   border-bottom: 1px solid var(--border);
   padding: 14px 24px;
   position: sticky;
-  top: 56px;
+  top: 105px;
   z-index: 90;
 }
 .search-inner {

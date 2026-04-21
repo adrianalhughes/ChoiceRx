@@ -225,6 +225,22 @@ export default function App() {
         <div className="wordmark">Choice<span>Rx</span></div>
       </header>
 
+      <div className="plan-bar">
+        <div className="plan-bar-inner">
+          <span className="formulary-label">Formulary</span>
+          <div className="formulary-tabs">
+            {PLANS.map(plan => (
+              <button key={plan.id}
+                className={`formulary-tab ${activePlan.id === plan.id ? 'active' : ''}`}
+                onClick={() => { setActivePlan(plan); setQuery('') }}>
+                <span className="tab-name">{plan.label}</span>
+                <span className="tab-date">{plan.effective}</span>
+              </button>
+            ))}
+          </div>
+        </div>
+      </div>
+
       <div className="search-wrap">
         <div className="search-inner">
           <SearchIcon className="search-icon" />
@@ -249,20 +265,6 @@ export default function App() {
       </div>
 
       <main className="main-content">
-
-        <div className="formulary-selector">
-          <span className="formulary-label">Formulary</span>
-          <div className="formulary-tabs">
-            {PLANS.map(plan => (
-              <button key={plan.id}
-                className={`formulary-tab ${activePlan.id === plan.id ? 'active' : ''}`}
-                onClick={() => { setActivePlan(plan); setQuery('') }}>
-                <span className="tab-name">{plan.label}</span>
-                <span className="tab-date">{plan.effective}</span>
-              </button>
-            ))}
-          </div>
-        </div>
 
         <div className="source-note">
           For reference only. Source:{' '}
