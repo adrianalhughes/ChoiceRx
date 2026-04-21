@@ -68,16 +68,13 @@ function DrugRow({ drug, q, showFlags }) {
 
 // ── Drug section ──────────────────────────────────────────────────────────────
 function DrugSection({ drugs, q, type, startOpen }) {
-  const [open, setOpen] = useState(true)
   if (drugs.length === 0) return null
   const isClean = type === 'clean'
-  const isOpen = startOpen ? true : open
   return (
     <div>
       <button
-        className={`section-banner ${isClean ? 'clean-banner' : 'req-banner'} ${isOpen ? 'banner-open' : ''}`}
-        onClick={() => setOpen(o => !o)}
-        aria-expanded={isOpen}
+        className={`section-banner ${isClean ? 'clean-banner' : 'req-banner'} ${startOpen ? 'banner-open' : ''}`}
+        aria-expanded={startOpen}
       >
         <ChevronRight className="banner-chevron" />
         <span className="banner-label">{isClean ? 'Open — No Restrictions' : 'Restrictions Apply'}</span>
