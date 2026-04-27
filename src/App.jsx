@@ -510,29 +510,32 @@ export default function App() {
         )}
 
         <div className="resources-section">
+          <div className="resources-label">Cash Price Tools</div>
+          <div className="resources-links">
+            <a href="https://costplusdrugs.com" target="_blank" rel="noopener noreferrer" className="resource-link">
+              Cost Plus Drugs — transparent-pricing pharmacy <ExtIcon />
+            </a>
+            <a href="https://www.goodrx.com" target="_blank" rel="noopener noreferrer" className="resource-link">
+              GoodRx — compare cash prices at local pharmacies <ExtIcon />
+            </a>
+            <a href="https://tryrx.hhs.gov" target="_blank" rel="noopener noreferrer" className="resource-link">
+              TrumpRx — federally negotiated IRA drug prices <ExtIcon />
+            </a>
+          </div>
+        </div>
+
+        <div className="resources-section">
           <div className="resources-label">Resources</div>
           <div className="resources-links">
             <a href={SHEETS_URL} target="_blank" rel="noopener noreferrer" className="resource-link">
               Formulary Spreadsheet (Updated April 2026) <ExtIcon />
             </a>
             <a href={SOURCE_URL} target="_blank" rel="noopener noreferrer" className="resource-link">
-              Website: Florida Blue Medication Guides (Current) <ExtIcon />
+              Florida Blue Medication Guides (Current) <ExtIcon />
             </a>
             <button className="resource-link estimator-btn" onClick={() => setShowEstimator(true)}>
               Impact Estimator <span className="beta-tag">Beta</span>
             </button>
-          </div>
-        </div>
-
-        <div className="resources-section">
-          <div className="resources-label">Cash Price Tools</div>
-          <div className="resources-links">
-            <a href="https://costplusdrugs.com" target="_blank" rel="noopener noreferrer" className="resource-link">
-              Cost Plus Drugs — Mark Cuban's transparent-pricing pharmacy <ExtIcon />
-            </a>
-            <a href="https://www.goodrx.com" target="_blank" rel="noopener noreferrer" className="resource-link">
-              GoodRx — Compare cash prices and coupons at local pharmacies <ExtIcon />
-            </a>
           </div>
         </div>
 
