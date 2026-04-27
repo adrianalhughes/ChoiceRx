@@ -1,17 +1,25 @@
 import DiabetesDashboard from './DiabetesDashboard'
+import uhcTexas from './data/uhc_texas.json'
 import { useState, useMemo } from 'react'
 import bcbsfl from './data/bcbsfl.json'
 import simplechoice from './data/simplechoice.json'
 import notCovered from './data/not_covered.json'
 
 const PLANS = [
-  { id: 'bcbsfl',       label: 'ValueScript Rx',          plan: 'Florida Blue', effective: 'April 2026', data: bcbsfl },
-  { id: 'simplechoice', label: 'ValueScript SimpleChoice', plan: 'Florida Blue', effective: 'April 2026', data: simplechoice },
+  { id: 'bcbsfl',       label: 'ValueScript Rx',          plan: 'Florida Blue',       payer: 'Florida Blue',       effective: 'April 2026',  tiers: 6, data: bcbsfl },
+  { id: 'simplechoice', label: 'ValueScript SimpleChoice', plan: 'Florida Blue',       payer: 'Florida Blue',       effective: 'April 2026',  tiers: 6, data: simplechoice },
+  { id: 'uhc_texas',    label: 'Texas Advantage 3-Tier',   plan: 'UnitedHealthcare',   payer: 'UnitedHealthcare',   effective: 'May 2026',    tiers: 3, data: uhcTexas },
 ]
 
-const TIER_LABELS = {
+const TIER_LABELS_6 = {
   1: 'Preventive', 2: 'Condition Care Generic', 3: 'Low-Cost Generic',
   4: 'Condition Care Brand', 5: 'High-Cost Generic / Preferred Brand', 6: 'Specialty / Non-Preferred',
+}
+
+const TIER_LABELS_3 = {
+  1: 'Lower-Cost (Generic)',
+  2: 'Mid-Range Cost',
+  3: 'Highest-Cost (Brand)',
 }
 
 const SHEETS_URL = 'https://docs.google.com/spreadsheets/d/1ZYoF3KZVVOARGSa6zn2IVXfG9Lz31m0qykO37kUndwo/edit?usp=sharing'
@@ -231,9 +239,9 @@ export default function App() {
           <div className="formulary-tabs">
             {PLANS.map(plan => (
               <button key={plan.id}
-                className={`formulary-tab ${activePlan.id === plan.id ? 'active' : ''}`}
+                className={`formulary-tab ${activePlan.id === plan.id ? 'active' : ''} ${plan.payer === 'UnitedHealthcare' ? 'uhc-tab' : ''}`}
                 onClick={() => { setActivePlan(plan); setQuery('') }}>
-                <span className="tab-plan">myBlue</span>
+                <span className="tab-plan">{plan.payer === 'UnitedHealthcare' ? 'UnitedHealthcare' : 'myBlue'}</span>
                 <span className="tab-name">{plan.label}</span>
                 <span className="tab-date">{plan.effective}</span>
               </button>
@@ -269,8 +277,11 @@ export default function App() {
 
         <div className="source-note">
           For reference only. Source:{' '}
-          <a href={SOURCE_URL} target="_blank" rel="noopener noreferrer">Florida Blue Medication Guide</a>
-          {' '}· Updated April 2026
+          {activePlan.payer === 'UnitedHealthcare'
+            ? <a href="https://www.uhc.com/health-and-wellness/drug-list" target="_blank" rel="noopener noreferrer">UnitedHealthcare Drug List</a>
+            : <a href={SOURCE_URL} target="_blank" rel="noopener noreferrer">Florida Blue Medication Guide</a>
+          }
+          {' '}· Updated {activePlan.effective}
         </div>
 
         <div className="special-grid">
@@ -280,7 +291,7 @@ export default function App() {
 
         <div className="section-heading">Search Covered Drugs by Condition</div>
         <div className="tier-legend-inline">
-          {Object.entries(TIER_LABELS).map(([t, label]) => (
+          {Object.entries(activePlan.tiers === 3 ? TIER_LABELS_3 : TIER_LABELS_6).map(([t, label]) => (
             <span key={t} className="legend-item">
               <span className={`tier-badge tier-${t}`}>{t}</span>
               <span>{label}</span>
@@ -335,7 +346,7 @@ export default function App() {
       </main>
 
       <footer className="app-footer">
-        ChoiceRx · myBlue · {activePlan.label} · {activePlan.effective}
+        ChoiceRx · {activePlan.payer} · {activePlan.label} · {activePlan.effective}
       </footer>
     </>
   )

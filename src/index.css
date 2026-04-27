@@ -133,6 +133,13 @@ body { min-height: 100vh; background: var(--bg); }
 .formulary-tab.active .tab-name { color: var(--blue-bright); }
 .tab-date { font-size: 10px; color: var(--text-muted); }
 
+
+/* ── UHC tab variant ── */
+.uhc-tab:hover { border-color: #F59E0B !important; background: rgba(245,158,11,0.08) !important; }
+.uhc-tab.active { border-color: #F59E0B !important; background: rgba(245,158,11,0.1) !important; }
+.uhc-tab.active .tab-name { color: #FCD34D !important; }
+.uhc-tab .tab-plan { color: #F59E0B !important; }
+
 /* ── Search ── */
 .search-wrap {
   background: var(--bg);
