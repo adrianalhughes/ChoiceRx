@@ -1,4 +1,5 @@
 import DiabetesDashboard from './DiabetesDashboard'
+import PolicyWatch from './PolicyWatch'
 import uhcTexas from './data/uhc_texas.json'
 import uhcTexasEssential from './data/uhc_texas_essential.json'
 import { useState, useMemo } from 'react'
@@ -33,6 +34,186 @@ const TIER_LABELS_3 = {
 
 const SHEETS_URL = 'https://docs.google.com/spreadsheets/d/1ZYoF3KZVVOARGSa6zn2IVXfG9Lz31m0qykO37kUndwo/edit?usp=sharing'
 const SOURCE_URL = 'https://www.floridablue.com/members/tools-resources/pharmacy/medication-guide'
+
+// ── Regulatory Updates ─────────────────────────────────────────────────────
+const UPDATES = [
+  {
+    id: 'caa2026',
+    status: 'enacted',
+    statusLabel: 'Enacted',
+    jurisdictions: ['Federal'],
+    title: 'Consolidated Appropriations Act, 2026 — PBM Reform Package',
+    citation: 'HR 7148 · Signed Feb 3, 2026',
+    summary: 'The most comprehensive federal PBM reform to date. Requires 100% pass-through of manufacturer rebates to health plans, mandates semiannual transparency reporting to employer sponsors on net drug spend and spread pricing, restricts PBM compensation for Medicare Part D to flat bona fide service fees (effective 2028), and creates an "any willing pharmacy" right for network participation. Annual audit rights granted to plan sponsors.',
+    effectiveDate: 'Most provisions: 2028–2029 plan years',
+    url: 'https://www.pharmacytimes.com/view/pbm-reform-within-2026-appropriations-bill-signed-into-law',
+  },
+  {
+    id: 'helpcopays',
+    status: 'pending',
+    statusLabel: 'Pending — Federal',
+    jurisdictions: ['Federal'],
+    title: 'HELP Copays Act — Copay Accumulator / Maximizer Ban',
+    citation: 'Introduced March 2025 · Bipartisan',
+    summary: 'Would require health plans and PBMs to count ALL forms of copay assistance — manufacturer coupons, third-party payments, and patient assistance program funds — toward a patient\'s deductible and out-of-pocket maximum. Eliminates the core mechanism of accumulator and maximizer programs. Currently, 84% of commercially insured beneficiaries are in plans that use accumulators. Bill is in committee; no vote scheduled.',
+    effectiveDate: 'Pending',
+    url: 'https://www.mintz.com/insights-center/viewpoints/2025-11-04-pbm-policy-and-legislative-update-summer-fall-2025',
+  },
+  {
+    id: 'breakup',
+    status: 'pending',
+    statusLabel: 'Pending — Federal',
+    jurisdictions: ['Federal'],
+    title: 'Break Up Big Medicine Act — PBM / Pharmacy Ownership Ban',
+    citation: 'S. 3822 · Warren (D) / Hawley (R) · Introduced Feb 2026',
+    summary: 'Bipartisan bill referred to the Senate Judiciary Committee that would prohibit PBMs, health insurers, and drug wholesalers from being under common ownership with pharmacies or provider groups. Targets the vertical integration of CVS/Caremark, Cigna/Express Scripts, and UnitedHealth/OptumRx. A companion House bill is anticipated.',
+    effectiveDate: 'Pending',
+    url: 'https://www.amcp.org/letters-statements-analysis/federal-update-senate-introduces-comprehensive-pbm-reform-legislation',
+  },
+  {
+    id: 'dol2026',
+    status: 'proposed',
+    statusLabel: 'Proposed Rule',
+    jurisdictions: ['Federal'],
+    title: 'DOL Proposed Rule — ERISA PBM Disclosure Expansion',
+    citation: 'Proposed Jan 30, 2026 · Dept. of Labor',
+    summary: 'Proposed rule that would require PBMs to make sweeping compensation disclosures to fiduciaries of ERISA-governed self-insured group health plans, including fees, spread pricing, and all remuneration from manufacturers. Pairs with audit rights covering PBM affiliates, brokers, and consultants. Comment period closed; final rule timing TBD.',
+    effectiveDate: 'TBD — Rulemaking in progress',
+    url: 'https://www.mintz.com/insights-center/viewpoints/2026-04-22-pbm-policy-and-legislative-update-spring-2026',
+  },
+  {
+    id: 'fl697',
+    status: 'enacted',
+    statusLabel: 'Enacted',
+    jurisdictions: ['Florida'],
+    title: 'HB 697 — PBM Pharmacy Reimbursement Parity',
+    citation: 'Chapter 2026-4 · Signed Mar 25, 2026 · Effective Jul 1, 2026',
+    summary: 'Prohibits PBMs from reimbursing an affiliated pharmacy at a higher rate than a non-affiliated pharmacy for the same drug and day supply. Bars PBMs from forcing pharmacies to dispense at a loss. Requires PBMs to allow pharmacies to submit consolidated appeals covering multiple adjudicated claims with the same drug and day supply in the same calendar month — reducing administrative burden on independent pharmacies.',
+    effectiveDate: 'July 1, 2026',
+    url: 'https://www.flsenate.gov/Session/Bill/2026/697',
+  },
+  {
+    id: 'fl1550',
+    status: 'enacted',
+    statusLabel: 'In Effect',
+    jurisdictions: ['Florida'],
+    title: 'Prescription Drug Reform Act — PBM Licensing & Pass-Through',
+    citation: 'SB 1550 · Signed May 2023 · Fully in effect Jan 2024',
+    summary: 'Florida\'s landmark PBM law. Requires all PBMs doing business in Florida to obtain a certificate of authority from the Office of Insurance Regulation (OIR) — currently 71 PBMs are licensed. Mandates pass-through pricing, prohibits spread pricing, requires 100% rebate pass-through to plan sponsors, prohibits exclusive PBM-affiliated pharmacy networks, and bans surprise DIR-style clawbacks. OIR has examination and enforcement authority.',
+    effectiveDate: 'In full effect',
+    url: 'https://floir.gov/life-health/pbm',
+  },
+  {
+    id: 'fl-accumulator',
+    status: 'gap',
+    statusLabel: 'Protection Gap',
+    jurisdictions: ['Florida'],
+    title: 'Copay Accumulator Protections — Not Yet Enacted in Florida',
+    citation: 'No pending bill · Florida rated "D" by AIDS Institute',
+    summary: 'Florida has not passed a copay accumulator ban. An estimated 75% of Florida marketplace plans include accumulator adjustment policies that prevent manufacturer copay assistance from counting toward patient deductibles or out-of-pocket maximums. Patients often exhaust copay assistance mid-year and then face the full cost of specialty drugs. The federal HELP Copays Act would provide a floor if enacted, but until then Florida fully-insured plan members remain exposed.',
+    effectiveDate: 'No action',
+    url: 'https://allcopayscount.org/resources/op-ed-its-time-for-florida-to-protect-copay-assistance-for-vulnerable-patients/',
+  },
+  {
+    id: 'tx1236',
+    status: 'enacted',
+    statusLabel: 'In Effect',
+    jurisdictions: ['Texas'],
+    title: 'SB 1236 — Pharmacy Contract Protections & Audit Reform',
+    citation: 'Signed by Gov. Abbott · Effective Sep 1, 2025',
+    summary: 'Strengthens protections for Texas pharmacies in PBM contracts. Prohibits PBMs from denying or reducing adjudicated claims through retroactive audits except in cases of fraud or substantive dispensing error. Clarifies that clerical or record-keeping errors can only result in clawback of the dispensing fee, not the full drug cost. Requires pharmacy network contracts to include an explicit fee schedule. Backed by a Feb 2025 Texas AG opinion asserting state authority over ERISA-plan PBM activity.',
+    effectiveDate: 'In effect Sep 1, 2025',
+    url: 'https://capitol.texas.gov/tlodocs/89R/analysis/html/SB01236F.htm',
+  },
+  {
+    id: 'tx1122',
+    status: 'pending',
+    statusLabel: 'Pending — Texas',
+    jurisdictions: ['Texas'],
+    title: 'SB 1122 — Extension of PBM Protections to All Health Plans (incl. ERISA)',
+    citation: 'TX 89th Legislature · 2025 Session',
+    summary: 'Would extend existing Texas PBM pharmacy and patient protections to ALL health benefit plans administered in the state, including self-funded ERISA-governed employer plans — which currently represent the majority of commercial coverage and are typically beyond state reach. Backed by AG Opinion KP-0480. ERISA preemption remains a legal risk; similar laws in other states have faced injunctions.',
+    effectiveDate: 'Pending — session status unclear',
+    url: 'https://legiscan.com/TX/supplement/SB1122/id/535000',
+  },
+  {
+    id: 'tx-accumulator',
+    status: 'gap',
+    statusLabel: 'Protection Gap',
+    jurisdictions: ['Texas'],
+    title: 'Copay Accumulator Protections — Not Yet Enacted in Texas',
+    citation: 'No enacted state ban · 26 states have passed protections',
+    summary: 'Texas has not passed a copay accumulator ban. As of 2025, 26 states and DC have enacted laws requiring copay assistance to count toward cost-sharing limits; Texas is not among them. The HELP Copays Act (federal, pending) would provide a national floor if enacted. Without it, Texas commercially insured patients on specialty medications are at risk of accumulator "surprise" costs when manufacturer copay assistance is exhausted mid-year.',
+    effectiveDate: 'No action',
+    url: 'https://triagecancer.org/state-laws/co-pay-accumulators',
+  },
+]
+
+const STATUS_STYLES = {
+  enacted:  { dot: '#34d399', label: '#34d399', bg: 'rgba(52,211,153,0.08)' },
+  pending:  { dot: '#fbbf24', label: '#fbbf24', bg: 'rgba(251,191,36,0.08)'  },
+  proposed: { dot: '#60a5fa', label: '#60a5fa', bg: 'rgba(96,165,250,0.08)'  },
+  gap:      { dot: '#f87171', label: '#f87171', bg: 'rgba(248,113,113,0.08)' },
+}
+
+const JURISDICTION_COLORS = {
+  Federal: { color: '#93c5fd', bg: 'rgba(147,197,253,0.1)' },
+  Florida: { color: '#6ee7b7', bg: 'rgba(110,231,183,0.1)' },
+  Texas:   { color: '#fcd34d', bg: 'rgba(252,211,77,0.1)'  },
+}
+
+function UpdateCard({ update }) {
+  const [open, setOpen] = useState(false)
+  const s = STATUS_STYLES[update.status]
+  return (
+    <div className="update-card" style={{ background: s.bg, borderColor: s.dot + '33' }}>
+      <button className="update-header" onClick={() => setOpen(o => !o)}>
+        <div className="update-header-left">
+          <span className="update-dot" style={{ background: s.dot }} />
+          <span className="update-status" style={{ color: s.label }}>{update.statusLabel}</span>
+          <div className="update-jurisdictions">
+            {update.jurisdictions.map(j => {
+              const jc = JURISDICTION_COLORS[j]
+              return <span key={j} className="update-jurisdiction" style={{ color: jc.color, background: jc.bg }}>{j}</span>
+            })}
+          </div>
+        </div>
+        <span className="update-chevron" style={{ transform: open ? 'rotate(180deg)' : 'none' }}>▾</span>
+      </button>
+      <div className="update-title">{update.title}</div>
+      <div className="update-citation">{update.citation}</div>
+      {open && (
+        <div className="update-body">
+          <p className="update-summary">{update.summary}</p>
+          <div className="update-footer">
+            <span className="update-effective">Effective: {update.effectiveDate}</span>
+            <a href={update.url} target="_blank" rel="noopener noreferrer" className="update-link">Source <ExtIcon /></a>
+          </div>
+        </div>
+      )}
+    </div>
+  )
+}
+
+function LegislativeUpdates() {
+  const [filter, setFilter] = useState('All')
+  const tabs = ['All', 'Federal', 'Florida', 'Texas']
+  const visible = filter === 'All' ? UPDATES : UPDATES.filter(u => u.jurisdictions.includes(filter))
+  return (
+    <div className="resources-section">
+      <div className="resources-label">Regulatory &amp; Legislative Updates</div>
+      <div className="update-tabs">
+        {tabs.map(t => (
+          <button key={t} className={`update-tab ${filter === t ? 'active' : ''}`} onClick={() => setFilter(t)}>{t}</button>
+        ))}
+      </div>
+      <div className="update-list">
+        {visible.map(u => <UpdateCard key={u.id} update={u} />)}
+      </div>
+      <div className="update-meta">Last reviewed April 26, 2026 · Information is for reference only and does not constitute legal advice.</div>
+    </div>
+  )
+}
 
 function highlight(text, query) {
   if (!query) return text
@@ -354,6 +535,8 @@ export default function App() {
             </a>
           </div>
         </div>
+
+        <LegislativeUpdates />
 
         {showEstimator && (
           <div className="estimator-overlay" onClick={e => { if (e.target === e.currentTarget) setShowEstimator(false) }}>
