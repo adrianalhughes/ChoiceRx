@@ -536,7 +536,7 @@ export default function App() {
           </div>
         </div>
 
-        <LegislativeUpdates />
+        <PolicyWatch />
 
         {showEstimator && (
           <div className="estimator-overlay" onClick={e => { if (e.target === e.currentTarget) setShowEstimator(false) }}>

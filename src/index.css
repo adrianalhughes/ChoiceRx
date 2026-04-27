@@ -747,3 +747,195 @@ body { min-height: 100vh; background: var(--bg); }
   opacity: 0.7;
   font-style: italic;
 }
+
+/* ── Policy Watch ── */
+.policy-watch-section { }
+
+.policy-watch-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+.policy-watch-sub {
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-top: 3px;
+  letter-spacing: 0.1px;
+}
+.policy-watch-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+.policy-fetched-at {
+  font-size: 10px;
+  color: var(--text-muted);
+}
+.policy-refresh-btn {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--blue);
+  background: var(--blue-dim);
+  border: 1px solid rgba(79,142,247,0.25);
+  border-radius: var(--radius);
+  padding: 5px 12px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: background 0.15s, border-color 0.15s;
+}
+.policy-refresh-btn:hover:not(:disabled) {
+  background: rgba(79,142,247,0.18);
+  border-color: rgba(79,142,247,0.45);
+}
+.policy-refresh-btn:disabled { opacity: 0.6; cursor: default; }
+
+.policy-spinner {
+  display: inline-block;
+  width: 12px; height: 12px;
+  border: 2px solid rgba(79,142,247,0.3);
+  border-top-color: var(--blue);
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+.policy-spinner.large { width: 18px; height: 18px; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.policy-idle-state {
+  border: 1px dashed var(--border-mid);
+  border-radius: var(--radius);
+  padding: 20px 18px;
+  text-align: center;
+}
+.policy-idle-state p {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin: 0 0 12px;
+  line-height: 1.5;
+}
+.policy-load-btn {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--blue);
+  background: var(--blue-dim);
+  border: 1px solid rgba(79,142,247,0.3);
+  border-radius: var(--radius);
+  padding: 7px 18px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.policy-load-btn:hover { background: rgba(79,142,247,0.18); }
+
+.policy-loading-state {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 12px;
+  color: var(--text-muted);
+  padding: 16px 0;
+}
+.policy-error-state {
+  font-size: 12px;
+  color: #ef4444;
+  padding: 12px 0;
+}
+
+.policy-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.policy-card {
+  background: var(--bg-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 14px 16px;
+}
+.policy-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 7px;
+}
+.policy-card-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.policy-bill-numbers {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  font-weight: 500;
+  color: var(--text-muted);
+  letter-spacing: 0.3px;
+}
+.policy-topic-tag {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  background: var(--bg-3);
+  border: 1px solid var(--border);
+  padding: 1px 7px;
+  border-radius: 3px;
+}
+.policy-bill-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 5px;
+  line-height: 1.35;
+}
+.policy-bill-summary {
+  font-size: 11.5px;
+  color: var(--text-muted);
+  line-height: 1.5;
+  margin: 0 0 10px;
+}
+.policy-update-box {
+  background: var(--bg-3);
+  border: 1px solid var(--border);
+  border-radius: calc(var(--radius) - 2px);
+  padding: 10px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+.policy-update-row {
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+}
+.policy-update-label {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--text-muted);
+  white-space: nowrap;
+  padding-top: 1px;
+  min-width: 80px;
+}
+.policy-update-text {
+  font-size: 11.5px;
+  color: var(--text-mid);
+  line-height: 1.45;
+}
+.policy-congress-link {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--blue);
+  text-decoration: none;
+  letter-spacing: 0.1px;
+}
+.policy-congress-link:hover { text-decoration: underline; }
