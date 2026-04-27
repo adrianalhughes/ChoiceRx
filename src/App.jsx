@@ -1,15 +1,24 @@
 import DiabetesDashboard from './DiabetesDashboard'
 import uhcTexas from './data/uhc_texas.json'
+import uhcTexasEssential from './data/uhc_texas_essential.json'
 import { useState, useMemo } from 'react'
 import bcbsfl from './data/bcbsfl.json'
 import simplechoice from './data/simplechoice.json'
 import notCovered from './data/not_covered.json'
 
 const PLANS = [
-  { id: 'bcbsfl',       label: 'ValueScript Rx',          plan: 'Florida Blue',       payer: 'Florida Blue',       effective: 'April 2026',  tiers: 6, data: bcbsfl },
-  { id: 'simplechoice', label: 'ValueScript SimpleChoice', plan: 'Florida Blue',       payer: 'Florida Blue',       effective: 'April 2026',  tiers: 6, data: simplechoice },
-  { id: 'uhc_texas',    label: 'Texas Advantage 3-Tier',   plan: 'UnitedHealthcare',   payer: 'UnitedHealthcare',   effective: 'May 2026',    tiers: 3, data: uhcTexas },
+  { id: 'bcbsfl',              label: 'ValueScript Rx',          plan: 'Florida Blue',     payer: 'Florida Blue',     effective: 'April 2026', tiers: 6, data: bcbsfl },
+  { id: 'simplechoice',        label: 'ValueScript SimpleChoice', plan: 'Florida Blue',     payer: 'Florida Blue',     effective: 'April 2026', tiers: 6, data: simplechoice },
+  { id: 'uhc_texas',           label: 'Texas Advantage 3-Tier',   plan: 'UnitedHealthcare', payer: 'UnitedHealthcare', effective: 'May 2026',   tiers: 3, data: uhcTexas },
+  { id: 'uhc_texas_essential', label: 'Texas Essential 4-Tier',   plan: 'UnitedHealthcare', payer: 'UnitedHealthcare', effective: 'May 2026',   tiers: 4, data: uhcTexasEssential },
 ]
+
+const TIER_LABELS_4 = {
+  1: 'Lower-Cost (Generic)',
+  2: 'Mid-Range Cost',
+  3: 'Mid-Range (Brand)',
+  4: 'Highest-Cost (Brand)',
+}
 
 const TIER_LABELS_6 = {
   1: 'Preventive', 2: 'Condition Care Generic', 3: 'Low-Cost Generic',
@@ -291,7 +300,7 @@ export default function App() {
 
         <div className="section-heading">Search Covered Drugs by Condition</div>
         <div className="tier-legend-inline">
-          {Object.entries(activePlan.tiers === 3 ? TIER_LABELS_3 : TIER_LABELS_6).map(([t, label]) => (
+          {Object.entries(activePlan.tiers === 3 ? TIER_LABELS_3 : activePlan.tiers === 4 ? TIER_LABELS_4 : TIER_LABELS_6).map(([t, label]) => (
             <span key={t} className="legend-item">
               <span className={`tier-badge tier-${t}`}>{t}</span>
               <span>{label}</span>
