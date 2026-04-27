@@ -343,6 +343,18 @@ export default function App() {
           </div>
         </div>
 
+        <div className="resources-section">
+          <div className="resources-label">Cash Price Tools</div>
+          <div className="resources-links">
+            <a href="https://costplusdrugs.com" target="_blank" rel="noopener noreferrer" className="resource-link">
+              Cost Plus Drugs — Mark Cuban's transparent-pricing pharmacy <ExtIcon />
+            </a>
+            <a href="https://www.goodrx.com" target="_blank" rel="noopener noreferrer" className="resource-link">
+              GoodRx — Compare cash prices and coupons at local pharmacies <ExtIcon />
+            </a>
+          </div>
+        </div>
+
         {showEstimator && (
           <div className="estimator-overlay" onClick={e => { if (e.target === e.currentTarget) setShowEstimator(false) }}>
             <div className="estimator-modal">
