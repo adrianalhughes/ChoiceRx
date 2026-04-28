@@ -497,6 +497,7 @@ export default function App() {
 
             <div className="section-heading">Covered Drugs by Condition</div>
             <div className="tier-legend-inline">
+              <span className="legend-key-label">🔑 Tier Key</span>
               {Object.entries(activePlan.tiers === 3 ? TIER_LABELS_3 : activePlan.tiers === 4 ? TIER_LABELS_4 : TIER_LABELS_6).map(([t, label]) => (
                 <span key={t} className="legend-item">
                   <span className={`tier-badge tier-${t}`}>{t}</span>
@@ -584,10 +585,9 @@ export default function App() {
                   <div className="tool-link-desc">Current formulary medication guide</div>
                   <ExtIcon />
                 </a>
-                <a href="https://www.uhc.com/health-and-wellness/drug-list" target="_blank" rel="noopener noreferrer" className="tool-link uhc-tool">
+                <a href="https://www.uhc.com/health-and-wellness/drug-list" target="_blank" rel="noopener noreferrer" className="tool-link uhc-tool" style={{opacity:0.4, pointerEvents:'none', cursor:'not-allowed'}}>
                   <div className="tool-link-name" style={{color:'#60a5fa'}}>UnitedHealthcare</div>
-                  <div className="tool-link-desc">Current drug list</div>
-                  <ExtIcon />
+                  <div className="tool-link-desc">Link coming soon</div>
                 </a>
               </div>
             </div>
