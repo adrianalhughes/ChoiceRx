@@ -1,0 +1,3554 @@
+{
+  "covered": [
+    {
+      "name": "Abecma",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Abilify Asimtufii",
+      "ldd": true,
+      "pa": false,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Abilify Maintena",
+      "ldd": true,
+      "pa": false,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Abrysvo",
+      "ldd": false,
+      "pa": false,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Adakveo",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Actemra IV",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Adagen",
+      "ldd": true,
+      "pa": false,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Aduhelm",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Adstiladrin",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Adzynma",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Ahzantive",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Aldurazyme",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Alferon N",
+      "ldd": true,
+      "pa": false,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Alimta",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Aliqo",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Alyglo",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Alymsys",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Amondys",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Amvuttra",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Amtagvi",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Anktiva",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Aphexda",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Apokyn",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "apomorphine",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Specialty",
+      "ldd": false,
+      "pa": false,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "list of drugs covered under the medical",
+      "ldd": false,
+      "pa": false,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "under the medical policy and medical coverage",
+      "ldd": false,
+      "pa": false,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "may vary. Certain drugs may not",
+      "ldd": false,
+      "pa": false,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "benefit for inclusion in the PA program",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "and Forms).",
+      "ldd": false,
+      "pa": false,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "in our Provider Administered Drug Program",
+      "ldd": false,
+      "pa": false,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "of our online provider manual for",
+      "ldd": false,
+      "pa": false,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "only be available from a specific specialty",
+      "ldd": false,
+      "pa": false,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "further assistance after consulting",
+      "ldd": false,
+      "pa": false,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Center: 1-800-727-2227 (health care",
+      "ldd": false,
+      "pa": false,
+      "ql": false,
+      "dual_route": true
+    },
+    {
+      "name": "Aralast NP",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Aranesp",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Armlupeg",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Aristada",
+      "ldd": false,
+      "pa": false,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Aristada Initio",
+      "ldd": true,
+      "pa": false,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Arzerra",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Asceniv",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Asparlas",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Aucatzyl",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Aukelso",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Avastin",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Aveed",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Avtozma IV",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Avzivi",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Azedra",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Azmiro",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Bavencio",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Beleodaq",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Bendamustin RTD",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Bendeka",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Benlysta",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Beovu",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Beqvez",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Berinert",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "can be found here: Limited Distribution Drugs);",
+      "ldd": false,
+      "pa": false,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "of the Blue Cross and Blue Shield Association",
+      "ldd": false,
+      "pa": false,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "benefit nor is it a list of all medical drugs",
+      "ldd": false,
+      "pa": false,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "benefits apply.",
+      "ldd": false,
+      "pa": false,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "be covered by certain plans.",
+      "ldd": false,
+      "pa": false,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "and medication guide for determination",
+      "ldd": false,
+      "pa": false,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "a current list of drugs included.",
+      "ldd": false,
+      "pa": false,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "pharmacy or pharmacy location.",
+      "ldd": false,
+      "pa": false,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "pharmacy can be found here:",
+      "ldd": false,
+      "pa": false,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "this table, please call:",
+      "ldd": false,
+      "pa": false,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "of your insurance card)",
+      "ldd": false,
+      "pa": false,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "providers and office staff only)",
+      "ldd": false,
+      "pa": false,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Besponsa",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Bexxar",
+      "ldd": false,
+      "pa": false,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Beyfortus",
+      "ldd": false,
+      "pa": false,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Bildyos",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Bilprevda",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Bivigam",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Bizengri",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Bkemv",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Blenrep",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Blincyto",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Bomyntra SQ",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Boncresa",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Boniva",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Bortezomib",
+      "ldd": false,
+      "pa": false,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Bosaya",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Botox",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Breyanzi",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Brineura",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Briumvi",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Brixadi",
+      "ldd": true,
+      "pa": true,
+      "ql": true,
+      "dual_route": false
+    },
+    {
+      "name": "Byooviz",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Cablivi",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Camcevi Kit",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Camcevi ETM",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "that require Prior",
+      "ldd": false,
+      "pa": false,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "of coverage (Prior",
+      "ldd": false,
+      "pa": false,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "a drug on this list",
+      "ldd": false,
+      "pa": false,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Carvykti",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Casgevy",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Ceprotin",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Ceredase",
+      "ldd": false,
+      "pa": false,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Cerezyme",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Cimerli",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Cimzia vial for reconstitution",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Cimzia prefilled syringe",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Cinqair",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Cinvanti",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Columvi",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Conexxence",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Cosela",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Crysvita",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Cyramza",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Danyelza",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Darzalex",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Darzalex Faspro",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Datroway IV",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Defitelio",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Denosumab",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Dysport",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Elahere",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Elaprase",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "if unwilling to buy/bill.",
+      "ldd": false,
+      "pa": false,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Elelyso",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Elevidys",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Elfabrio",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Eligard",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Elitek",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Elrexfio",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Elzonris",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Emend",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Empliciti",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Emrelis",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Encelto",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Enhertu",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Enjaymo",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Enoby",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Entyvio IV",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Enzeevu",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Epioxa",
+      "ldd": false,
+      "pa": false,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Epkinly",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Epogen",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "epoprostenol",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Epysqli",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Erbitux",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Erzofri",
+      "ldd": true,
+      "pa": false,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Evenity",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Evkeeza",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Evomela",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Exdensur",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Exondys",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Eydenzelt",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Eylea",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Eylea HD",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Fabrazyme",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Fasenra prefilled syringe",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Faslodex",
+      "ldd": true,
+      "pa": false,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Fensolvi",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Feraheme",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Fibryga",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Firmagon",
+      "ldd": false,
+      "pa": false,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Flolan",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "fluphenazine deconate IM",
+      "ldd": false,
+      "pa": false,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "fluphenazine hcl IM",
+      "ldd": false,
+      "pa": false,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "fluphenazine hcl SQ",
+      "ldd": false,
+      "pa": false,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Focinvez",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Fulphila",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Fusilev",
+      "ldd": false,
+      "pa": false,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Fyarro",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Fylnetra",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "GamaSTAN S/D",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Gamifant",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Gammagard",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Gammagard SD",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Gammaked",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Gamunex C",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Gazyva",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Geodon IM",
+      "ldd": true,
+      "pa": false,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Givlaari",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Glassia",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Grafapex IV",
+      "ldd": false,
+      "pa": false,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Granix",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Haldol Deconate IM",
+      "ldd": true,
+      "pa": false,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "haloperidol deconate IM",
+      "ldd": true,
+      "pa": false,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Hemgenix",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Herceptin",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Herceptin Hylecta",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Hercessi",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Herzuma",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "iDose TR",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Ilaris",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Ilumya",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Iluvien",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Imaavy",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Imdelltra",
+      "ldd": false,
+      "pa": false,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Imfinzi",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Imjudo",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Imlygic",
+      "ldd": false,
+      "pa": false,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Immune Globulins",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Imuldosa IV",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Imuldosa SQ",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Inmazeb",
+      "ldd": false,
+      "pa": false,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Inflectra",
+      "ldd": false,
+      "pa": false,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Infugem",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Inlexzo",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Intron A",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Injectafer",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Invega IM",
+      "ldd": true,
+      "pa": false,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Itvisma",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Ixifi",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Izervay",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Jelmyto",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Jemperli",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Jesduvroq",
+      "ldd": true,
+      "pa": false,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Jobevne IV",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Jubbonti",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Jubereq",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Kadcyla",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Kalbitor",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Kanjinti",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Kanuma",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Kebilidi",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Keytruda",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Keytruda QLEX",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Khapzory",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Kimmtrak",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Kinsula",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Korsuva",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Krystexxa",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Kymriah",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Kyprolis",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Kyxata",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Lamzede",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Lantidra",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Lartruvo",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Lemtrada",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Lenmeldy",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Leqembi",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Leqvio",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Leukine",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "leuprolide depot",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Libtayo",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Loqtorzi",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Lucentis",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Lumizyme",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Lunsumio",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Lupaneta Pak",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Lupron Depot",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Lutathera",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Lutrate Depot Kit",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Luxturna",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Lyfgenia",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Lymphir",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Lynozyfic",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Macrilen",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Macugen",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Margenza",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Mepsevii",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Metastron",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Metopirone",
+      "ldd": true,
+      "pa": false,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Mircera",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Monjuvi",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Monoferric",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Mvasi",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Mylotarg",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Myobloc",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Naglazyme",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Neulasta",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Neulasta OnPro",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Neupogen",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Nexviazyme",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Niktimvo",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Nivestym",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Nplate",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Nucala vial for reconstitution",
+      "ldd": false,
+      "pa": false,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Nufymco",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Nulibry",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Nuzyra IV",
+      "ldd": false,
+      "pa": false,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Nypozi",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Nyvepria",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Ocrevus",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Ocrevus Zunovo",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Ogivri",
+      "ldd": false,
+      "pa": false,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "olanzapine IM",
+      "ldd": true,
+      "pa": false,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Omisirge",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Omlyclo",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Omvoh IV",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Onivyde",
+      "ldd": false,
+      "pa": false,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Onpattro",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Ontruzant",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Opdivo",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Opdivo Qvantig",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Opdualag",
+      "ldd": false,
+      "pa": false,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Opfolda",
+      "ldd": true,
+      "pa": false,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Opuviz",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Orencia IV",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Osenvelt",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Ospomyv",
+      "ldd": false,
+      "pa": false,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Osvyrti",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Otulfi IV",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Otulfi SQ",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Oxlumo",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Oziltus",
+      "ldd": false,
+      "pa": false,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Ozurdex",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Padcev",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Palforzia",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Panzyga",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Papzimeos",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Parsabiv",
+      "ldd": false,
+      "pa": false,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Pavblu",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Pedmark",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "pemetrexed",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Pemfexy",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Pemgarda",
+      "ldd": false,
+      "pa": false,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Penpulimab-kcqx",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Pepaxto",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Perjeta",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Perseris SQ",
+      "ldd": true,
+      "pa": false,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Phesgo",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "PiaSky",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Pluvicto",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Poherdy",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Polivy",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Pombiliti",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Portrazza",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Posfrea",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Poteligeo",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Probuphine",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Privigen",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Procrit",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Prolastin",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Prolastin-C",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Prolastin-C Liquid",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Prolia",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Provenge",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Pyzchiva IV",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Pyzchiva SQ",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Qalsody",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Qivigy",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Quadramet",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Qutenza",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Quzyttir",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Radicava",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Reblozyl",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Rebyota",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Reclast",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "RegeneCyte",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Releuko",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Remicade",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Renflexis",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Retacrit",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Rethymic",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Retisert",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Revatio (IV)",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Revcovi",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Riabni",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Riastap",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Risperdal Consta IM",
+      "ldd": true,
+      "pa": false,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "risperidone ER IM",
+      "ldd": true,
+      "pa": false,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Risvan IM",
+      "ldd": false,
+      "pa": false,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Rituxan",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Rituxan Hycela",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Roctavian",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Rolvedon",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "romidepsin",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Ruxience",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Rybrevant",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Rykindo",
+      "ldd": true,
+      "pa": false,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Rylaze",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Ryoncil",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Ryplazim",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Rystiggo",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Rytelo",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Ryzneutra",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Sandostatin LAR/Depot",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Saphnelo",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Sarclisa",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Scenesse",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Selarsdi SQ",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Skyrizi IV",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Signifor LAR",
+      "ldd": true,
+      "pa": true,
+      "ql": true,
+      "dual_route": false
+    },
+    {
+      "name": "Simponi Aria",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Soliris",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Somatuline Depot",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Spevigo IV",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Spinraza",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Spravato",
+      "ldd": true,
+      "pa": true,
+      "ql": true,
+      "dual_route": false
+    },
+    {
+      "name": "Starjemza SC",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Starjemza IV",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Stelara IV",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Stelara SQ",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Steqeyma IV",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Steqeyma SQ",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Stimufend",
+      "ldd": false,
+      "pa": true,
+      "ql": true,
+      "dual_route": false
+    },
+    {
+      "name": "Stoboclo",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Sublocade",
+      "ldd": true,
+      "pa": true,
+      "ql": true,
+      "dual_route": false
+    },
+    {
+      "name": "Supprelin LA",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Sustol",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Susvimo",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Syfovre",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Sylvant",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Synagis",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Talvey",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Tecartus",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Tecelra",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Tecentriq",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Tecentriq Hybreza",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Tecvayli",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Tepadina",
+      "ldd": false,
+      "pa": false,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Tepezza",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Tepylute",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Tevimbra",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Tezspire",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Thyrogen",
+      "ldd": true,
+      "pa": false,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Tivdak",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Tofidence",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Torisel",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Trazimera",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Treanda",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Trelstar Depot",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Trelstar LA",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Tremfya IV",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Triferic AVNU",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Triptodur",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Trodelvy",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Trogarzo",
+      "ldd": true,
+      "pa": false,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Truxima",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Tyenne IV",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Tyruko",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Tysabri",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Tzield",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Udenyca",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Udenyca Onbody",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Ultomiris",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Unituxin",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Unloxcyt",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Uplizna",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Uzedy SQ",
+      "ldd": true,
+      "pa": false,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Vabrinity",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Vabysmo",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Vafseo",
+      "ldd": true,
+      "pa": false,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Vantas",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Varubi",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Vectibix",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Vegzelma",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Veklury",
+      "ldd": false,
+      "pa": false,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Veletri",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Veopoz",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Viadur",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Vidaza",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Viltepso",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Vimizim",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Visudyne",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Vivitrol",
+      "ldd": true,
+      "pa": false,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Vpriv",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Vyepti",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Vyjuvek",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Vyloy",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Vyondys",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Vyvgart",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Vyvgart Hytrulo vial",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Vyxeos",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Waskyra",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Wezlana IV",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Wezlana SQ",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Winrevair",
+      "ldd": true,
+      "pa": true,
+      "ql": true,
+      "dual_route": false
+    },
+    {
+      "name": "Wyost",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Xbryk",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Xenpozyme",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Xeomin",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Xgeva",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Xiaflex",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Xolair",
+      "ldd": true,
+      "pa": true,
+      "ql": true,
+      "dual_route": true
+    },
+    {
+      "name": "Xtrenbo",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Yartemlea",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Ycanth",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Yervoy",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Yesafili",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Yescarta",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Yesintek IV",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Yesintek SQ",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Yeztugo SQ",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Yeztugo tablet",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Yimmugo",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Yondelis",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Yutiq",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Zarxio",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Zemaira",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Zepzelca",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Zevalin",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Zevaskyn",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Ziextenzo",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Ziihera",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Zilretta",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Zinplava",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "ziprasidone IM",
+      "ldd": true,
+      "pa": false,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Zirabev",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Zoladex",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "zoledronic acid",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Zolgensma",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Zometa",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Zulresso",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Zusduri",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Zynlonta",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Zynteglo",
+      "ldd": true,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Zynyz",
+      "ldd": false,
+      "pa": true,
+      "ql": false,
+      "dual_route": false
+    },
+    {
+      "name": "Zyprexa IM",
+      "ldd": true,
+      "pa": false,
+      "ql": false,
+      "dual_route": false
+    }
+  ],
+  "not_covered": []
+}

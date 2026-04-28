@@ -1,5 +1,5 @@
 import DiabetesDashboard from './DiabetesDashboard'
-import PolicyWatch from './PolicyWatch'
+import SpecialtySearch from './SpecialtySearch'
 import uhcTexas from './data/uhc_texas.json'
 import uhcTexasEssential from './data/uhc_texas_essential.json'
 import { useState, useMemo } from 'react'
@@ -8,10 +8,10 @@ import simplechoice from './data/simplechoice.json'
 import notCovered from './data/not_covered.json'
 
 const PLANS = [
-  { id: 'bcbsfl',              label: 'ValueScript Rx',          plan: 'Florida Blue',     payer: 'Florida Blue',     effective: 'April 2026', tiers: 6, data: bcbsfl },
-  { id: 'simplechoice',        label: 'ValueScript SimpleChoice', plan: 'Florida Blue',     payer: 'Florida Blue',     effective: 'April 2026', tiers: 6, data: simplechoice },
-  { id: 'uhc_texas',           label: 'Texas Advantage 3-Tier',   plan: 'UnitedHealthcare', payer: 'UnitedHealthcare', effective: 'May 2026',   tiers: 3, data: uhcTexas },
-  { id: 'uhc_texas_essential', label: 'Texas Essential 4-Tier',   plan: 'UnitedHealthcare', payer: 'UnitedHealthcare', effective: 'May 2026',   tiers: 4, data: uhcTexasEssential },
+  { id: 'bcbsfl',              label: 'FL ValueScript Rx',          plan: 'Florida Blue',     payer: 'Florida Blue',     effective: 'April 2026', tiers: 6, data: bcbsfl,           highlight: true  },
+  { id: 'simplechoice',        label: 'FL ValueScript SimpleChoice', plan: 'Florida Blue',     payer: 'Florida Blue',     effective: 'April 2026', tiers: 6, data: simplechoice,      highlight: false },
+  { id: 'uhc_texas',           label: 'TX Advantage 3-Tier',         plan: 'UnitedHealthcare', payer: 'UnitedHealthcare', effective: 'May 2026',   tiers: 3, data: uhcTexas,          highlight: true  },
+  { id: 'uhc_texas_essential', label: 'TX Essential 4-Tier',         plan: 'UnitedHealthcare', payer: 'UnitedHealthcare', effective: 'May 2026',   tiers: 4, data: uhcTexasEssential, highlight: true  },
 ]
 
 const TIER_LABELS_4 = {
@@ -386,6 +386,24 @@ function NotCoveredBlock({ drugs, appendixDrugs, q }) {
   )
 }
 
+function PAInstructionsLink() {
+  const [open, setOpen] = useState(false)
+  return (
+    <div className="pa-instructions-wrap">
+      <button className="resource-link fl-pa-link" onClick={() => setOpen(o => !o)}>
+        PA Criteria &amp; Forms — Florida Blue {open ? '▴' : '▾'}
+      </button>
+      {open && (
+        <div className="pa-instructions-box">
+          Go to <strong>myprime.com/en/forms.html</strong> → click <em>"Continue without signing in"</em> at the bottom
+          → select <strong>Florida Blue Health Plan</strong> → choose <strong>ValueScript</strong> to access
+          Prior Authorization Program Information and Fax Forms.
+        </div>
+      )}
+    </div>
+  )
+}
+
 export default function App() {
   const [activePlan, setActivePlan] = useState(PLANS[0])
   const [showEstimator, setShowEstimator] = useState(false)
@@ -420,18 +438,26 @@ export default function App() {
   return (
     <>
       <header className="app-header">
-        <div className="wordmark">Choice<span>Rx</span></div>
+        <div>
+          <div className="wordmark">Sanitas<sup className="beta-sup">β</sup></div>
+          <div className="wordmark-sub">Formulary Reference</div>
+        </div>
+        <div className="header-tagline">
+          Formulary coverage, pricing tools, and PA resources{' '}
+          <span className="tagline-accent">all in one place.</span>
+        </div>
+        <a href="mailto:ahughes@mysanitas.com?subject=Sanitas Formulary — Feedback" className="feedback-link">
+          Report an issue
+        </a>
       </header>
 
       <div className="plan-bar">
         <div className="plan-bar-inner">
-          <span className="formulary-label">Formulary</span>
           <div className="formulary-tabs">
             {PLANS.map(plan => (
               <button key={plan.id}
-                className={`formulary-tab ${activePlan.id === plan.id ? 'active' : ''} ${plan.payer === 'UnitedHealthcare' ? 'uhc-tab' : ''}`}
+                className={`formulary-tab ${activePlan.id === plan.id ? 'active' : ''} ${plan.highlight ? 'highlight-tab' : ''}`}
                 onClick={() => { setActivePlan(plan); setQuery('') }}>
-                <span className="tab-plan">{plan.payer === 'UnitedHealthcare' ? 'UnitedHealthcare' : 'myBlue'}</span>
                 <span className="tab-name">{plan.label}</span>
                 <span className="tab-date">{plan.effective}</span>
               </button>
@@ -504,34 +530,50 @@ export default function App() {
 
         {q && filtered.totalMatches === 0 && (
           <div className="empty-state">
-            <p>No drugs matched "<strong>{query}</strong>".</p>
+            <p>Drug not found in Medication List.</p>
             <p style={{ marginTop: 6, fontSize: 12 }}>Try a partial name or the generic name.</p>
           </div>
         )}
 
         <div className="resources-section">
-          <div className="resources-label">Cash Price Tools</div>
+          <div className="resources-label">Find a Lower Price</div>
           <div className="resources-links">
-            <a href="https://costplusdrugs.com" target="_blank" rel="noopener noreferrer" className="resource-link">
-              Cost Plus Drugs — transparent-pricing pharmacy <ExtIcon />
-            </a>
             <a href="https://www.goodrx.com" target="_blank" rel="noopener noreferrer" className="resource-link">
-              GoodRx — compare cash prices at local pharmacies <ExtIcon />
+              GoodRx <ExtIcon />
+            </a>
+            <a href="https://costplusdrugs.com" target="_blank" rel="noopener noreferrer" className="resource-link">
+              Cost Plus Drugs <ExtIcon />
             </a>
             <a href="https://tryrx.hhs.gov" target="_blank" rel="noopener noreferrer" className="resource-link">
-              TrumpRx — federally negotiated IRA drug prices <ExtIcon />
+              TrumpRx <ExtIcon />
+            </a>
+            <a href="https://www.rxassist.org" target="_blank" rel="noopener noreferrer" className="resource-link">
+              RxAssist — patient assistance programs <ExtIcon />
             </a>
           </div>
         </div>
 
         <div className="resources-section">
-          <div className="resources-label">Resources</div>
+          <div className="resources-label">Rx Needs a Prior Authorization?</div>
           <div className="resources-links">
-            <a href={SHEETS_URL} target="_blank" rel="noopener noreferrer" className="resource-link">
-              Formulary Spreadsheet (Updated April 2026) <ExtIcon />
+            <a href="https://www.covermymeds.com" target="_blank" rel="noopener noreferrer" className="resource-link cmm-link">
+              CoverMyMeds Portal <ExtIcon />
             </a>
-            <a href={SOURCE_URL} target="_blank" rel="noopener noreferrer" className="resource-link">
-              Florida Blue Medication Guides (Current) <ExtIcon />
+            <a href="https://docs.google.com/document/d/1EsuVXqVm7wf1fea1gIxGZvqudmPOewjB/edit?usp=sharing" target="_blank" rel="noopener noreferrer" className="resource-link cmm-guide-link">
+              Quick Start Guide <ExtIcon />
+            </a>
+            <PAInstructionsLink />
+          </div>
+        </div>
+
+        <div className="resources-section">
+          <div className="resources-label">Medication Guide</div>
+          <div className="resources-links">
+            <a href="https://www.floridablue.com/members/tools-resources/pharmacy/medication-guide" target="_blank" rel="noopener noreferrer" className="resource-link fl-link">
+              Florida Blue <ExtIcon />
+            </a>
+            <a href="https://www.uhc.com/health-and-wellness/drug-list" target="_blank" rel="noopener noreferrer" className="resource-link uhc-link">
+              UnitedHealthcare <ExtIcon />
             </a>
             <button className="resource-link estimator-btn" onClick={() => setShowEstimator(true)}>
               Impact Estimator <span className="beta-tag">Beta</span>
@@ -539,7 +581,7 @@ export default function App() {
           </div>
         </div>
 
-        <PolicyWatch />
+        <SpecialtySearch />
 
         {showEstimator && (
           <div className="estimator-overlay" onClick={e => { if (e.target === e.currentTarget) setShowEstimator(false) }}>
@@ -553,7 +595,11 @@ export default function App() {
       </main>
 
       <footer className="app-footer">
-        ChoiceRx · {activePlan.payer} · {activePlan.label} · {activePlan.effective}
+        Sanitas Formulary Reference · {activePlan.payer} · {activePlan.label} · {activePlan.effective}
+        <span className="footer-sep">·</span>
+        <a href="mailto:ahughes@mysanitas.com?subject=Sanitas Formulary — Feedback" className="footer-feedback">
+          Report an issue
+        </a>
       </footer>
     </>
   )
