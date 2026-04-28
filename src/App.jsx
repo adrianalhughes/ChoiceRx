@@ -695,6 +695,8 @@ export default function App() {
           <a href="https://www.floridablue.com/members/tools-resources/pharmacy/medication-guide" target="_blank" rel="noopener noreferrer" className="sources-footer-btn">Florida Blue</a>
           <a href="https://www.uhc.com/member-resources/pharmacy-benefits/prescription-drug-lists" target="_blank" rel="noopener noreferrer" className="sources-footer-btn">UnitedHealthcare</a>
         </div>
+
+        {showEstimator && (
           <div className="estimator-overlay" onClick={e => { if (e.target === e.currentTarget) setShowEstimator(false) }}>
             <div className="estimator-modal">
               <button className="estimator-close" onClick={() => setShowEstimator(false)}>✕</button>
@@ -706,8 +708,6 @@ export default function App() {
       </main>
 
       <footer className="app-footer">
-        Sanitas Formulary Reference · {activePlan.payer} · {activePlan.label} · {activePlan.effective}
-        <span className="footer-sep">·</span>
         <a href="mailto:ahughes@mysanitas.com?subject=Sanitas Formulary — Feedback" className="footer-feedback">
           Report an issue
         </a>

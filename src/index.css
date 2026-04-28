@@ -1255,98 +1255,12 @@ body { min-height: 100vh; background: var(--bg); }
 .legend-group-label-low  { background: rgba(94,234,212,0.15); color: #5EEAD4; border-radius: var(--radius) var(--radius) 0 0; }
 .legend-group-label-high { background: rgba(251,146,60,0.15);  color: #FB923C; border-radius: var(--radius) var(--radius) 0 0; }
 
-/* ── Fix search bar offset inside panel ── */
-.panel-search-wrap .search-inner {
-  max-width: 100% !important;
-  margin: 0 !important;
-}
 
-/* ── Drug not found state ── */
-.not-found-state {
-  background: rgba(248,113,113,0.06);
-  border: 1px solid rgba(248,113,113,0.2);
-  border-radius: var(--radius);
-  padding: 16px 18px;
-  margin-bottom: 16px;
-}
-.not-found-title {
-  font-size: 13px;
-  font-weight: 600;
-  color: #fca5a5;
-  margin-bottom: 10px;
-}
-.not-found-actions {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  margin-bottom: 10px;
-}
-.not-found-btn {
-  font-size: 12px;
-  font-weight: 500;
-  color: #e2e8f0;
-  text-decoration: none;
-  padding: 7px 12px;
-  background: var(--bg-2);
-  border: 1px solid var(--border-mid);
-  border-radius: var(--radius);
-  transition: border-color 0.15s;
-}
-.not-found-btn:hover { border-color: var(--blue); color: #fff; }
-.not-found-sub {
-  font-size: 11px;
-  color: #64748b;
-  font-style: italic;
-}
-
-/* ── Amazon Pharmacy tool link ── */
-.amazon-tool { border-color: rgba(255,153,0,0.25) !important; }
-.amazon-tool:hover { border-color: rgba(255,153,0,0.5) !important; background: rgba(255,153,0,0.05) !important; }
-
-/* ── Drugs Not Covered full-width standalone block ── */
-.not-covered-standalone { grid-column: 1 / -1; margin-top: 8px; }
-
-/* ── Collapsible tools sections ── */
-.tools-section-collapsible {
-  border-bottom: 1px solid var(--border);
-}
-.tools-section-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-  background: none;
-  border: none;
-  padding: 12px 0;
-  cursor: pointer;
-  font-family: 'DM Sans', sans-serif;
-  text-align: left;
-}
-.tools-section-label {
-  font-size: 13px;
-  font-weight: 600;
-  color: #ffffff;
-  letter-spacing: 0;
-  text-transform: none;
-}
-.tools-section-chevron {
-  font-size: 14px;
-  color: #4f8ef7;
-  flex-shrink: 0;
-  margin-left: 8px;
-}
-.tools-section-body {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  padding-bottom: 12px;
-}
-
-/* ── Search bar fix — panel-search-wrap is now the search container ── */
+/* ── Panel search — flush left, no offset ── */
 .panel-search-wrap {
   position: relative;
-  margin-bottom: 16px;
   width: 100%;
+  margin-bottom: 16px;
 }
 .panel-search-wrap .search-icon {
   position: absolute;
@@ -1369,62 +1283,49 @@ body { min-height: 100vh; background: var(--bg); }
   transform: translateY(-50%);
 }
 
-/* ── Collapsible section — closed state ── */
-.tools-section-collapsible { border-bottom: 1px solid #1e2d4d; }
-.tools-section-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-  background: none;
-  border: none;
-  padding: 13px 0;
-  cursor: pointer;
-  font-family: 'DM Sans', sans-serif;
-  text-align: left;
-  transition: opacity 0.15s;
+/* ── Collapsible tools sections ── */
+.tools-section-collapsible {
+  border-bottom: 1px solid #1e2d4d;
 }
-.tools-section-header:hover { opacity: 0.85; }
+.tools-section-header {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  width: 100% !important;
+  background: none !important;
+  border: none !important;
+  padding: 14px 0 !important;
+  cursor: pointer !important;
+  font-family: 'DM Sans', sans-serif !important;
+  text-align: left !important;
+}
 .tools-section-label {
-  font-size: 13px;
-  font-weight: 600;
-  color: #94a3b8;
-  letter-spacing: 0;
-  text-transform: none;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  color: #64748b !important;
+  letter-spacing: 0 !important;
+  text-transform: none !important;
   transition: color 0.15s;
 }
 .tools-section-chevron {
-  font-size: 16px;
-  color: #334155;
-  flex-shrink: 0;
-  margin-left: 8px;
-  transition: color 0.15s;
+  font-size: 18px !important;
+  color: #334155 !important;
+  flex-shrink: 0 !important;
+  margin-left: 8px !important;
+  transition: color 0.2s;
 }
-
-/* ── Collapsible section — open/active state ── */
-.tools-section-collapsible.is-open .tools-section-label { color: #ffffff; }
-.tools-section-collapsible.is-open .tools-section-chevron { color: #4f8ef7; font-size: 18px; }
-.tools-section-collapsible.is-open .tools-section-header { border-bottom: 1px solid #253147; margin-bottom: 0; }
-
+.tools-section-collapsible.is-open .tools-section-label {
+  color: #ffffff !important;
+}
+.tools-section-collapsible.is-open .tools-section-chevron {
+  color: #4f8ef7 !important;
+}
 .tools-section-body {
-  padding: 8px 0 12px;
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
+  padding: 6px 0 14px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 4px !important;
 }
-
-/* ── Tool link arrow ── */
-.tool-link::after {
-  content: '→';
-  font-size: 13px;
-  color: #334155;
-  margin-left: auto;
-  padding-left: 8px;
-  flex-shrink: 0;
-  transition: color 0.15s, transform 0.15s;
-}
-.tool-link:hover::after { color: #ffffff; transform: translateX(2px); }
-.tool-link button::after { display: none; }
 
 /* ── Sources footer ── */
 .sources-footer {
@@ -1453,3 +1354,7 @@ body { min-height: 100vh; background: var(--bg); }
   transition: color 0.15s, border-color 0.15s;
 }
 .sources-footer-btn:hover { color: #94a3b8; border-color: #334155; }
+
+/* ── Amazon tool link ── */
+.amazon-tool { border-color: rgba(255,153,0,0.25) !important; }
+.amazon-tool:hover { border-color: rgba(255,153,0,0.5) !important; background: rgba(255,153,0,0.05) !important; }
