@@ -549,6 +549,11 @@ export default function App() {
                 <p style={{ marginTop: 6, fontSize: 12 }}>Try a partial name or the generic name.</p>
               </div>
             )}
+
+            <div className="special-grid">
+              <NonPreferredBlock drugs={filtered.tier6} q={q} />
+              <NotCoveredBlock drugs={filtered.ncDrugs} appendixDrugs={filtered.ncAppend} q={q} />
+            </div>
           </div>
 
           {/* ── Right: Tools ── */}
