@@ -634,7 +634,7 @@ export default function App() {
                 <div className="tool-link-desc">Transparent-pricing mail pharmacy</div>
                 <ExtIcon />
               </a>
-              <a href="https://tryrx.hhs.gov" target="_blank" rel="noopener noreferrer" className="tool-link">
+              <a href="https://trumprx.gov/" target="_blank" rel="noopener noreferrer" className="tool-link">
                 <div className="tool-link-name">TrumpRx</div>
                 <div className="tool-link-desc">Federally negotiated IRA prices</div>
                 <ExtIcon />
