@@ -465,130 +465,170 @@ export default function App() {
         </div>
       </div>
 
-      <div className="search-wrap">
-        <div className="search-inner">
-          <SearchIcon className="search-icon" />
-          <input
-            className="search-input"
-            type="text"
-            placeholder="Search drug name..."
-            value={query}
-            onChange={e => setQuery(e.target.value)}
-            autoComplete="off"
-            spellCheck={false}
-          />
-          {query && <button className="search-clear" onClick={() => setQuery('')} aria-label="Clear">✕</button>}
-        </div>
-        {q && (
-          <div className="search-count">
-            {filtered.totalMatches === 0
-              ? 'No matches found'
-              : `${filtered.totalMatches} drug${filtered.totalMatches !== 1 ? 's' : ''} matched`}
-          </div>
-        )}
-      </div>
-
       <main className="main-content">
+        <div className="split-layout">
 
-        <div className="source-note">
-          For reference only. Source:{' '}
-          {activePlan.payer === 'UnitedHealthcare'
-            ? <a href="https://www.uhc.com/health-and-wellness/drug-list" target="_blank" rel="noopener noreferrer">UnitedHealthcare Drug List</a>
-            : <a href={SOURCE_URL} target="_blank" rel="noopener noreferrer">Florida Blue Medication Guide</a>
-          }
-          {' '}· Updated {activePlan.effective}
-        </div>
+          {/* ── Left: Formulary ── */}
+          <div className="formulary-panel">
+            <div className="panel-question">What are the coverage details?</div>
 
-        <div className="special-grid">
-          <NonPreferredBlock drugs={filtered.tier6} q={q} />
-          <NotCoveredBlock drugs={filtered.ncDrugs} appendixDrugs={filtered.ncAppend} q={q} />
-        </div>
+            <div className="panel-search-wrap">
+              <div className="search-inner">
+                <SearchIcon className="search-icon" />
+                <input
+                  className="search-input"
+                  type="text"
+                  placeholder="Search drug name..."
+                  value={query}
+                  onChange={e => setQuery(e.target.value)}
+                  autoComplete="off"
+                  spellCheck={false}
+                />
+                {query && <button className="search-clear" onClick={() => setQuery('')} aria-label="Clear">✕</button>}
+              </div>
+              {q && (
+                <div className="search-count">
+                  {filtered.totalMatches === 0
+                    ? 'No matches found'
+                    : `${filtered.totalMatches} drug${filtered.totalMatches !== 1 ? 's' : ''} matched`}
+                </div>
+              )}
+            </div>
 
-        <div className="section-heading">Search Covered Drugs by Condition</div>
-        <div className="tier-legend-inline">
-          {Object.entries(activePlan.tiers === 3 ? TIER_LABELS_3 : activePlan.tiers === 4 ? TIER_LABELS_4 : TIER_LABELS_6).map(([t, label]) => (
-            <span key={t} className="legend-item">
-              <span className={`tier-badge tier-${t}`}>{t}</span>
-              <span>{label}</span>
-            </span>
-          ))}
-        </div>
+            <div className="source-note">
+              For reference only. Source:{' '}
+              {activePlan.payer === 'UnitedHealthcare'
+                ? <a href="https://www.uhc.com/health-and-wellness/drug-list" target="_blank" rel="noopener noreferrer">UnitedHealthcare Drug List</a>
+                : <a href={SOURCE_URL} target="_blank" rel="noopener noreferrer">Florida Blue Medication Guide</a>
+              }
+              {' '}· Updated {activePlan.effective}
+            </div>
 
-        <div className="condition-grid">
-          {filtered.conditions.map(c => (
-            <ConditionBlock
-              key={c.name}
-              name={c.name}
-              cleanDrugs={c.cleanDrugs}
-              restrictedDrugs={c.restrictedDrugs}
-              q={q}
-              forceOpen={c.forceOpen}
-            />
-          ))}
-        </div>
+            <div className="special-grid">
+              <NonPreferredBlock drugs={filtered.tier6} q={q} />
+              <NotCoveredBlock drugs={filtered.ncDrugs} appendixDrugs={filtered.ncAppend} q={q} />
+            </div>
 
-        {q && filtered.totalMatches === 0 && (
-          <div className="empty-state">
-            <p>Drug not found in Medication List.</p>
-            <p style={{ marginTop: 6, fontSize: 12 }}>Try a partial name or the generic name.</p>
+            <div className="section-heading">Covered Drugs by Condition</div>
+            <div className="tier-legend-inline">
+              {Object.entries(activePlan.tiers === 3 ? TIER_LABELS_3 : activePlan.tiers === 4 ? TIER_LABELS_4 : TIER_LABELS_6).map(([t, label]) => (
+                <span key={t} className="legend-item">
+                  <span className={`tier-badge tier-${t}`}>{t}</span>
+                  <span>{label}</span>
+                </span>
+              ))}
+            </div>
+
+            <div className="condition-grid">
+              {filtered.conditions.map(c => (
+                <ConditionBlock
+                  key={c.name}
+                  name={c.name}
+                  cleanDrugs={c.cleanDrugs}
+                  restrictedDrugs={c.restrictedDrugs}
+                  q={q}
+                  forceOpen={c.forceOpen}
+                />
+              ))}
+            </div>
+
+            {q && filtered.totalMatches === 0 && (
+              <div className="empty-state">
+                <p>Drug not found in Medication List.</p>
+                <p style={{ marginTop: 6, fontSize: 12 }}>Try a partial name or the generic name.</p>
+              </div>
+            )}
           </div>
-        )}
 
-        <div className="resources-section">
-          <div className="resources-label">Look for a Lower Price</div>
-          <div className="resources-links">
-            <a href="https://www.goodrx.com" target="_blank" rel="noopener noreferrer" className="resource-link">
-              GoodRx <ExtIcon />
-            </a>
-            <a href="https://costplusdrugs.com" target="_blank" rel="noopener noreferrer" className="resource-link">
-              Cost Plus Drugs <ExtIcon />
-            </a>
-            <a href="https://tryrx.hhs.gov" target="_blank" rel="noopener noreferrer" className="resource-link">
-              TrumpRx <ExtIcon />
-            </a>
-            <a href="https://www.rxassist.org" target="_blank" rel="noopener noreferrer" className="resource-link">
-              RxAssist — patient assistance programs <ExtIcon />
-            </a>
-          </div>
-        </div>
+          {/* ── Right: Tools ── */}
+          <div className="tools-panel">
 
-        <div className="resources-section">
-          <div className="resources-label">Rx Needs a Prior Authorization?</div>
-          <div className="resources-links">
-            <a href="https://www.covermymeds.com" target="_blank" rel="noopener noreferrer" className="resource-link cmm-link">
-              CoverMyMeds Portal <ExtIcon />
-            </a>
-            <a href="https://docs.google.com/document/d/1EsuVXqVm7wf1fea1gIxGZvqudmPOewjB/edit?usp=sharing" target="_blank" rel="noopener noreferrer" className="resource-link cmm-guide-link">
-              Quick Start Guide <ExtIcon />
-            </a>
-            <PAInstructionsLink />
-          </div>
-        </div>
+            <div className="tools-section">
+              <div className="resources-label">Look for a Lower Price</div>
+              <div className="tools-links">
+                <a href="https://www.goodrx.com" target="_blank" rel="noopener noreferrer" className="tool-link">
+                  <div className="tool-link-name">GoodRx</div>
+                  <div className="tool-link-desc">Cash prices at local pharmacies</div>
+                  <ExtIcon />
+                </a>
+                <a href="https://costplusdrugs.com" target="_blank" rel="noopener noreferrer" className="tool-link">
+                  <div className="tool-link-name">Cost Plus Drugs</div>
+                  <div className="tool-link-desc">Transparent-pricing mail pharmacy</div>
+                  <ExtIcon />
+                </a>
+                <a href="https://tryrx.hhs.gov" target="_blank" rel="noopener noreferrer" className="tool-link">
+                  <div className="tool-link-name">TrumpRx</div>
+                  <div className="tool-link-desc">Federally negotiated IRA prices</div>
+                  <ExtIcon />
+                </a>
+                <a href="https://www.rxassist.org" target="_blank" rel="noopener noreferrer" className="tool-link">
+                  <div className="tool-link-name">RxAssist</div>
+                  <div className="tool-link-desc">Manufacturer PAPs for uninsured patients</div>
+                  <ExtIcon />
+                </a>
+              </div>
+            </div>
 
-        <div className="resources-section">
-          <div className="resources-label">Medication Guide</div>
-          <div className="resources-links">
-            <a href="https://www.floridablue.com/members/tools-resources/pharmacy/medication-guide" target="_blank" rel="noopener noreferrer" className="resource-link fl-link">
-              Florida Blue <ExtIcon />
-            </a>
-            <a href="https://www.uhc.com/health-and-wellness/drug-list" target="_blank" rel="noopener noreferrer" className="resource-link uhc-link">
-              UnitedHealthcare <ExtIcon />
-            </a>
-            <button className="resource-link estimator-btn" onClick={() => setShowEstimator(true)}>
-              Impact Estimator <span className="beta-tag">Beta</span>
-            </button>
-          </div>
-        </div>
+            <div className="tools-divider" />
 
-        <div className="resources-section">
-          <div className="resources-label">Specialty Drug Lists — Florida Blue</div>
-          <div className="resources-links">
-            <a href="https://www.bcbsfl.com/DocumentLibrary/Providers/Content/RxF_Specialty_Table_Self.pdf" target="_blank" rel="noopener noreferrer" className="resource-link fl-link">
-              Self-Administered Specialty Drugs <ExtIcon />
-            </a>
-            <a href="https://www.bcbsfl.com/DocumentLibrary/Providers/Content/RxF_Specialty_Table_Prov.pdf" target="_blank" rel="noopener noreferrer" className="resource-link fl-link">
-              Provider-Administered Specialty Drugs <ExtIcon />
-            </a>
+            <div className="tools-section">
+              <div className="resources-label">Rx Needs a Prior Authorization?</div>
+              <div className="tools-links">
+                <a href="https://www.covermymeds.com" target="_blank" rel="noopener noreferrer" className="tool-link cmm-tool">
+                  <div className="tool-link-name" style={{color:'#FF8C00'}}>CoverMyMeds Portal</div>
+                  <div className="tool-link-desc">Submit &amp; track PA requests</div>
+                  <ExtIcon />
+                </a>
+                <a href="https://docs.google.com/document/d/1EsuVXqVm7wf1fea1gIxGZvqudmPOewjB/edit?usp=sharing" target="_blank" rel="noopener noreferrer" className="tool-link cmm-guide-tool">
+                  <div className="tool-link-name" style={{color:'#e83480'}}>Quick Start Guide</div>
+                  <div className="tool-link-desc">Step-by-step tutorial (Google Doc)</div>
+                  <ExtIcon />
+                </a>
+                <PAInstructionsLink />
+              </div>
+            </div>
+
+            <div className="tools-divider" />
+
+            <div className="tools-section">
+              <div className="resources-label">Medication Guide</div>
+              <div className="tools-links">
+                <a href="https://www.floridablue.com/members/tools-resources/pharmacy/medication-guide" target="_blank" rel="noopener noreferrer" className="tool-link fl-tool">
+                  <div className="tool-link-name" style={{color:'#4a90d9'}}>Florida Blue</div>
+                  <div className="tool-link-desc">Current formulary medication guide</div>
+                  <ExtIcon />
+                </a>
+                <a href="https://www.uhc.com/health-and-wellness/drug-list" target="_blank" rel="noopener noreferrer" className="tool-link uhc-tool">
+                  <div className="tool-link-name" style={{color:'#60a5fa'}}>UnitedHealthcare</div>
+                  <div className="tool-link-desc">Current drug list</div>
+                  <ExtIcon />
+                </a>
+                <button className="tool-link estimator-tool" onClick={() => setShowEstimator(true)}>
+                  <div className="tool-link-name" style={{color:'#475569'}}>Impact Estimator</div>
+                  <div className="tool-link-desc" style={{color:'#334155'}}>Cost modeling tool</div>
+                  <span className="beta-tag">Beta</span>
+                </button>
+              </div>
+            </div>
+
+            <div className="tools-divider" />
+
+            <div className="tools-section">
+              <div className="resources-label">Specialty Drug Lists — Florida Blue</div>
+              <div className="tools-links">
+                <a href="https://www.bcbsfl.com/DocumentLibrary/Providers/Content/RxF_Specialty_Table_Self.pdf" target="_blank" rel="noopener noreferrer" className="tool-link fl-tool">
+                  <div className="tool-link-name" style={{color:'#4a90d9'}}>Self-Administered</div>
+                  <div className="tool-link-desc">Specialty drugs filled at pharmacy</div>
+                  <ExtIcon />
+                </a>
+                <a href="https://www.bcbsfl.com/DocumentLibrary/Providers/Content/RxF_Specialty_Table_Prov.pdf" target="_blank" rel="noopener noreferrer" className="tool-link fl-tool">
+                  <div className="tool-link-name" style={{color:'#4a90d9'}}>Provider-Administered</div>
+                  <div className="tool-link-desc">Specialty drugs given in-office or infusion</div>
+                  <ExtIcon />
+                </a>
+              </div>
+            </div>
+
           </div>
         </div>
 
