@@ -578,7 +578,7 @@ export default function App() {
             <div className="tools-divider" />
 
             <div className="tools-section">
-              <div className="resources-label">Medication Guide</div>
+              <div className="resources-label">Database Original Sources: View the Medication Lists (PDF)</div>
               <div className="tools-links">
                 <a href="https://www.floridablue.com/members/tools-resources/pharmacy/medication-guide" target="_blank" rel="noopener noreferrer" className="tool-link fl-tool">
                   <div className="tool-link-name" style={{color:'#4a90d9'}}>Florida Blue</div>
