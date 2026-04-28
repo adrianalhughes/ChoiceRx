@@ -428,7 +428,7 @@ function PAInstructionsLink() {
   return (
     <div className="pa-instructions-wrap">
       <button className="resource-link fl-pa-link" onClick={() => setOpen(o => !o)}>
-        PA Criteria &amp; Forms — Florida Blue {open ? '▴' : '▾'}
+        Fax Forms — Florida Blue {open ? '▴' : '▾'}
       </button>
       {open && (
         <div className="pa-instructions-box">
