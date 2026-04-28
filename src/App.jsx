@@ -536,7 +536,7 @@ export default function App() {
         )}
 
         <div className="resources-section">
-          <div className="resources-label">Find a Lower Price</div>
+          <div className="resources-label">Look for a Lower Price</div>
           <div className="resources-links">
             <a href="https://www.goodrx.com" target="_blank" rel="noopener noreferrer" className="resource-link">
               GoodRx <ExtIcon />
