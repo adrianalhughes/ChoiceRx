@@ -1,5 +1,4 @@
 import DiabetesDashboard from './DiabetesDashboard'
-import SpecialtySearch from './SpecialtySearch'
 import uhcTexas from './data/uhc_texas.json'
 import uhcTexasEssential from './data/uhc_texas_essential.json'
 import { useState, useMemo } from 'react'
@@ -581,7 +580,17 @@ export default function App() {
           </div>
         </div>
 
-        <SpecialtySearch />
+        <div className="resources-section">
+          <div className="resources-label">Specialty Drug Lists — Florida Blue</div>
+          <div className="resources-links">
+            <a href="https://www.bcbsfl.com/DocumentLibrary/Providers/Content/RxF_Specialty_Table_Self.pdf" target="_blank" rel="noopener noreferrer" className="resource-link fl-link">
+              Self-Administered Specialty Drugs <ExtIcon />
+            </a>
+            <a href="https://www.bcbsfl.com/DocumentLibrary/Providers/Content/RxF_Specialty_Table_Prov.pdf" target="_blank" rel="noopener noreferrer" className="resource-link fl-link">
+              Provider-Administered Specialty Drugs <ExtIcon />
+            </a>
+          </div>
+        </div>
 
         {showEstimator && (
           <div className="estimator-overlay" onClick={e => { if (e.target === e.currentTarget) setShowEstimator(false) }}>
