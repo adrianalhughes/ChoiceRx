@@ -1410,3 +1410,113 @@ body { min-height: 100vh; background: var(--bg); }
   border-bottom: 1px solid #1e2d4d;
   margin-bottom: 2px;
 }
+
+/* ── Tools bar (row 2) ── */
+.tools-bar {
+  background: #111827;
+  border-bottom: 1px solid var(--border);
+  padding: 0 24px;
+  position: sticky;
+  top: 110px;
+  z-index: 85;
+}
+.tools-bar-inner {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  max-width: 1200px;
+  margin: 0;
+  position: relative;
+}
+.tools-bar-section { position: relative; }
+.tools-bar-btn {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  color: #94a3b8;
+  background: none;
+  border: none;
+  padding: 12px 14px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+  border-bottom: 2px solid transparent;
+  transition: color 0.15s, border-color 0.15s;
+}
+.tools-bar-btn:hover { color: #e2e8f0; }
+.tools-bar-section.is-open .tools-bar-btn {
+  color: #ffffff;
+  border-bottom-color: #4f8ef7;
+}
+.tools-bar-chevron { font-size: 13px; color: #475569; transition: color 0.15s; }
+.tools-bar-section.is-open .tools-bar-chevron { color: #4f8ef7; }
+
+.tools-bar-dropdown {
+  position: absolute;
+  top: calc(100% + 1px);
+  left: 0;
+  min-width: 280px;
+  background: #1a2540;
+  border: 1px solid var(--border-mid);
+  border-radius: 0 var(--radius) var(--radius) var(--radius);
+  padding: 12px;
+  z-index: 200;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+}
+
+/* ── Plan tabs — consistent, no yellow ── */
+.formulary-tab.fl-tab { }
+.formulary-tab.fl-tab.active { border-bottom-color: #4a90d9; color: #ffffff; }
+.formulary-tab.tx-tab {
+  background: none !important;
+  color: #64748b !important;
+  border-color: transparent !important;
+  border-radius: 0 !important;
+  border-bottom: 2px solid transparent !important;
+  padding: 9px 12px !important;
+  margin-bottom: -1px !important;
+}
+.formulary-tab.tx-tab:hover { color: #93c5fd !important; }
+.formulary-tab.tx-tab.active { color: #93c5fd !important; border-bottom-color: #93c5fd !important; }
+.formulary-tab.tx-tab .tab-name { color: inherit !important; }
+.formulary-tab.tx-tab .tab-date { color: inherit !important; opacity: 0.6; }
+.formulary-tab.highlight-tab {
+  background: none !important;
+  color: #64748b !important;
+  border-color: transparent !important;
+  border-radius: 0 !important;
+  border-bottom: 2px solid transparent !important;
+  padding: 9px 12px !important;
+}
+.formulary-tab.highlight-tab.active { color: #ffffff !important; border-bottom-color: #4f8ef7 !important; }
+.formulary-tab.highlight-tab .tab-name { color: inherit !important; }
+.formulary-tab.highlight-tab .tab-date { color: inherit !important; opacity: 0.6; }
+
+/* ── Most Used badge ── */
+.most-used-badge {
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+  background: rgba(79,142,247,0.15);
+  color: #4f8ef7;
+  border: 1px solid rgba(79,142,247,0.3);
+  border-radius: 3px;
+  padding: 1px 5px;
+  margin-left: 4px;
+  white-space: nowrap;
+}
+
+/* ── Bar instruction text ── */
+.bar-instruction {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: #475569;
+  white-space: nowrap;
+  flex-shrink: 0;
+  margin-right: 8px;
+}
