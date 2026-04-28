@@ -394,7 +394,7 @@ function SpecialtyNotCoveredBlock({ q }) {
     <div className={`special-block notcovered-block ${open ? 'open' : ''}`} onClick={() => setOpen(o => !o)}>
       <div className="special-block-header">
         <span className="special-block-chevron">{open ? '▾' : '›'}</span>
-        <span className="special-block-title">Self-Admin Specialty — Not Covered</span>
+        <span className="special-block-title">Specialty Drugs — Not Covered</span>
         <span className="meta-pill notcovered">{filtered.length} drugs</span>
       </div>
       {open && (

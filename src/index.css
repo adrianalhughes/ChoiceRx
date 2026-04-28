@@ -1598,3 +1598,21 @@ body { min-height: 100vh; background: var(--bg); }
   min-width: 260px;
   top: calc(100% + 4px);
 }
+
+/* ── Push tools grid to far right of header ── */
+.app-header {
+  justify-content: flex-start !important;
+}
+.header-tools-grid {
+  margin-left: auto !important;
+  margin-right: 0 !important;
+}
+.feedback-link {
+  margin-left: 16px !important;
+  margin-right: 0 !important;
+  align-self: center !important;
+  order: 99;
+}
+
+/* ── Clean up drug list dropdown items ── */
+.tool-link-name { white-space: nowrap !important; overflow: hidden; text-overflow: ellipsis; }
