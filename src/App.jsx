@@ -422,6 +422,8 @@ function SpecialtyNotCoveredBlock({ q }) {
     </div>
   )
 }
+
+function PAInstructionsLink() {
   const [open, setOpen] = useState(false)
   return (
     <div className="pa-instructions-wrap">
@@ -540,7 +542,6 @@ export default function App() {
                     : `${filtered.totalMatches} drug${filtered.totalMatches !== 1 ? 's' : ''} matched`}
                 </div>
               )}
-            </div>
             </div>
 
             <div className="section-heading">Health Plan Covered Drugs</div>
@@ -688,7 +689,7 @@ export default function App() {
             </ToolsSection>
 
           </div>
-        </div>
+        </div>{/* end split-layout */}
 
         <div className="sources-footer">
           <span className="sources-footer-label">Sources: View and Download the PDFs</span>
