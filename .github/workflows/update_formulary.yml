@@ -1,0 +1,46 @@
+name: Monthly Formulary Update
+
+on:
+  schedule:
+    # Runs at 6:00 AM UTC on the 2nd of every month
+    # (1st gives plans time to publish, 2nd we grab it)
+    - cron: '0 6 2 * *'
+  workflow_dispatch:
+    # Allow manual trigger from GitHub Actions tab
+
+jobs:
+  update-formulary:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          pip install pdfplumber requests
+
+      - name: Run formulary updater
+        run: python scripts/update_formulary.py
+
+      - name: Check for changes
+        id: changes
+        run: |
+          git diff --quiet src/data/ || echo "changed=true" >> $GITHUB_OUTPUT
+
+      - name: Commit and push if changed
+        if: steps.changes.outputs.changed == 'true'
+        run: |
+          git config user.name  "Sanitas Auto-Updater"
+          git config user.email "ahughes@mysanitas.com"
+          MONTH=$(date +"%B %Y")
+          git add src/data/
+          git commit -m "Auto-update formulary data — $MONTH"
+          git push
