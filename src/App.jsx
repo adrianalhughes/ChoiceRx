@@ -585,9 +585,10 @@ export default function App() {
                   <div className="tool-link-desc">Current formulary medication guide</div>
                   <ExtIcon />
                 </a>
-                <a href="https://www.uhc.com/health-and-wellness/drug-list" target="_blank" rel="noopener noreferrer" className="tool-link uhc-tool" style={{opacity:0.4, pointerEvents:'none', cursor:'not-allowed'}}>
+                <a href="https://www.uhc.com/member-resources/pharmacy-benefits/prescription-drug-lists" target="_blank" rel="noopener noreferrer" className="tool-link uhc-tool">
                   <div className="tool-link-name" style={{color:'#60a5fa'}}>UnitedHealthcare</div>
-                  <div className="tool-link-desc">Link coming soon</div>
+                  <div className="tool-link-desc">Prescription drug lists</div>
+                  <ExtIcon />
                 </a>
               </div>
             </div>

@@ -1182,3 +1182,16 @@ body { min-height: 100vh; background: var(--bg); }
   border-right: 1px solid var(--border);
   padding-right: 12px;
 }
+
+/* ── Global white + size overrides ── */
+.section-heading { color: #ffffff !important; font-size: 13px !important; }
+.header-tagline { font-size: 15px !important; color: #ffffff !important; }
+.resources-label { font-size: 13px !important; color: #ffffff !important; }
+.tool-link-name { font-size: 13px !important; color: #ffffff !important; }
+.tool-link-desc { color: #94a3b8 !important; }
+.source-note { color: #94a3b8 !important; }
+.wordmark-sub { color: #94a3b8 !important; }
+.footer-feedback { color: #94a3b8 !important; }
+/* Keep Impact Estimator greyed */
+.estimator-tool .tool-link-name { color: #475569 !important; }
+.estimator-tool .tool-link-desc { color: #334155 !important; }
