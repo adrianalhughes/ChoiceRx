@@ -613,18 +613,12 @@ export default function App() {
               </div>
             )}
 
-            <div className="special-grid">
-              <NonPreferredBlock drugs={filtered.tier6} q={q} />
-              {activePlan.payer === 'Florida Blue' && <SpecialtyNotCoveredBlock q={q} />}
-            </div>
-
-            <NotCoveredBlock drugs={filtered.ncDrugs} appendixDrugs={filtered.ncAppend} q={q} />
           </div>
 
           {/* ── Right: Tools ── */}
           <div className="tools-panel">
 
-            <div className="tools-panel-header">Quick Access</div>
+            <div className="tools-panel-header">✦ Your Rx Toolkit</div>
 
             <ToolsSection label="Look for a Lower Price">
               <a href="https://www.goodrx.com" target="_blank" rel="noopener noreferrer" className="tool-link">
@@ -647,13 +641,11 @@ export default function App() {
                 <div className="tool-link-desc">Manufacturer PAPs for uninsured patients</div>
                 <ExtIcon />
               </a>
-              {activePlan.payer === 'Florida Blue' && (
-                <a href="https://pharmacy.amazon.com/?ref_=pd_sl_OCI_XBV0_MD_e_YOR566_QTT071_dev_c&hvocijid=10259146375960946511--&hvexpln=135" target="_blank" rel="noopener noreferrer" className="tool-link amazon-tool">
-                  <div className="tool-link-name" style={{color:'#FF9900'}}>Amazon Pharmacy Delivery</div>
-                  <div className="tool-link-desc">Florida Blue members · free delivery</div>
-                  <ExtIcon />
-                </a>
-              )}
+              <a href="https://pharmacy.amazon.com/?ref_=pd_sl_OCI_XBV0_MD_e_YOR566_QTT071_dev_c&hvocijid=10259146375960946511--&hvexpln=135" target="_blank" rel="noopener noreferrer" className="tool-link amazon-tool">
+                <div className="tool-link-name" style={{color:'#FF9900'}}>Amazon Pharmacy Delivery</div>
+                <div className="tool-link-desc">Free home delivery</div>
+                <ExtIcon />
+              </a>
             </ToolsSection>
 
             <ToolsSection label="Rx Needs a Prior Authorization?">
@@ -670,25 +662,26 @@ export default function App() {
               <PAInstructionsLink />
             </ToolsSection>
 
-            <ToolsSection label="Specialty Drug Resources">
-              <a href="https://www.bcbsfl.com/DocumentLibrary/Providers/Content/RxF_Specialty_Table_Self.pdf" target="_blank" rel="noopener noreferrer" className="tool-link fl-tool">
-                <div className="tool-link-name" style={{color:'#4a90d9'}}>Self-Administered</div>
-                <div className="tool-link-desc">Specialty drugs filled at pharmacy</div>
-                <ExtIcon />
-              </a>
-              <a href="https://www.bcbsfl.com/DocumentLibrary/Providers/Content/RxF_Specialty_Table_Prov.pdf" target="_blank" rel="noopener noreferrer" className="tool-link fl-tool">
-                <div className="tool-link-name" style={{color:'#4a90d9'}}>Provider-Administered</div>
-                <div className="tool-link-desc">Specialty drugs given in-office or infusion</div>
-                <ExtIcon />
-              </a>
-            </ToolsSection>
-
-            <ToolsSection label="Impact Estimator (in development)">
-              <button className="tool-link estimator-tool" onClick={() => setShowEstimator(true)}>
-                <div className="tool-link-name" style={{color:'#475569'}}>Open Impact Estimator</div>
-                <div className="tool-link-desc" style={{color:'#334155'}}>Cost modeling tool</div>
-                <span className="beta-tag">Beta</span>
-              </button>
+            <ToolsSection label="Drug Reference Lists">
+              {activePlan.payer === 'Florida Blue' && (
+                <>
+                  <a href="https://www.bcbsfl.com/DocumentLibrary/Providers/Content/RxF_Specialty_Table_Self.pdf" target="_blank" rel="noopener noreferrer" className="tool-link fl-tool">
+                    <div className="tool-link-name" style={{color:'#4a90d9'}}>Specialty — Self-Administered</div>
+                    <div className="tool-link-desc">Specialty drugs filled at pharmacy</div>
+                    <ExtIcon />
+                  </a>
+                  <a href="https://www.bcbsfl.com/DocumentLibrary/Providers/Content/RxF_Specialty_Table_Prov.pdf" target="_blank" rel="noopener noreferrer" className="tool-link fl-tool">
+                    <div className="tool-link-name" style={{color:'#4a90d9'}}>Specialty — Provider-Administered</div>
+                    <div className="tool-link-desc">Specialty drugs given in-office or infusion</div>
+                    <ExtIcon />
+                  </a>
+                </>
+              )}
+              <div className="tool-link-subhead">Non-Preferred Drugs</div>
+              <NonPreferredBlock drugs={filtered.tier6} q={q} />
+              {activePlan.payer === 'Florida Blue' && <SpecialtyNotCoveredBlock q={q} />}
+              <div className="tool-link-subhead">Drugs Not Covered</div>
+              <NotCoveredBlock drugs={filtered.ncDrugs} appendixDrugs={filtered.ncAppend} q={q} />
             </ToolsSection>
 
           </div>
