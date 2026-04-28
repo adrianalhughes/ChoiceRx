@@ -5,6 +5,7 @@ import { useState, useMemo } from 'react'
 import bcbsfl from './data/bcbsfl.json'
 import simplechoice from './data/simplechoice.json'
 import notCovered from './data/not_covered.json'
+import specialtySelf from './data/specialty_self.json'
 
 const PLANS = [
   { id: 'bcbsfl',              label: 'FL ValueScript Rx',          plan: 'Florida Blue',     payer: 'Florida Blue',     effective: 'April 2026', tiers: 6, data: bcbsfl,           highlight: true  },
@@ -385,7 +386,42 @@ function NotCoveredBlock({ drugs, appendixDrugs, q }) {
   )
 }
 
-function PAInstructionsLink() {
+function SpecialtyNotCoveredBlock({ q }) {
+  const drugs = specialtySelf.not_covered
+  const filtered = q ? drugs.filter(d => d.name.toLowerCase().includes(q)) : drugs
+  const [open, setOpen] = useState(false)
+  return (
+    <div className={`special-block notcovered-block ${open ? 'open' : ''}`} onClick={() => setOpen(o => !o)}>
+      <div className="special-block-header">
+        <span className="special-block-chevron">{open ? '▾' : '›'}</span>
+        <span className="special-block-title">Self-Admin Specialty — Not Covered</span>
+        <span className="meta-pill notcovered">{filtered.length} drugs</span>
+      </div>
+      {open && (
+        <div className="special-block-body">
+          <p className="notcovered-note" style={{ marginBottom: 8 }}>
+            These specialty drugs are not covered under the Florida Blue ValueScript plan.
+          </p>
+          <table className="drug-table">
+            <thead><tr><th>Drug</th><th>Flags</th></tr></thead>
+            <tbody>
+              {filtered.map((d, i) => (
+                <tr key={i}>
+                  <td>{d.name}</td>
+                  <td>
+                    {d.ldd && <span className="flag-chip flag-ST">LDD</span>}
+                    {d.pa  && <span className="flag-chip flag-PA">PA</span>}
+                    {d.ql  && <span className="flag-chip flag-QL">QL</span>}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
+    </div>
+  )
+}
   const [open, setOpen] = useState(false)
   return (
     <div className="pa-instructions-wrap">
@@ -553,6 +589,7 @@ export default function App() {
             <div className="special-grid">
               <NonPreferredBlock drugs={filtered.tier6} q={q} />
               <NotCoveredBlock drugs={filtered.ncDrugs} appendixDrugs={filtered.ncAppend} q={q} />
+              {activePlan.payer === 'Florida Blue' && <SpecialtyNotCoveredBlock q={q} />}
             </div>
           </div>
 
