@@ -560,7 +560,7 @@ export default function App() {
             </a>
           </ToolsBarSection>
 
-          <ToolsBarSection label="📦 Amazon Pharmacy">
+          <ToolsBarSection label="📦 Mail-Order Information">
             <a href="https://pharmacy.amazon.com/?ref_=pd_sl_OCI_XBV0_MD_e_YOR566_QTT071_dev_c&hvocijid=10259146375960946511--&hvexpln=135" target="_blank" rel="noopener noreferrer" className="tool-link amazon-tool">
               <div className="tool-link-name" style={{color:'#FF9900'}}>Amazon Pharmacy Delivery</div>
               <div className="tool-link-desc">Free home delivery on prescriptions</div>
