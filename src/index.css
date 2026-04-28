@@ -1520,3 +1520,9 @@ body { min-height: 100vh; background: var(--bg); }
   flex-shrink: 0;
   margin-right: 8px;
 }
+
+/* ── Feedback links — visible ── */
+.feedback-link { color: #e2e8f0 !important; font-size: 12px !important; }
+.feedback-link:hover { color: #ffffff !important; text-decoration: underline !important; }
+.footer-feedback { color: #e2e8f0 !important; font-size: 12px !important; }
+.footer-feedback:hover { color: #ffffff !important; text-decoration: underline !important; }
