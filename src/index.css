@@ -1167,3 +1167,7 @@ body { min-height: 100vh; background: var(--bg); }
 .formulary-tab.tx-tab .tab-date { color: #1e3a5f; }
 .formulary-tab.tx-tab:hover { background: #bfdbfe; border-color: #bfdbfe; }
 .formulary-tab.tx-tab.active { background: #bfdbfe; border-color: #bfdbfe; }
+
+/* ── White labels override ── */
+.resources-label { color: #ffffff !important; }
+.tools-section .resources-label { color: #ffffff !important; }
