@@ -442,7 +442,7 @@ function SpecialtyNotCoveredBlock({ q }) {
 function ToolsSection({ label, children }) {
   const [open, setOpen] = useState(false)
   return (
-    <div className="tools-section-collapsible">
+    <div className={`tools-section-collapsible ${open ? 'is-open' : ''}`}>
       <button className="tools-section-header" onClick={() => setOpen(o => !o)}>
         <span className="tools-section-label">{label}</span>
         <span className="tools-section-chevron">{open ? '▾' : '›'}</span>
@@ -522,19 +522,17 @@ export default function App() {
             <div className="panel-question">What are the coverage details?</div>
 
             <div className="panel-search-wrap">
-              <div className="search-inner">
-                <SearchIcon className="search-icon" />
-                <input
-                  className="search-input"
-                  type="text"
-                  placeholder="Search drug name..."
-                  value={query}
-                  onChange={e => setQuery(e.target.value)}
-                  autoComplete="off"
-                  spellCheck={false}
-                />
-                {query && <button className="search-clear" onClick={() => setQuery('')} aria-label="Clear">✕</button>}
-              </div>
+              <SearchIcon className="search-icon" />
+              <input
+                className="search-input"
+                type="text"
+                placeholder="Search drug name..."
+                value={query}
+                onChange={e => setQuery(e.target.value)}
+                autoComplete="off"
+                spellCheck={false}
+              />
+              {query && <button className="search-clear" onClick={() => setQuery('')} aria-label="Clear">✕</button>}
               {q && (
                 <div className="search-count">
                   {filtered.totalMatches === 0
@@ -542,6 +540,7 @@ export default function App() {
                     : `${filtered.totalMatches} drug${filtered.totalMatches !== 1 ? 's' : ''} matched`}
                 </div>
               )}
+            </div>
             </div>
 
             <div className="section-heading">Health Plan Covered Drugs</div>
@@ -661,20 +660,7 @@ export default function App() {
               <PAInstructionsLink />
             </ToolsSection>
 
-            <ToolsSection label="Database Sources: View the Medication Lists (PDF)">
-              <a href="https://www.floridablue.com/members/tools-resources/pharmacy/medication-guide" target="_blank" rel="noopener noreferrer" className="tool-link fl-tool">
-                <div className="tool-link-name" style={{color:'#4a90d9'}}>Florida Blue</div>
-                <div className="tool-link-desc">Current formulary medication guide</div>
-                <ExtIcon />
-              </a>
-              <a href="https://www.uhc.com/member-resources/pharmacy-benefits/prescription-drug-lists" target="_blank" rel="noopener noreferrer" className="tool-link uhc-tool">
-                <div className="tool-link-name" style={{color:'#60a5fa'}}>UnitedHealthcare</div>
-                <div className="tool-link-desc">Prescription drug lists</div>
-                <ExtIcon />
-              </a>
-            </ToolsSection>
-
-            <ToolsSection label="Specialty Drug Lists — Florida Blue">
+            <ToolsSection label="Specialty Drug Resources">
               <a href="https://www.bcbsfl.com/DocumentLibrary/Providers/Content/RxF_Specialty_Table_Self.pdf" target="_blank" rel="noopener noreferrer" className="tool-link fl-tool">
                 <div className="tool-link-name" style={{color:'#4a90d9'}}>Self-Administered</div>
                 <div className="tool-link-desc">Specialty drugs filled at pharmacy</div>
@@ -698,7 +684,11 @@ export default function App() {
           </div>
         </div>
 
-        {showEstimator && (
+        <div className="sources-footer">
+          <span className="sources-footer-label">Sources: View and Download the PDFs</span>
+          <a href="https://www.floridablue.com/members/tools-resources/pharmacy/medication-guide" target="_blank" rel="noopener noreferrer" className="sources-footer-btn">Florida Blue</a>
+          <a href="https://www.uhc.com/member-resources/pharmacy-benefits/prescription-drug-lists" target="_blank" rel="noopener noreferrer" className="sources-footer-btn">UnitedHealthcare</a>
+        </div>
           <div className="estimator-overlay" onClick={e => { if (e.target === e.currentTarget) setShowEstimator(false) }}>
             <div className="estimator-modal">
               <button className="estimator-close" onClick={() => setShowEstimator(false)}>✕</button>
