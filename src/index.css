@@ -1651,3 +1651,40 @@ body { min-height: 100vh; background: var(--bg); }
 .formulary-tab.fl-tab .tab-date,
 .formulary-tab.tx-tab .tab-date,
 .formulary-tab.highlight-tab .tab-date { color: inherit !important; opacity: 0.6; }
+
+/* ── Clean text-only tabs, underline on active ── */
+.formulary-tab,
+.formulary-tab.fl-tab,
+.formulary-tab.tx-tab,
+.formulary-tab.highlight-tab {
+  background: transparent !important;
+  border: none !important;
+  border-radius: 0 !important;
+  border-bottom: 2px solid transparent !important;
+  color: #64748b !important;
+  padding: 0 14px !important;
+  height: 52px !important;
+}
+.formulary-tab:hover,
+.formulary-tab.fl-tab:hover,
+.formulary-tab.tx-tab:hover,
+.formulary-tab.highlight-tab:hover {
+  background: transparent !important;
+  border-color: transparent !important;
+  border-bottom-color: #475569 !important;
+  color: #cbd5e1 !important;
+}
+.formulary-tab.active,
+.formulary-tab.fl-tab.active,
+.formulary-tab.tx-tab.active,
+.formulary-tab.highlight-tab.active {
+  background: transparent !important;
+  border-color: transparent !important;
+  border-bottom-color: #4f8ef7 !important;
+  color: #ffffff !important;
+}
+.formulary-tab .tab-name,
+.formulary-tab.fl-tab .tab-name,
+.formulary-tab.tx-tab .tab-name,
+.formulary-tab.highlight-tab .tab-name { color: inherit !important; font-weight: 500 !important; }
+.formulary-tab .tab-date { display: none !important; }
