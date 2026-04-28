@@ -548,14 +548,15 @@ export default function App() {
             <div style={{ fontStyle: 'italic', fontSize: 12, color: '#94a3b8', marginBottom: 12, marginTop: -6 }}>
               Select the plan and formulary from the above tabs.
             </div>
-            <div className="tier-legend-inline">
+            <div className={`tier-legend-inline plan-tiers-${activePlan.tiers}`}>
               {(() => {
                 const labels = activePlan.tiers === 3 ? TIER_LABELS_3 : activePlan.tiers === 4 ? TIER_LABELS_4 : TIER_LABELS_6
-                const cutoff = activePlan.tiers === 3 ? 2 : 3
+                // 3-tier: low=1, high=2-3 | 4-tier: low=1-2, high=3-4 | 6-tier: low=1-3, high=4-6
+                const cutoff = activePlan.tiers === 3 ? 1 : activePlan.tiers === 4 ? 2 : 3
                 const lowTiers  = Object.entries(labels).filter(([t]) => Number(t) <= cutoff)
                 const highTiers = Object.entries(labels).filter(([t]) => Number(t) >  cutoff)
-                const highLabel = activePlan.tiers === 3 ? 'Tier 3 · Higher Cost' : `Tiers 4–${activePlan.tiers} · Higher Cost`
-                const lowLabel  = activePlan.tiers === 3 ? 'Tiers 1–2 · Lower Cost' : 'Tiers 1–3 · Lower Cost'
+                const lowLabel  = activePlan.tiers === 3 ? 'Tier 1 · Lower Cost' : activePlan.tiers === 4 ? 'Tiers 1–2 · Lower Cost' : 'Tiers 1–3 · Lower Cost'
+                const highLabel = activePlan.tiers === 3 ? 'Tiers 2–3 · Mid to Higher Cost' : activePlan.tiers === 4 ? 'Tiers 3–4 · Mid to Highest Cost' : `Tiers 4–6 · Higher Cost`
                 return (
                   <>
                     <div style={{ flex: 1, marginRight: 6 }}>
