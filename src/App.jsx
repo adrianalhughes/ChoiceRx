@@ -520,7 +520,7 @@ export default function App() {
       {/* ── Row 1: Plan selector ── */}
       <div className="plan-bar">
         <div className="plan-bar-inner">
-          <span className="bar-instruction">Choose the plan formulary</span>
+          <span className="bar-instruction" style={{color:'#ffffff'}}>Choose the plan formulary</span>
           <div className="formulary-tabs">
             {PLANS.map(plan => (
               <button key={plan.id}
@@ -568,14 +568,14 @@ export default function App() {
             </a>
           </ToolsBarSection>
 
-          <ToolsBarSection label="📋 Prior Authorization">
+          <ToolsBarSection label="📋 CoverMyMeds ePA">
             <a href="https://oidc.covermymeds.com/login?return_url=%2Foauth%2Fauthorize%3Fclient_id%3D-QXKSuZr5mOEba23vs1QzqnlFiQFwSVj70BG2nrD3SI%26nonce%3Dd25026b0bd0b60612235a1de7a171bc9%26redirect_uri%3Dhttps%253A%252F%252Faccount.covermymeds.com%252Fauth%252Fcmm_oidc%252Fcallback%26response_type%3Dcode%26scope%3Dopenid%2520profile%2520email%2520offline_access%26state%3Db42ce2e4a3453a45e9dbf64760e84d73" target="_blank" rel="noopener noreferrer" className="tool-link cmm-tool">
               <div className="tool-link-name" style={{color:'#FF8C00'}}>CoverMyMeds Portal</div>
               <div className="tool-link-desc">Submit &amp; track PA requests</div>
               <ExtIcon />
             </a>
             <a href="https://docs.google.com/document/d/1EsuVXqVm7wf1fea1gIxGZvqudmPOewjB/edit?usp=sharing" target="_blank" rel="noopener noreferrer" className="tool-link cmm-guide-tool">
-              <div className="tool-link-name" style={{color:'#e83480'}}>Quick Start Guide</div>
+              <div className="tool-link-name" style={{color:'#e83480'}}>Help Guide</div>
               <div className="tool-link-desc">Step-by-step tutorial</div>
               <ExtIcon />
             </a>
