@@ -548,34 +548,40 @@ export default function App() {
               Select the plan and formulary from the above tabs.
             </div>
             <div className="tier-legend-inline">
-              <div style={{ flex: 1, marginRight: 6 }}>
-                <div className="legend-group-label legend-group-label-low">Tiers 1–3 · Lower Cost</div>
-                <div style={{ display: 'flex' }}>
-                  {Object.entries(activePlan.tiers === 3 ? TIER_LABELS_3 : activePlan.tiers === 4 ? TIER_LABELS_4 : TIER_LABELS_6)
-                    .filter(([t]) => Number(t) <= (activePlan.tiers <= 3 ? activePlan.tiers : 3))
-                    .map(([t, label]) => (
-                      <div key={t} className="legend-item legend-item-low">
-                        <span className={`tier-badge tier-${t}`}>{t}</span>
-                        <span>{label}</span>
+              {(() => {
+                const labels = activePlan.tiers === 3 ? TIER_LABELS_3 : activePlan.tiers === 4 ? TIER_LABELS_4 : TIER_LABELS_6
+                const cutoff = activePlan.tiers === 3 ? 2 : 3
+                const lowTiers  = Object.entries(labels).filter(([t]) => Number(t) <= cutoff)
+                const highTiers = Object.entries(labels).filter(([t]) => Number(t) >  cutoff)
+                const highLabel = activePlan.tiers === 3 ? 'Tier 3 · Higher Cost' : `Tiers 4–${activePlan.tiers} · Higher Cost`
+                const lowLabel  = activePlan.tiers === 3 ? 'Tiers 1–2 · Lower Cost' : 'Tiers 1–3 · Lower Cost'
+                return (
+                  <>
+                    <div style={{ flex: 1, marginRight: 6 }}>
+                      <div className="legend-group-label legend-group-label-low">{lowLabel}</div>
+                      <div style={{ display: 'flex' }}>
+                        {lowTiers.map(([t, label]) => (
+                          <div key={t} className="legend-item legend-item-low">
+                            <span className={`tier-badge tier-${t}`}>{t}</span>
+                            <span>{label}</span>
+                          </div>
+                        ))}
                       </div>
-                    ))}
-                </div>
-              </div>
-              {activePlan.tiers > 3 && (
-                <div style={{ flex: 1 }}>
-                  <div className="legend-group-label legend-group-label-high">Tiers 4–{activePlan.tiers} · Higher Cost</div>
-                  <div style={{ display: 'flex' }}>
-                    {Object.entries(activePlan.tiers === 4 ? TIER_LABELS_4 : TIER_LABELS_6)
-                      .filter(([t]) => Number(t) > 3)
-                      .map(([t, label]) => (
-                        <div key={t} className="legend-item legend-item-high">
-                          <span className={`tier-badge tier-${t}`}>{t}</span>
-                          <span>{label}</span>
-                        </div>
-                      ))}
-                  </div>
-                </div>
-              )}
+                    </div>
+                    <div style={{ flex: 1 }}>
+                      <div className="legend-group-label legend-group-label-high">{highLabel}</div>
+                      <div style={{ display: 'flex' }}>
+                        {highTiers.map(([t, label]) => (
+                          <div key={t} className="legend-item legend-item-high">
+                            <span className={`tier-badge tier-${t}`}>{t}</span>
+                            <span>{label}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </>
+                )
+              })()}
             </div>
 
             <div className="condition-grid">
