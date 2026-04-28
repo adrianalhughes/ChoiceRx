@@ -630,11 +630,6 @@ export default function App() {
           )}
         </div>
 
-        <div className="section-heading">Health Plan Covered Drugs</div>
-        <div style={{ fontStyle: 'italic', fontSize: 12, color: '#94a3b8', marginBottom: 12, marginTop: -6 }}>
-          Select the plan and formulary from the above tabs.
-        </div>
-
         <div className={`tier-legend-inline plan-tiers-${activePlan.tiers}`}>
           {(() => {
             const labels = activePlan.tiers === 3 ? TIER_LABELS_3 : activePlan.tiers === 4 ? TIER_LABELS_4 : TIER_LABELS_6
