@@ -580,17 +580,25 @@ export default function App() {
             </div>
 
             {q && filtered.totalMatches === 0 && (
-              <div className="empty-state">
-                <p>Drug not found in Medication List.</p>
-                <p style={{ marginTop: 6, fontSize: 12 }}>Try a partial name or the generic name.</p>
+              <div className="not-found-state">
+                <div className="not-found-title">Drug not found in formulary</div>
+                <div className="not-found-actions">
+                  <a href="https://www.goodrx.com" target="_blank" rel="noopener noreferrer" className="not-found-btn">Check GoodRx cash price →</a>
+                  <a href="https://www.rxassist.org" target="_blank" rel="noopener noreferrer" className="not-found-btn">Search patient assistance programs →</a>
+                  {activePlan.payer === 'Florida Blue' && (
+                    <a href="https://pharmacy.amazon.com/?ref_=pd_sl_OCI_XBV0_MD_e_YOR566_QTT071_dev_c&hvocijid=10259146375960946511--&hvexpln=135" target="_blank" rel="noopener noreferrer" className="not-found-btn">Check Amazon Pharmacy →</a>
+                  )}
+                </div>
+                <p className="not-found-sub">For help, contact a pharmacy team member.</p>
               </div>
             )}
 
             <div className="special-grid">
               <NonPreferredBlock drugs={filtered.tier6} q={q} />
-              <NotCoveredBlock drugs={filtered.ncDrugs} appendixDrugs={filtered.ncAppend} q={q} />
               {activePlan.payer === 'Florida Blue' && <SpecialtyNotCoveredBlock q={q} />}
             </div>
+
+            <NotCoveredBlock drugs={filtered.ncDrugs} appendixDrugs={filtered.ncAppend} q={q} />
           </div>
 
           {/* ── Right: Tools ── */}
@@ -619,6 +627,13 @@ export default function App() {
                   <div className="tool-link-desc">Manufacturer PAPs for uninsured patients</div>
                   <ExtIcon />
                 </a>
+                {activePlan.payer === 'Florida Blue' && (
+                  <a href="https://pharmacy.amazon.com/?ref_=pd_sl_OCI_XBV0_MD_e_YOR566_QTT071_dev_c&hvocijid=10259146375960946511--&hvexpln=135" target="_blank" rel="noopener noreferrer" className="tool-link amazon-tool">
+                    <div className="tool-link-name" style={{color:'#FF9900'}}>Amazon Pharmacy Delivery</div>
+                    <div className="tool-link-desc">Florida Blue members · free delivery</div>
+                    <ExtIcon />
+                  </a>
+                )}
               </div>
             </div>
 

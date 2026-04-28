@@ -1260,3 +1260,48 @@ body { min-height: 100vh; background: var(--bg); }
   max-width: 100% !important;
   margin: 0 !important;
 }
+
+/* ── Drug not found state ── */
+.not-found-state {
+  background: rgba(248,113,113,0.06);
+  border: 1px solid rgba(248,113,113,0.2);
+  border-radius: var(--radius);
+  padding: 16px 18px;
+  margin-bottom: 16px;
+}
+.not-found-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: #fca5a5;
+  margin-bottom: 10px;
+}
+.not-found-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 10px;
+}
+.not-found-btn {
+  font-size: 12px;
+  font-weight: 500;
+  color: #e2e8f0;
+  text-decoration: none;
+  padding: 7px 12px;
+  background: var(--bg-2);
+  border: 1px solid var(--border-mid);
+  border-radius: var(--radius);
+  transition: border-color 0.15s;
+}
+.not-found-btn:hover { border-color: var(--blue); color: #fff; }
+.not-found-sub {
+  font-size: 11px;
+  color: #64748b;
+  font-style: italic;
+}
+
+/* ── Amazon Pharmacy tool link ── */
+.amazon-tool { border-color: rgba(255,153,0,0.25) !important; }
+.amazon-tool:hover { border-color: rgba(255,153,0,0.5) !important; background: rgba(255,153,0,0.05) !important; }
+
+/* ── Drugs Not Covered full-width standalone block ── */
+.not-covered-standalone { grid-column: 1 / -1; margin-top: 8px; }
