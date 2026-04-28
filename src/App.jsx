@@ -441,12 +441,13 @@ function PAInstructionsLink() {
   )
 }
 
-function ToolsBarSection({ label, children }) {
+function ToolsBarSection({ label, sublabel, children }) {
   const [open, setOpen] = useState(false)
   return (
-    <div className={`tools-bar-section ${open ? 'is-open' : ''}`}>
-      <button className="tools-bar-btn" onClick={() => setOpen(o => !o)}>
-        {label} <span className="tools-bar-chevron">{open ? '▾' : '›'}</span>
+    <div className={`tools-grid-cell ${open ? 'is-open' : ''}`}>
+      <button className="tools-grid-btn" onClick={() => setOpen(o => !o)}>
+        <span className="tools-grid-emoji">{label}</span>
+        <span className="tools-grid-label">{sublabel}</span>
       </button>
       {open && (
         <div className="tools-bar-dropdown">
@@ -512,32 +513,8 @@ export default function App() {
           Formulary coverage, pricing tools, and PA resources{' '}
           <span className="tagline-accent">all in one place.</span>
         </div>
-        <a href="mailto:ahughes@mysanitas.com?subject=Sanitas Formulary — Feedback" className="feedback-link">
-          Report an issue
-        </a>
-      </header>
-
-      {/* ── Row 1: Plan selector ── */}
-      <div className="plan-bar">
-        <div className="plan-bar-inner">
-          <span className="bar-instruction" style={{color:'#ffffff'}}>Choose the plan formulary</span>
-          <div className="formulary-tabs">
-            {PLANS.map(plan => (
-              <button key={plan.id}
-                className={`formulary-tab ${activePlan.id === plan.id ? 'active' : ''} ${plan.txTab ? 'tx-tab' : 'fl-tab'}`}
-                onClick={() => { setActivePlan(plan); setQuery('') }}>
-                <span className="tab-name">{plan.label}</span>
-                {plan.id === 'bcbsfl' && <span className="most-used-badge">Most Used</span>}
-              </button>
-            ))}
-          </div>
-        </div>
-      </div>
-
-      {/* ── Row 2: Provider tools ── */}
-      <div className="tools-bar">
-        <div className="tools-bar-inner">
-          <ToolsBarSection label="💊 Look for a Lower Price">
+        <div className="header-tools-grid">
+          <ToolsBarSection label="💊" sublabel="Lower Price">
             <a href="https://www.goodrx.com" target="_blank" rel="noopener noreferrer" className="tool-link">
               <div className="tool-link-name">GoodRx</div>
               <div className="tool-link-desc">Cash prices at local pharmacies</div>
@@ -560,15 +537,15 @@ export default function App() {
             </a>
           </ToolsBarSection>
 
-          <ToolsBarSection label="📦 Mail-Order Information">
+          <ToolsBarSection label="📦" sublabel="Mail-Order">
             <a href="https://pharmacy.amazon.com/?ref_=pd_sl_OCI_XBV0_MD_e_YOR566_QTT071_dev_c&hvocijid=10259146375960946511--&hvexpln=135" target="_blank" rel="noopener noreferrer" className="tool-link amazon-tool">
-              <div className="tool-link-name" style={{color:'#FF9900'}}>Amazon Pharmacy Delivery</div>
+              <div className="tool-link-name" style={{color:'#FF9900'}}>Amazon Pharmacy</div>
               <div className="tool-link-desc">Free home delivery on prescriptions</div>
               <ExtIcon />
             </a>
           </ToolsBarSection>
 
-          <ToolsBarSection label="📋 CoverMyMeds ePA">
+          <ToolsBarSection label="📋" sublabel="CoverMyMeds ePA">
             <a href="https://oidc.covermymeds.com/login?return_url=%2Foauth%2Fauthorize%3Fclient_id%3D-QXKSuZr5mOEba23vs1QzqnlFiQFwSVj70BG2nrD3SI%26nonce%3Dd25026b0bd0b60612235a1de7a171bc9%26redirect_uri%3Dhttps%253A%252F%252Faccount.covermymeds.com%252Fauth%252Fcmm_oidc%252Fcallback%26response_type%3Dcode%26scope%3Dopenid%2520profile%2520email%2520offline_access%26state%3Db42ce2e4a3453a45e9dbf64760e84d73" target="_blank" rel="noopener noreferrer" className="tool-link cmm-tool">
               <div className="tool-link-name" style={{color:'#FF8C00'}}>CoverMyMeds Portal</div>
               <div className="tool-link-desc">Submit &amp; track PA requests</div>
@@ -582,26 +559,44 @@ export default function App() {
             <PAInstructionsLink />
           </ToolsBarSection>
 
-          <ToolsBarSection label="📑 Drug Reference Lists">
+          <ToolsBarSection label="📑" sublabel="Drug Lists">
             {activePlan.payer === 'Florida Blue' && (
               <>
                 <a href="https://www.bcbsfl.com/DocumentLibrary/Providers/Content/RxF_Specialty_Table_Self.pdf" target="_blank" rel="noopener noreferrer" className="tool-link fl-tool">
-                  <div className="tool-link-name" style={{color:'#4a90d9'}}>Specialty — Self-Administered</div>
-                  <div className="tool-link-desc">Florida Blue · PDF</div>
+                  <div className="tool-link-name" style={{color:'#4a90d9'}}>Specialty Self-Administered</div>
+                  <div className="tool-link-desc">Florida Blue PDF</div>
                   <ExtIcon />
                 </a>
                 <a href="https://www.bcbsfl.com/DocumentLibrary/Providers/Content/RxF_Specialty_Table_Prov.pdf" target="_blank" rel="noopener noreferrer" className="tool-link fl-tool">
-                  <div className="tool-link-name" style={{color:'#4a90d9'}}>Specialty — Provider-Administered</div>
-                  <div className="tool-link-desc">Florida Blue · PDF</div>
+                  <div className="tool-link-name" style={{color:'#4a90d9'}}>Specialty Provider-Administered</div>
+                  <div className="tool-link-desc">Florida Blue PDF</div>
                   <ExtIcon />
                 </a>
               </>
             )}
-            <div className="tool-link-subhead">Non-Preferred &amp; Not Covered</div>
-            <NonPreferredBlock drugs={filtered.tier6} q={q} />
             {activePlan.payer === 'Florida Blue' && <SpecialtyNotCoveredBlock q={q} />}
             <NotCoveredBlock drugs={filtered.ncDrugs} appendixDrugs={filtered.ncAppend} q={q} />
           </ToolsBarSection>
+        </div>
+        <a href="mailto:ahughes@mysanitas.com?subject=Sanitas Formulary — Feedback" className="feedback-link">
+          Report an issue
+        </a>
+      </header>
+
+      {/* ── Plan selector ── */}
+      <div className="plan-bar">
+        <div className="plan-bar-inner">
+          <span className="bar-instruction" style={{color:'#ffffff'}}>Choose the plan formulary</span>
+          <div className="formulary-tabs">
+            {PLANS.map(plan => (
+              <button key={plan.id}
+                className={`formulary-tab ${activePlan.id === plan.id ? 'active' : ''} ${plan.txTab ? 'tx-tab' : 'fl-tab'}`}
+                onClick={() => { setActivePlan(plan); setQuery('') }}>
+                <span className="tab-name">{plan.label}</span>
+                {plan.id === 'bcbsfl' && <span className="most-used-badge">Most Used</span>}
+              </button>
+            ))}
+          </div>
         </div>
       </div>
 
