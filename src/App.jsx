@@ -490,7 +490,7 @@ export default function App() {
       <header className="app-header">
         <div>
           <div className="wordmark">Sanitas<sup className="beta-sup">β</sup></div>
-          <div className="wordmark-sub">Formulary Reference</div>
+          <div className="wordmark-sub" style={{color:'#ffffff'}}>Pharmacy Resources</div>
         </div>
         <div className="header-tagline">
           Formulary coverage, pricing tools, and PA resources{' '}
@@ -623,6 +623,8 @@ export default function App() {
           {/* ── Right: Tools ── */}
           <div className="tools-panel">
 
+            <div className="tools-panel-header">Quick Access</div>
+
             <ToolsSection label="Look for a Lower Price">
               <a href="https://www.goodrx.com" target="_blank" rel="noopener noreferrer" className="tool-link">
                 <div className="tool-link-name">GoodRx</div>
@@ -680,7 +682,7 @@ export default function App() {
               </a>
             </ToolsSection>
 
-            <ToolsSection label="Impact Estimator">
+            <ToolsSection label="Impact Estimator (in development)">
               <button className="tool-link estimator-tool" onClick={() => setShowEstimator(true)}>
                 <div className="tool-link-name" style={{color:'#475569'}}>Open Impact Estimator</div>
                 <div className="tool-link-desc" style={{color:'#334155'}}>Cost modeling tool</div>

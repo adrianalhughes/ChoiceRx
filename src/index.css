@@ -84,8 +84,8 @@ body { min-height: 100vh; background: var(--bg); }
   z-index: 95;
 }
 .plan-bar-inner {
-  max-width: 900px;
-  margin: 0 auto;
+  max-width: 1200px;
+  margin: 0;
   width: 100%;
   display: flex;
   align-items: center;
@@ -1358,3 +1358,15 @@ body { min-height: 100vh; background: var(--bg); }
 /* ── Amazon tool link ── */
 .amazon-tool { border-color: rgba(255,153,0,0.25) !important; }
 .amazon-tool:hover { border-color: rgba(255,153,0,0.5) !important; background: rgba(255,153,0,0.05) !important; }
+
+/* ── Tools panel header ── */
+.tools-panel-header {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  color: #4f8ef7;
+  padding: 0 0 10px;
+  border-bottom: 1px solid #1e2d4d;
+  margin-bottom: 2px;
+}
