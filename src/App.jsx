@@ -627,7 +627,7 @@ export default function App() {
             <div className="tools-section">
               <div className="resources-label">Rx Needs a Prior Authorization?</div>
               <div className="tools-links">
-                <a href="https://www.covermymeds.com" target="_blank" rel="noopener noreferrer" className="tool-link cmm-tool">
+                <a href="https://oidc.covermymeds.com/login?return_url=%2Foauth%2Fauthorize%3Fclient_id%3D-QXKSuZr5mOEba23vs1QzqnlFiQFwSVj70BG2nrD3SI%26nonce%3Dd25026b0bd0b60612235a1de7a171bc9%26redirect_uri%3Dhttps%253A%252F%252Faccount.covermymeds.com%252Fauth%252Fcmm_oidc%252Fcallback%26response_type%3Dcode%26scope%3Dopenid%2520profile%2520email%2520offline_access%26state%3Db42ce2e4a3453a45e9dbf64760e84d73" target="_blank" rel="noopener noreferrer" className="tool-link cmm-tool">
                   <div className="tool-link-name" style={{color:'#FF8C00'}}>CoverMyMeds Portal</div>
                   <div className="tool-link-desc">Submit &amp; track PA requests</div>
                   <ExtIcon />
@@ -644,7 +644,7 @@ export default function App() {
             <div className="tools-divider" />
 
             <div className="tools-section">
-              <div className="resources-label">Database Original Sources: View the Medication Lists (PDF)</div>
+              <div className="resources-label">Database Sources: View the Medication Lists (PDF)</div>
               <div className="tools-links">
                 <a href="https://www.floridablue.com/members/tools-resources/pharmacy/medication-guide" target="_blank" rel="noopener noreferrer" className="tool-link fl-tool">
                   <div className="tool-link-name" style={{color:'#4a90d9'}}>Florida Blue</div>

@@ -1254,3 +1254,9 @@ body { min-height: 100vh; background: var(--bg); }
 }
 .legend-group-label-low  { background: rgba(94,234,212,0.15); color: #5EEAD4; border-radius: var(--radius) var(--radius) 0 0; }
 .legend-group-label-high { background: rgba(251,146,60,0.15);  color: #FB923C; border-radius: var(--radius) var(--radius) 0 0; }
+
+/* ── Fix search bar offset inside panel ── */
+.panel-search-wrap .search-inner {
+  max-width: 100% !important;
+  margin: 0 !important;
+}
