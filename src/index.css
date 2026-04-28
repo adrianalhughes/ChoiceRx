@@ -1305,3 +1305,39 @@ body { min-height: 100vh; background: var(--bg); }
 
 /* ── Drugs Not Covered full-width standalone block ── */
 .not-covered-standalone { grid-column: 1 / -1; margin-top: 8px; }
+
+/* ── Collapsible tools sections ── */
+.tools-section-collapsible {
+  border-bottom: 1px solid var(--border);
+}
+.tools-section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  background: none;
+  border: none;
+  padding: 12px 0;
+  cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
+  text-align: left;
+}
+.tools-section-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #ffffff;
+  letter-spacing: 0;
+  text-transform: none;
+}
+.tools-section-chevron {
+  font-size: 14px;
+  color: #4f8ef7;
+  flex-shrink: 0;
+  margin-left: 8px;
+}
+.tools-section-body {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding-bottom: 12px;
+}

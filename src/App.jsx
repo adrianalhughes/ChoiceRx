@@ -439,6 +439,19 @@ function SpecialtyNotCoveredBlock({ q }) {
   )
 }
 
+function ToolsSection({ label, children }) {
+  const [open, setOpen] = useState(false)
+  return (
+    <div className="tools-section-collapsible">
+      <button className="tools-section-header" onClick={() => setOpen(o => !o)}>
+        <span className="tools-section-label">{label}</span>
+        <span className="tools-section-chevron">{open ? '▾' : '›'}</span>
+      </button>
+      {open && <div className="tools-section-body">{children}</div>}
+    </div>
+  )
+}
+
 export default function App() {
   const [activePlan, setActivePlan] = useState(PLANS[0])
   const [showEstimator, setShowEstimator] = useState(false)
@@ -604,105 +617,83 @@ export default function App() {
           {/* ── Right: Tools ── */}
           <div className="tools-panel">
 
-            <div className="tools-section">
-              <div className="resources-label">Look for a Lower Price</div>
-              <div className="tools-links">
-                <a href="https://www.goodrx.com" target="_blank" rel="noopener noreferrer" className="tool-link">
-                  <div className="tool-link-name">GoodRx</div>
-                  <div className="tool-link-desc">Cash prices at local pharmacies</div>
+            <ToolsSection label="Look for a Lower Price">
+              <a href="https://www.goodrx.com" target="_blank" rel="noopener noreferrer" className="tool-link">
+                <div className="tool-link-name">GoodRx</div>
+                <div className="tool-link-desc">Cash prices at local pharmacies</div>
+                <ExtIcon />
+              </a>
+              <a href="https://costplusdrugs.com" target="_blank" rel="noopener noreferrer" className="tool-link">
+                <div className="tool-link-name">Cost Plus Drugs</div>
+                <div className="tool-link-desc">Transparent-pricing mail pharmacy</div>
+                <ExtIcon />
+              </a>
+              <a href="https://tryrx.hhs.gov" target="_blank" rel="noopener noreferrer" className="tool-link">
+                <div className="tool-link-name">TrumpRx</div>
+                <div className="tool-link-desc">Federally negotiated IRA prices</div>
+                <ExtIcon />
+              </a>
+              <a href="https://www.rxassist.org" target="_blank" rel="noopener noreferrer" className="tool-link">
+                <div className="tool-link-name">RxAssist</div>
+                <div className="tool-link-desc">Manufacturer PAPs for uninsured patients</div>
+                <ExtIcon />
+              </a>
+              {activePlan.payer === 'Florida Blue' && (
+                <a href="https://pharmacy.amazon.com/?ref_=pd_sl_OCI_XBV0_MD_e_YOR566_QTT071_dev_c&hvocijid=10259146375960946511--&hvexpln=135" target="_blank" rel="noopener noreferrer" className="tool-link amazon-tool">
+                  <div className="tool-link-name" style={{color:'#FF9900'}}>Amazon Pharmacy Delivery</div>
+                  <div className="tool-link-desc">Florida Blue members · free delivery</div>
                   <ExtIcon />
                 </a>
-                <a href="https://costplusdrugs.com" target="_blank" rel="noopener noreferrer" className="tool-link">
-                  <div className="tool-link-name">Cost Plus Drugs</div>
-                  <div className="tool-link-desc">Transparent-pricing mail pharmacy</div>
-                  <ExtIcon />
-                </a>
-                <a href="https://tryrx.hhs.gov" target="_blank" rel="noopener noreferrer" className="tool-link">
-                  <div className="tool-link-name">TrumpRx</div>
-                  <div className="tool-link-desc">Federally negotiated IRA prices</div>
-                  <ExtIcon />
-                </a>
-                <a href="https://www.rxassist.org" target="_blank" rel="noopener noreferrer" className="tool-link">
-                  <div className="tool-link-name">RxAssist</div>
-                  <div className="tool-link-desc">Manufacturer PAPs for uninsured patients</div>
-                  <ExtIcon />
-                </a>
-                {activePlan.payer === 'Florida Blue' && (
-                  <a href="https://pharmacy.amazon.com/?ref_=pd_sl_OCI_XBV0_MD_e_YOR566_QTT071_dev_c&hvocijid=10259146375960946511--&hvexpln=135" target="_blank" rel="noopener noreferrer" className="tool-link amazon-tool">
-                    <div className="tool-link-name" style={{color:'#FF9900'}}>Amazon Pharmacy Delivery</div>
-                    <div className="tool-link-desc">Florida Blue members · free delivery</div>
-                    <ExtIcon />
-                  </a>
-                )}
-              </div>
-            </div>
+              )}
+            </ToolsSection>
 
-            <div className="tools-divider" />
+            <ToolsSection label="Rx Needs a Prior Authorization?">
+              <a href="https://oidc.covermymeds.com/login?return_url=%2Foauth%2Fauthorize%3Fclient_id%3D-QXKSuZr5mOEba23vs1QzqnlFiQFwSVj70BG2nrD3SI%26nonce%3Dd25026b0bd0b60612235a1de7a171bc9%26redirect_uri%3Dhttps%253A%252F%252Faccount.covermymeds.com%252Fauth%252Fcmm_oidc%252Fcallback%26response_type%3Dcode%26scope%3Dopenid%2520profile%2520email%2520offline_access%26state%3Db42ce2e4a3453a45e9dbf64760e84d73" target="_blank" rel="noopener noreferrer" className="tool-link cmm-tool">
+                <div className="tool-link-name" style={{color:'#FF8C00'}}>CoverMyMeds Portal</div>
+                <div className="tool-link-desc">Submit &amp; track PA requests</div>
+                <ExtIcon />
+              </a>
+              <a href="https://docs.google.com/document/d/1EsuVXqVm7wf1fea1gIxGZvqudmPOewjB/edit?usp=sharing" target="_blank" rel="noopener noreferrer" className="tool-link cmm-guide-tool">
+                <div className="tool-link-name" style={{color:'#e83480'}}>Quick Start Guide</div>
+                <div className="tool-link-desc">Step-by-step tutorial (Google Doc)</div>
+                <ExtIcon />
+              </a>
+              <PAInstructionsLink />
+            </ToolsSection>
 
-            <div className="tools-section">
-              <div className="resources-label">Rx Needs a Prior Authorization?</div>
-              <div className="tools-links">
-                <a href="https://oidc.covermymeds.com/login?return_url=%2Foauth%2Fauthorize%3Fclient_id%3D-QXKSuZr5mOEba23vs1QzqnlFiQFwSVj70BG2nrD3SI%26nonce%3Dd25026b0bd0b60612235a1de7a171bc9%26redirect_uri%3Dhttps%253A%252F%252Faccount.covermymeds.com%252Fauth%252Fcmm_oidc%252Fcallback%26response_type%3Dcode%26scope%3Dopenid%2520profile%2520email%2520offline_access%26state%3Db42ce2e4a3453a45e9dbf64760e84d73" target="_blank" rel="noopener noreferrer" className="tool-link cmm-tool">
-                  <div className="tool-link-name" style={{color:'#FF8C00'}}>CoverMyMeds Portal</div>
-                  <div className="tool-link-desc">Submit &amp; track PA requests</div>
-                  <ExtIcon />
-                </a>
-                <a href="https://docs.google.com/document/d/1EsuVXqVm7wf1fea1gIxGZvqudmPOewjB/edit?usp=sharing" target="_blank" rel="noopener noreferrer" className="tool-link cmm-guide-tool">
-                  <div className="tool-link-name" style={{color:'#e83480'}}>Quick Start Guide</div>
-                  <div className="tool-link-desc">Step-by-step tutorial (Google Doc)</div>
-                  <ExtIcon />
-                </a>
-                <PAInstructionsLink />
-              </div>
-            </div>
+            <ToolsSection label="Database Sources: View the Medication Lists (PDF)">
+              <a href="https://www.floridablue.com/members/tools-resources/pharmacy/medication-guide" target="_blank" rel="noopener noreferrer" className="tool-link fl-tool">
+                <div className="tool-link-name" style={{color:'#4a90d9'}}>Florida Blue</div>
+                <div className="tool-link-desc">Current formulary medication guide</div>
+                <ExtIcon />
+              </a>
+              <a href="https://www.uhc.com/member-resources/pharmacy-benefits/prescription-drug-lists" target="_blank" rel="noopener noreferrer" className="tool-link uhc-tool">
+                <div className="tool-link-name" style={{color:'#60a5fa'}}>UnitedHealthcare</div>
+                <div className="tool-link-desc">Prescription drug lists</div>
+                <ExtIcon />
+              </a>
+            </ToolsSection>
 
-            <div className="tools-divider" />
+            <ToolsSection label="Specialty Drug Lists — Florida Blue">
+              <a href="https://www.bcbsfl.com/DocumentLibrary/Providers/Content/RxF_Specialty_Table_Self.pdf" target="_blank" rel="noopener noreferrer" className="tool-link fl-tool">
+                <div className="tool-link-name" style={{color:'#4a90d9'}}>Self-Administered</div>
+                <div className="tool-link-desc">Specialty drugs filled at pharmacy</div>
+                <ExtIcon />
+              </a>
+              <a href="https://www.bcbsfl.com/DocumentLibrary/Providers/Content/RxF_Specialty_Table_Prov.pdf" target="_blank" rel="noopener noreferrer" className="tool-link fl-tool">
+                <div className="tool-link-name" style={{color:'#4a90d9'}}>Provider-Administered</div>
+                <div className="tool-link-desc">Specialty drugs given in-office or infusion</div>
+                <ExtIcon />
+              </a>
+            </ToolsSection>
 
-            <div className="tools-section">
-              <div className="resources-label">Database Sources: View the Medication Lists (PDF)</div>
-              <div className="tools-links">
-                <a href="https://www.floridablue.com/members/tools-resources/pharmacy/medication-guide" target="_blank" rel="noopener noreferrer" className="tool-link fl-tool">
-                  <div className="tool-link-name" style={{color:'#4a90d9'}}>Florida Blue</div>
-                  <div className="tool-link-desc">Current formulary medication guide</div>
-                  <ExtIcon />
-                </a>
-                <a href="https://www.uhc.com/member-resources/pharmacy-benefits/prescription-drug-lists" target="_blank" rel="noopener noreferrer" className="tool-link uhc-tool">
-                  <div className="tool-link-name" style={{color:'#60a5fa'}}>UnitedHealthcare</div>
-                  <div className="tool-link-desc">Prescription drug lists</div>
-                  <ExtIcon />
-                </a>
-              </div>
-            </div>
-
-            <div className="tools-divider" />
-
-            <div className="tools-section">
-              <div className="resources-label">Specialty Drug Lists — Florida Blue</div>
-              <div className="tools-links">
-                <a href="https://www.bcbsfl.com/DocumentLibrary/Providers/Content/RxF_Specialty_Table_Self.pdf" target="_blank" rel="noopener noreferrer" className="tool-link fl-tool">
-                  <div className="tool-link-name" style={{color:'#4a90d9'}}>Self-Administered</div>
-                  <div className="tool-link-desc">Specialty drugs filled at pharmacy</div>
-                  <ExtIcon />
-                </a>
-                <a href="https://www.bcbsfl.com/DocumentLibrary/Providers/Content/RxF_Specialty_Table_Prov.pdf" target="_blank" rel="noopener noreferrer" className="tool-link fl-tool">
-                  <div className="tool-link-name" style={{color:'#4a90d9'}}>Provider-Administered</div>
-                  <div className="tool-link-desc">Specialty drugs given in-office or infusion</div>
-                  <ExtIcon />
-                </a>
-              </div>
-            </div>
-
-            <div className="tools-divider" />
-
-            <div className="tools-section">
-              <div className="tools-links">
-                <button className="tool-link estimator-tool" onClick={() => setShowEstimator(true)}>
-                  <div className="tool-link-name" style={{color:'#475569'}}>Impact Estimator</div>
-                  <div className="tool-link-desc" style={{color:'#334155'}}>Cost modeling tool</div>
-                  <span className="beta-tag">Beta</span>
-                </button>
-              </div>
-            </div>
+            <ToolsSection label="Impact Estimator">
+              <button className="tool-link estimator-tool" onClick={() => setShowEstimator(true)}>
+                <div className="tool-link-name" style={{color:'#475569'}}>Open Impact Estimator</div>
+                <div className="tool-link-desc" style={{color:'#334155'}}>Cost modeling tool</div>
+                <span className="beta-tag">Beta</span>
+              </button>
+            </ToolsSection>
 
           </div>
         </div>
