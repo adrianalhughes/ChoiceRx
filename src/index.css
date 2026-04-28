@@ -1195,3 +1195,62 @@ body { min-height: 100vh; background: var(--bg); }
 /* Keep Impact Estimator greyed */
 .estimator-tool .tool-link-name { color: #475569 !important; }
 .estimator-tool .tool-link-desc { color: #334155 !important; }
+
+/* ── Footer removal ── */
+.app-footer { display: none !important; }
+
+/* ── White search input text ── */
+.search-input { color: #ffffff !important; }
+
+/* ── Match panel-question and section-heading size ── */
+.panel-question { font-size: 15px !important; font-weight: 600 !important; }
+.section-heading { font-size: 15px !important; font-weight: 600 !important; text-transform: none !important; letter-spacing: 0 !important; }
+
+/* ── Redesigned tier legend ── */
+.tier-legend-inline {
+  display: flex !important;
+  flex-wrap: nowrap !important;
+  align-items: stretch !important;
+  gap: 0 !important;
+  padding: 0 !important;
+  background: transparent !important;
+  border: none !important;
+  margin-bottom: 16px !important;
+  overflow-x: auto;
+}
+.legend-key-label { display: none !important; }
+.tier-group {
+  display: flex;
+  flex: 1;
+  gap: 0;
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+.tier-group-low  { margin-right: 6px; }
+.legend-item {
+  flex: 1;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 3px !important;
+  padding: 7px 6px !important;
+  font-size: 10px !important;
+  color: #ffffff !important;
+  white-space: nowrap;
+}
+.legend-item-low  { background: rgba(94,234,212,0.10); border: 1px solid rgba(94,234,212,0.2); }
+.legend-item-low:not(:last-child)  { border-right: none; }
+.legend-item-high { background: rgba(251,146,60,0.10);  border: 1px solid rgba(251,146,60,0.2); }
+.legend-item-high:not(:last-child) { border-right: none; }
+.legend-item .tier-badge { width: 20px !important; height: 20px !important; font-size: 10px !important; }
+.legend-group-label {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  padding: 3px 10px;
+  text-align: center;
+}
+.legend-group-label-low  { background: rgba(94,234,212,0.15); color: #5EEAD4; border-radius: var(--radius) var(--radius) 0 0; }
+.legend-group-label-high { background: rgba(251,146,60,0.15);  color: #FB923C; border-radius: var(--radius) var(--radius) 0 0; }

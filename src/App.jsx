@@ -495,15 +495,39 @@ export default function App() {
               )}
             </div>
 
-            <div className="section-heading">Covered Drugs by Condition</div>
+            <div className="section-heading">Health Plan Covered Drugs</div>
+            <div style={{ fontStyle: 'italic', fontSize: 12, color: '#94a3b8', marginBottom: 12, marginTop: -6 }}>
+              Select the plan and formulary from the above tabs.
+            </div>
             <div className="tier-legend-inline">
-              <span className="legend-key-label">🔑 Tier Key</span>
-              {Object.entries(activePlan.tiers === 3 ? TIER_LABELS_3 : activePlan.tiers === 4 ? TIER_LABELS_4 : TIER_LABELS_6).map(([t, label]) => (
-                <span key={t} className="legend-item">
-                  <span className={`tier-badge tier-${t}`}>{t}</span>
-                  <span>{label}</span>
-                </span>
-              ))}
+              <div style={{ flex: 1, marginRight: 6 }}>
+                <div className="legend-group-label legend-group-label-low">Tiers 1–3 · Lower Cost</div>
+                <div style={{ display: 'flex' }}>
+                  {Object.entries(activePlan.tiers === 3 ? TIER_LABELS_3 : activePlan.tiers === 4 ? TIER_LABELS_4 : TIER_LABELS_6)
+                    .filter(([t]) => Number(t) <= (activePlan.tiers <= 3 ? activePlan.tiers : 3))
+                    .map(([t, label]) => (
+                      <div key={t} className="legend-item legend-item-low">
+                        <span className={`tier-badge tier-${t}`}>{t}</span>
+                        <span>{label}</span>
+                      </div>
+                    ))}
+                </div>
+              </div>
+              {activePlan.tiers > 3 && (
+                <div style={{ flex: 1 }}>
+                  <div className="legend-group-label legend-group-label-high">Tiers 4–{activePlan.tiers} · Higher Cost</div>
+                  <div style={{ display: 'flex' }}>
+                    {Object.entries(activePlan.tiers === 4 ? TIER_LABELS_4 : TIER_LABELS_6)
+                      .filter(([t]) => Number(t) > 3)
+                      .map(([t, label]) => (
+                        <div key={t} className="legend-item legend-item-high">
+                          <span className={`tier-badge tier-${t}`}>{t}</span>
+                          <span>{label}</span>
+                        </div>
+                      ))}
+                  </div>
+                </div>
+              )}
             </div>
 
             <div className="condition-grid">
