@@ -447,7 +447,7 @@ function ToolsSection({ label, children }) {
         <span className="tools-section-label">{label}</span>
         <span className="tools-section-chevron">{open ? '▾' : '›'}</span>
       </button>
-      {open && <div className="tools-section-body">{children}</div>}
+      {open && <div className="tools-section-body tools-links">{children}</div>}
     </div>
   )
 }

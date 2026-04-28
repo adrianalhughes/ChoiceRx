@@ -150,8 +150,8 @@ body { min-height: 100vh; background: var(--bg); }
   z-index: 90;
 }
 .search-inner {
-  max-width: 680px;
-  margin: 0 auto;
+  max-width: 100%;
+  margin: 0;
   position: relative;
 }
 .search-icon {
