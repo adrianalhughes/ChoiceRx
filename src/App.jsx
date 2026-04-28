@@ -603,11 +603,6 @@ export default function App() {
                   <div className="tool-link-desc">Current drug list</div>
                   <ExtIcon />
                 </a>
-                <button className="tool-link estimator-tool" onClick={() => setShowEstimator(true)}>
-                  <div className="tool-link-name" style={{color:'#475569'}}>Impact Estimator</div>
-                  <div className="tool-link-desc" style={{color:'#334155'}}>Cost modeling tool</div>
-                  <span className="beta-tag">Beta</span>
-                </button>
               </div>
             </div>
 
@@ -626,6 +621,18 @@ export default function App() {
                   <div className="tool-link-desc">Specialty drugs given in-office or infusion</div>
                   <ExtIcon />
                 </a>
+              </div>
+            </div>
+
+            <div className="tools-divider" />
+
+            <div className="tools-section">
+              <div className="tools-links">
+                <button className="tool-link estimator-tool" onClick={() => setShowEstimator(true)}>
+                  <div className="tool-link-name" style={{color:'#475569'}}>Impact Estimator</div>
+                  <div className="tool-link-desc" style={{color:'#334155'}}>Cost modeling tool</div>
+                  <span className="beta-tag">Beta</span>
+                </button>
               </div>
             </div>
 
