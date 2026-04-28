@@ -1160,3 +1160,10 @@ body { min-height: 100vh; background: var(--bg); }
   .formulary-panel { border-right: none; padding-right: 0; }
   .tools-panel { padding-left: 0; position: static; max-height: none; border-top: 1px solid var(--border); }
 }
+
+/* ── Baby blue TX tabs ── */
+.formulary-tab.tx-tab { background: #93c5fd; color: #0F172A; border-color: #93c5fd; }
+.formulary-tab.tx-tab .tab-name { color: #0F172A; }
+.formulary-tab.tx-tab .tab-date { color: #1e3a5f; }
+.formulary-tab.tx-tab:hover { background: #bfdbfe; border-color: #bfdbfe; }
+.formulary-tab.tx-tab.active { background: #bfdbfe; border-color: #bfdbfe; }
