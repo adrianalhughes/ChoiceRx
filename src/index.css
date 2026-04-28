@@ -1526,3 +1526,21 @@ body { min-height: 100vh; background: var(--bg); }
 .feedback-link:hover { color: #ffffff !important; text-decoration: underline !important; }
 .footer-feedback { color: #e2e8f0 !important; font-size: 12px !important; }
 .footer-feedback:hover { color: #ffffff !important; text-decoration: underline !important; }
+
+/* ── Force all bar/tab text to white — no more invisible grey ── */
+.tools-bar-btn { color: #ffffff !important; }
+.tools-bar-chevron { color: #94a3b8 !important; }
+.tools-bar-section.is-open .tools-bar-chevron { color: #4f8ef7 !important; }
+.formulary-tab { color: #ffffff !important; }
+.tab-name { color: #ffffff !important; }
+.tab-date { color: #94a3b8 !important; }
+.bar-instruction { color: #ffffff !important; }
+.tool-link-desc { color: #94a3b8 !important; }
+.tool-link-name { color: #ffffff !important; }
+.tools-section-label { color: #ffffff !important; }
+.section-heading { color: #ffffff !important; }
+.resources-label { color: #ffffff !important; }
+.legend-item { color: #ffffff !important; }
+.search-count { color: #94a3b8 !important; }
+.source-note { color: #94a3b8 !important; }
+.sources-footer-label { color: #94a3b8 !important; }
