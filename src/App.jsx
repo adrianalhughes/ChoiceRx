@@ -495,26 +495,6 @@ export default function App() {
               )}
             </div>
 
-            {q && filtered.totalMatches === 0 && (
-              <div className="empty-state">
-                <p>Drug not found in Medication List.</p>
-                <p style={{ marginTop: 6, fontSize: 12 }}>Try a partial name or the generic name.</p>
-              </div>
-            )}
-
-            <div className="special-grid">
-              <NonPreferredBlock drugs={filtered.tier6} q={q} />
-              <NotCoveredBlock drugs={filtered.ncDrugs} appendixDrugs={filtered.ncAppend} q={q} />
-            </div>
-
-            <div className="source-note">
-              For reference only. Source:{' '}
-              {activePlan.payer === 'UnitedHealthcare'
-                ? <a href="https://www.uhc.com/health-and-wellness/drug-list" target="_blank" rel="noopener noreferrer">UnitedHealthcare Drug List</a>
-                : <a href={SOURCE_URL} target="_blank" rel="noopener noreferrer">Florida Blue Medication Guide</a>
-              }
-              {' '}· Updated {activePlan.effective}
-            </div>
             <div className="section-heading">Covered Drugs by Condition</div>
             <div className="tier-legend-inline">
               {Object.entries(activePlan.tiers === 3 ? TIER_LABELS_3 : activePlan.tiers === 4 ? TIER_LABELS_4 : TIER_LABELS_6).map(([t, label]) => (
@@ -544,11 +524,6 @@ export default function App() {
                 <p style={{ marginTop: 6, fontSize: 12 }}>Try a partial name or the generic name.</p>
               </div>
             )}
-
-            <div className="special-grid">
-              <NonPreferredBlock drugs={filtered.tier6} q={q} />
-              <NotCoveredBlock drugs={filtered.ncDrugs} appendixDrugs={filtered.ncAppend} q={q} />
-            </div>
           </div>
 
           {/* ── Right: Tools ── */}
