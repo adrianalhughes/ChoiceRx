@@ -1,22 +1,23 @@
-// PHI detection patterns
+// PHI detection patterns — clinical context words like "patient" are fine, we catch actual identifiers
 const PHI_PATTERNS = [
-  // Names with context
-  /\b(patient|pt|mr|mrs|ms|dr)\.?\s+[a-z]{2,}\s+[a-z]{2,}/i,
+  // Full names: two capitalized words after patient/mr/mrs/ms (e.g. "patient John Smith")
+  /\b(patient|pt|mr|mrs|ms)\s+[A-Z][a-z]+\s+[A-Z][a-z]+/,
   // DOB patterns
-  /\b(dob|date of birth|born|birthday)\s*:?\s*\d{1,2}[\/-]\d{1,2}[\/-]\d{2,4}/i,
-  /\b\d{1,2}[\/-]\d{1,2}[\/-]\d{4}\b/,
+  /\b(dob|date of birth|born on|birthday)\s*:?\s*\d{1,2}[\/-]\d{1,2}[\/-]\d{2,4}/i,
+  // Standalone date that looks like a DOB (MM/DD/YYYY)
+  /\b\d{1,2}\/\d{1,2}\/\d{4}\b/,
   // MRN patterns
-  /\b(mrn|medical record|chart)\s*[:#]?\s*\d{4,}/i,
+  /\b(mrn|medical record number|chart number)\s*[:#]?\s*\d{4,}/i,
   // SSN
   /\b\d{3}-\d{2}-\d{4}\b/,
-  // Phone numbers
+  // Phone numbers (10 digit with separators)
   /\b(\+1[-.\s]?)?\(?\d{3}\)?[-.\s]\d{3}[-.\s]\d{4}\b/,
   // Email addresses
   /\b[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}\b/i,
   // Insurance ID patterns
-  /\b(member id|insurance id|policy|group)\s*[:#]?\s*[a-z0-9]{6,}/i,
-  // Address patterns
-  /\b\d+\s+[a-z]+\s+(st|ave|blvd|rd|dr|ln|way|ct|pl)\b/i,
+  /\b(member id|insurance id|policy number|group number)\s*[:#]?\s*[a-z0-9]{6,}/i,
+  // Street addresses
+  /\b\d+\s+[A-Z][a-z]+\s+(Street|Avenue|Blvd|Road|Drive|Lane|Way|Court|Place|St|Ave|Rd|Dr|Ln)\b/,
 ]
 
 function detectPHI(text) {

@@ -416,3 +416,7 @@ body { min-height: 100vh; background: var(--bg); }
 .tools-panel .tools-section-collapsible.is-open .tools-section-label { color: #ffffff; }
 .tools-panel .tools-info-val { color: #e2e8f0; }
 .tools-panel .pa-instructions-box { color: #94a3b8; }
+
+/* ── Baby blue for resources section labels ── */
+.tools-section-label { color: #93c5fd !important; }
+.tools-section-collapsible.is-open .tools-section-label { color: #ffffff !important; }
