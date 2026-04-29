@@ -443,6 +443,25 @@ function PAInstructionsLink() {
   )
 }
 
+function HeaderTool({ label, color = '#4f8ef7', children }) {
+  const [open, setOpen] = useState(false)
+  return (
+    <div className="header-tool-wrap" style={{'--tool-color': color}}>
+      <button
+        className={`header-tool-btn ${open ? 'is-open' : ''}`}
+        onClick={() => setOpen(o => !o)}
+      >
+        {label}
+      </button>
+      {open && (
+        <div className="header-tool-dropdown">
+          <div className="tools-links">{children}</div>
+        </div>
+      )}
+    </div>
+  )
+}
+
 function SidebarSection({ emoji, sublabel, children }) {
   const [open, setOpen] = useState(false)
   return (
@@ -521,6 +540,8 @@ export default function App() {
     return { conditions, tier6: allTier6, ncDrugs, ncAppend, totalMatches }
   }, [activePlan.data, q])
 
+  const [tabsOpen, setTabsOpen] = useState(false)
+
   return (
     <>
       <header className="app-header">
@@ -528,10 +549,63 @@ export default function App() {
           <div className="wordmark">Sanitas</div>
           <div className="wordmark-sub">Pharmacy Resources<sup className="beta-sup">β</sup></div>
         </div>
-        <div className="header-tagline">
-          Formulary coverage, pricing tools, and PA resources{' '}
-          <span className="tagline-accent">all in one place.</span>
+
+        {/* ── Bookmark tool buttons replacing tagline ── */}
+        <div className="header-bookmarks">
+          <HeaderTool label="Does this Rx need a Prior Authorization?" color="#FF8C00">
+            <a href="https://oidc.covermymeds.com/login?return_url=%2Foauth%2Fauthorize%3Fclient_id%3D-QXKSuZr5mOEba23vs1QzqnlFiQFwSVj70BG2nrD3SI%26nonce%3Dd25026b0bd0b60612235a1de7a171bc9%26redirect_uri%3Dhttps%253A%252F%252Faccount.covermymeds.com%252Fauth%252Fcmm_oidc%252Fcallback%26response_type%3Dcode%26scope%3Dopenid%2520profile%2520email%2520offline_access%26state%3Db42ce2e4a3453a45e9dbf64760e84d73" target="_blank" rel="noopener noreferrer" className="tool-link cmm-tool">
+              <div className="tool-link-name" style={{color:'#FF8C00'}}>CoverMyMeds Portal</div>
+              <div className="tool-link-desc">Submit &amp; track PA requests</div>
+              <ExtIcon />
+            </a>
+            <a href="https://docs.google.com/document/d/1EsuVXqVm7wf1fea1gIxGZvqudmPOewjB/edit?usp=sharing" target="_blank" rel="noopener noreferrer" className="tool-link cmm-guide-tool">
+              <div className="tool-link-name" style={{color:'#e83480'}}>Help Guide</div>
+              <div className="tool-link-desc">Step-by-step tutorial</div>
+              <ExtIcon />
+            </a>
+            <PAInstructionsLink />
+          </HeaderTool>
+
+          <HeaderTool label="Financial Assistance?" color="#a855f7">
+            <a href="https://www.rxassist.org" target="_blank" rel="noopener noreferrer" className="tool-link">
+              <div className="tool-link-name">RxAssist</div>
+              <div className="tool-link-desc">Manufacturer PAPs for uninsured patients</div>
+              <ExtIcon />
+            </a>
+          </HeaderTool>
+
+          <HeaderTool label="Cash Pricing" color="#4ade80">
+            <a href="https://www.goodrx.com" target="_blank" rel="noopener noreferrer" className="tool-link">
+              <div className="tool-link-name">GoodRx</div>
+              <div className="tool-link-desc">Cash prices at local pharmacies</div>
+              <ExtIcon />
+            </a>
+            <a href="https://costplusdrugs.com" target="_blank" rel="noopener noreferrer" className="tool-link">
+              <div className="tool-link-name">Cost Plus Drugs</div>
+              <div className="tool-link-desc">Transparent-pricing mail pharmacy</div>
+              <ExtIcon />
+            </a>
+            <a href="https://trumprx.gov/" target="_blank" rel="noopener noreferrer" className="tool-link">
+              <div className="tool-link-name">TrumpRx</div>
+              <div className="tool-link-desc">Federally negotiated IRA prices</div>
+              <ExtIcon />
+            </a>
+          </HeaderTool>
+
+          <HeaderTool label="Mail Order" color="#FF9900">
+            <div className="tools-section-info">
+              <div className="tools-info-row"><span className="tools-info-label">E-scribe</span><span className="tools-info-val">Amazon.com – Amazon Pharmacy</span></div>
+              <div className="tools-info-row"><span className="tools-info-label">Fax</span><span className="tools-info-val">512-884-5981</span></div>
+              <div className="tools-info-row"><span className="tools-info-label">Phone</span><span className="tools-info-val">855-206-3605</span></div>
+            </div>
+            <a href="https://pharmacy.amazon.com/?ref_=pd_sl_OCI_XBV0_MD_e_YOR566_QTT071_dev_c&hvocijid=10259146375960946511--&hvexpln=135" target="_blank" rel="noopener noreferrer" className="tool-link amazon-tool">
+              <div className="tool-link-name" style={{color:'#FF9900'}}>Amazon Pharmacy</div>
+              <div className="tool-link-desc">Visit the mail order portal</div>
+              <ExtIcon />
+            </a>
+          </HeaderTool>
         </div>
+
         <a href="mailto:ahughes@mysanitas.com?subject=Sanitas Formulary — Feedback" className="feedback-link">
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{marginRight:4,verticalAlign:'middle'}}>
             <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
@@ -541,19 +615,30 @@ export default function App() {
         </a>
       </header>
 
-      {/* ── Plan selector ── */}
+      {/* ── Plan selector — collapsible ── */}
       <div className="plan-bar">
         <div className="plan-bar-inner">
-          <span className="bar-instruction" style={{color:'#ffffff'}}>Choose the plan formulary</span>
-          <div className="formulary-tabs">
-            {PLANS.map(plan => (
-              <button key={plan.id}
-                className={`formulary-tab ${activePlan.id === plan.id ? 'active' : ''} ${plan.txTab ? 'tx-tab' : 'fl-tab'}`}
-                onClick={() => { setActivePlan(plan); setQuery('') }}>
-                <span className="tab-name">{plan.label}</span>
-              </button>
-            ))}
-          </div>
+          <button
+            className="plan-toggle-btn"
+            onClick={() => setTabsOpen(o => !o)}
+          >
+            <span>Choose the plan formulary</span>
+            <span className="plan-toggle-chevron">{tabsOpen ? '▾' : '›'}</span>
+          </button>
+          {tabsOpen && (
+            <div className="formulary-tabs">
+              {PLANS.map(plan => (
+                <button key={plan.id}
+                  className={`formulary-tab ${activePlan.id === plan.id ? 'active' : ''} ${plan.txTab ? 'tx-tab' : 'fl-tab'}`}
+                  onClick={() => { setActivePlan(plan); setQuery(''); setTabsOpen(false) }}>
+                  <span className="tab-name">{plan.label}</span>
+                </button>
+              ))}
+            </div>
+          )}
+          {!tabsOpen && (
+            <span className="active-plan-chip">{activePlan.label}</span>
+          )}
         </div>
       </div>
 
