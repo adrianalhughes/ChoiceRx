@@ -569,3 +569,17 @@ body { min-height: 100vh; background: var(--bg); }
   letter-spacing: 0.1px;
   padding-bottom: 14px;
 }
+
+/* ── Bookmark tabs — white borders pop ── */
+.header-tool-btn {
+  border: 1px solid rgba(255,255,255,0.25) !important;
+  border-bottom: none !important;
+}
+.header-tool-btn:hover {
+  border-color: rgba(255,255,255,0.5) !important;
+  background: rgba(255,255,255,0.08) !important;
+}
+.header-tool-btn.is-open {
+  border-color: var(--tool-color, #4f8ef7) !important;
+  border-bottom: none !important;
+}

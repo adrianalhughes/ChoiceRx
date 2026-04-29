@@ -426,20 +426,12 @@ function SpecialtyNotCoveredBlock({ q }) {
 }
 
 function PAInstructionsLink() {
-  const [open, setOpen] = useState(false)
   return (
-    <div className="pa-instructions-wrap">
-      <button className="resource-link fl-pa-link" onClick={() => setOpen(o => !o)}>
-        Fax Forms — Florida Blue {open ? '▴' : '▾'}
-      </button>
-      {open && (
-        <div className="pa-instructions-box">
-          Go to <strong>myprime.com/en/forms.html</strong> → click <em>"Continue without signing in"</em> at the bottom
-          → select <strong>Florida Blue Health Plan</strong> → choose <strong>ValueScript</strong> to access
-          Prior Authorization Program Information and Fax Forms.
-        </div>
-      )}
-    </div>
+    <a href="https://www.myprime.com/en/forms/coverage-determination/prior-authorization.html" target="_blank" rel="noopener noreferrer" className="tool-link fl-tool">
+      <div className="tool-link-name" style={{color:'#4a90d9'}}>PA Program Summaries &amp; Fax Forms</div>
+      <div className="tool-link-desc">Florida Blue · MyPrime</div>
+      <ExtIcon />
+    </a>
   )
 }
 
@@ -770,15 +762,7 @@ export default function App() {
         </div>
       </main>
 
-      <footer className="app-footer">
-        <a href="mailto:ahughes@mysanitas.com?subject=Sanitas Formulary — Feedback" className="footer-feedback">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{marginRight:5,verticalAlign:'middle'}}>
-            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
-            <polyline points="22,6 12,13 2,6"/>
-          </svg>
-          Report an issue
-        </a>
-      </footer>
+      <footer className="app-footer" style={{height:'8px',padding:0,border:'none'}} />
     </>
   )
 }
