@@ -618,6 +618,17 @@ export default function App() {
             </a>
           </HeaderTool>
 
+          <HeaderTool label="Low Cost Drugs" color="#5EEAD4">
+            <div style={{fontSize:11,color:'#94a3b8',marginBottom:8,lineHeight:1.5}}>
+              Florida Blue preferred drug lists with lower cost options for common conditions.
+            </div>
+            <a href="https://www.bcbsfl.com/DocumentLibrary/Providers/Content/RxF_ConditionCare.pdf" target="_blank" rel="noopener noreferrer" className="tool-link fl-tool">
+              <div className="tool-link-name" style={{color:'#5EEAD4'}}>FL Blue Condition Care List</div>
+              <div className="tool-link-desc">Depression · Diabetes · Blood Pressure · Cholesterol · Respiratory · PDF</div>
+              <ExtIcon />
+            </a>
+          </HeaderTool>
+
           <HeaderTool label="Medication Protocols" color="#5EEAD4">
             <div style={{fontSize:11,color:'#64748b',padding:'4px 0 8px',fontStyle:'italic'}}>
               Google Drive links coming soon
