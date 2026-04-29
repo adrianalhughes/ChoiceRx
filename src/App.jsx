@@ -645,7 +645,7 @@ export default function App() {
 
           {/* ── Right: Tools ── */}
           <div className="tools-panel">
-            <div className="tools-panel-header">✦ Rx Tools</div>
+            <div className="tools-panel-header">✦ Provider Resources</div>
 
             <ToolsSection label="Does this Rx need a Prior Authorization?">
               <a href="https://oidc.covermymeds.com/login?return_url=%2Foauth%2Fauthorize%3Fclient_id%3D-QXKSuZr5mOEba23vs1QzqnlFiQFwSVj70BG2nrD3SI%26nonce%3Dd25026b0bd0b60612235a1de7a171bc9%26redirect_uri%3Dhttps%253A%252F%252Faccount.covermymeds.com%252Fauth%252Fcmm_oidc%252Fcallback%26response_type%3Dcode%26scope%3Dopenid%2520profile%2520email%2520offline_access%26state%3Db42ce2e4a3453a45e9dbf64760e84d73" target="_blank" rel="noopener noreferrer" className="tool-link cmm-tool">
