@@ -717,7 +717,7 @@ export default function App() {
 
       <div className="rx-sidebar">
 
-        <SidebarSection emoji="💊" sublabel="Lower Price">
+        <SidebarSection emoji="💊" sublabel="DTC (Cash)">
           <a href="https://www.goodrx.com" target="_blank" rel="noopener noreferrer" className="tool-link">
             <div className="tool-link-name">GoodRx</div>
             <div className="tool-link-desc">Cash prices at local pharmacies</div>
@@ -740,7 +740,7 @@ export default function App() {
           </a>
         </SidebarSection>
 
-        <SidebarSection emoji="📦" sublabel="Mail-Order">
+        <SidebarSection emoji="📦" sublabel="Mail Order Signup">
           <a href="https://pharmacy.amazon.com/?ref_=pd_sl_OCI_XBV0_MD_e_YOR566_QTT071_dev_c&hvocijid=10259146375960946511--&hvexpln=135" target="_blank" rel="noopener noreferrer" className="tool-link amazon-tool">
             <div className="tool-link-name" style={{color:'#FF9900'}}>Amazon Pharmacy</div>
             <div className="tool-link-desc">Free home delivery on prescriptions</div>
@@ -748,7 +748,7 @@ export default function App() {
           </a>
         </SidebarSection>
 
-        <SidebarSection emoji="📋" sublabel="ePA">
+        <SidebarSection emoji="📋" sublabel="ePA Portal">
           <a href="https://oidc.covermymeds.com/login?return_url=%2Foauth%2Fauthorize%3Fclient_id%3D-QXKSuZr5mOEba23vs1QzqnlFiQFwSVj70BG2nrD3SI%26nonce%3Dd25026b0bd0b60612235a1de7a171bc9%26redirect_uri%3Dhttps%253A%252F%252Faccount.covermymeds.com%252Fauth%252Fcmm_oidc%252Fcallback%26response_type%3Dcode%26scope%3Dopenid%2520profile%2520email%2520offline_access%26state%3Db42ce2e4a3453a45e9dbf64760e84d73" target="_blank" rel="noopener noreferrer" className="tool-link cmm-tool">
             <div className="tool-link-name" style={{color:'#FF8C00'}}>CoverMyMeds Portal</div>
             <div className="tool-link-desc">Submit &amp; track PA requests</div>
