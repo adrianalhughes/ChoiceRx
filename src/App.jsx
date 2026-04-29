@@ -7,6 +7,7 @@ import bcbsfl from './data/bcbsfl.json'
 import simplechoice from './data/simplechoice.json'
 import notCovered from './data/not_covered.json'
 import specialtySelf from './data/specialty_self.json'
+import { Analytics } from '@vercel/analytics/react'
 
 const PLANS = [
   { id: 'bcbsfl',              label: 'FL ValueScript Rx',          plan: 'Florida Blue',     payer: 'Florida Blue',     effective: 'April 2026', tiers: 6, data: bcbsfl,           highlight: true  },
@@ -732,6 +733,7 @@ export default function App() {
           Report an issue
         </a>
       </footer>
+      <Analytics />
     </>
   )
 }
