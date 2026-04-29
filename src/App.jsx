@@ -579,6 +579,10 @@ export default function App() {
           </ToolsBarSection>
         </div>
         <a href="mailto:ahughes@mysanitas.com?subject=Sanitas Formulary — Feedback" className="feedback-link">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{marginRight:4,verticalAlign:'middle'}}>
+            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+            <polyline points="22,6 12,13 2,6"/>
+          </svg>
           Report an issue
         </a>
       </header>
@@ -686,25 +690,12 @@ export default function App() {
           </div>
         )}
 
-        <div className="sources-footer">
-          <span className="sources-footer-label">Sources: View and Download the PDFs</span>
-          <a href="https://www.floridablue.com/members/tools-resources/pharmacy/medication-guide" target="_blank" rel="noopener noreferrer" className="sources-footer-btn">Florida Blue</a>
-          <a href="https://www.uhc.com/member-resources/pharmacy-benefits/prescription-drug-lists" target="_blank" rel="noopener noreferrer" className="sources-footer-btn">UnitedHealthcare</a>
-        </div>
-
-        {showEstimator && (
-          <div className="estimator-overlay" onClick={e => { if (e.target === e.currentTarget) setShowEstimator(false) }}>
-            <div className="estimator-modal">
-              <button className="estimator-close" onClick={() => setShowEstimator(false)}>✕</button>
-              <DiabetesDashboard />
-            </div>
-          </div>
-        )}
-
-      </main>
-
       <footer className="app-footer">
         <a href="mailto:ahughes@mysanitas.com?subject=Sanitas Formulary — Feedback" className="footer-feedback">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{marginRight:5,verticalAlign:'middle'}}>
+            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+            <polyline points="22,6 12,13 2,6"/>
+          </svg>
           Report an issue
         </a>
       </footer>
