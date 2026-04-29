@@ -131,7 +131,7 @@ body { min-height: 100vh; background: var(--bg); }
 /* ── Split layout ── */
 .split-layout {
   display: grid;
-  grid-template-columns: 1fr 320px;
+  grid-template-columns: 1fr 380px;
   gap: 0;
   align-items: start;
 }
