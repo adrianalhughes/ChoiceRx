@@ -690,6 +690,8 @@ export default function App() {
           </div>
         )}
 
+      </main>
+
       <footer className="app-footer">
         <a href="mailto:ahughes@mysanitas.com?subject=Sanitas Formulary — Feedback" className="footer-feedback">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{marginRight:5,verticalAlign:'middle'}}>
