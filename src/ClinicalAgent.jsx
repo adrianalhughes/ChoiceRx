@@ -117,6 +117,9 @@ function Message({ msg }) {
 }
 
 export default function ClinicalAgent({ activePlan }) {
+  const [unlocked, setUnlocked] = useState(false)
+  const [passcode, setPasscode] = useState('')
+  const [passcodeError, setPasscodeError] = useState(false)
   const [messages, setMessages] = useState([])
   const [input, setInput] = useState('')
   const [loading, setLoading] = useState(false)
@@ -156,6 +159,48 @@ export default function ClinicalAgent({ activePlan }) {
       setMessages(prev => [...prev, { role: 'assistant', content: `[CLINICAL KNOWLEDGE]\nSorry, something went wrong: ${e.message}. Please try again.` }])
     }
     setLoading(false)
+  }
+
+  if (!unlocked) {
+    return (
+      <div style={{
+        width: '100%', background: '#0d1526', border: '1px solid #263354',
+        borderRadius: 12, padding: '20px 16px', marginBottom: 12,
+      }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 6 }}>
+          <BenzeneIcon />
+          <span style={{ fontSize: 13, fontWeight: 700, color: '#ffffff' }}>Claude's Clinical Knowledge</span>
+        </div>
+        <div style={{ fontSize: 11, color: '#64748b', marginBottom: 14, lineHeight: 1.5 }}>
+          AI-powered clinical reference with web search. Access with passcode <strong style={{color:'#94a3b8'}}>"beta"</strong>
+        </div>
+        <div style={{ display: 'flex', gap: 6 }}>
+          <input
+            value={passcode}
+            onChange={e => { setPasscode(e.target.value); setPasscodeError(false) }}
+            onKeyDown={e => { if (e.key === 'Enter') { if (passcode.toLowerCase() === 'beta') setUnlocked(true); else setPasscodeError(true) } }}
+            placeholder="Enter passcode..."
+            type="password"
+            style={{
+              flex: 1, background: '#1a2540', border: `1px solid ${passcodeError ? '#f87171' : '#2e3d65'}`,
+              borderRadius: 7, padding: '7px 11px', fontSize: 12,
+              color: '#e2e8f0', fontFamily: 'DM Sans, sans-serif', outline: 'none',
+            }}
+          />
+          <button
+            onClick={() => { if (passcode.toLowerCase() === 'beta') setUnlocked(true); else setPasscodeError(true) }}
+            style={{
+              background: '#4f8ef7', border: 'none', borderRadius: 7,
+              padding: '7px 14px', cursor: 'pointer', color: '#fff',
+              fontSize: 12, fontWeight: 600, fontFamily: 'DM Sans, sans-serif',
+            }}
+          >
+            Access
+          </button>
+        </div>
+        {passcodeError && <div style={{ fontSize: 11, color: '#f87171', marginTop: 6 }}>Incorrect passcode. Try again.</div>}
+      </div>
+    )
   }
 
   return (
