@@ -506,8 +506,8 @@ export default function App() {
     <>
       <header className="app-header">
         <div>
-          <div className="wordmark">Sanitas<sup className="beta-sup">β</sup></div>
-          <div className="wordmark-sub" style={{color:'#ffffff'}}>Pharmacy Resources</div>
+          <div className="wordmark">Sanitas</div>
+          <div className="wordmark-sub">Pharmacy Resources<sup className="beta-sup">β</sup></div>
         </div>
         <div className="header-tagline">
           Formulary coverage, pricing tools, and PA resources{' '}

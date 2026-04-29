@@ -1740,3 +1740,33 @@ body { min-height: 100vh; background: var(--bg); }
 .formulary-tab .tab-name,
 .formulary-tab .tab-date { display: inline !important; }
 .formulary-tab .tab-date { display: none !important; }
+
+/* ── White everywhere, no exceptions (except muted desc) ── */
+.wordmark { color: #ffffff !important; }
+.wordmark-sub { color: #ffffff !important; }
+.header-tagline { color: #ffffff !important; }
+.tagline-accent { color: #4f8ef7 !important; }
+.beta-sup { color: #4f8ef7 !important; font-size: 10px !important; margin-left: 3px; }
+
+/* ── Tier legend — centered text, tighter layout ── */
+.tier-legend-inline {
+  margin-bottom: 20px !important;
+}
+.legend-item {
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+  padding: 8px 10px !important;
+  gap: 4px !important;
+  font-size: 10px !important;
+  color: #ffffff !important;
+}
+.legend-group-label {
+  text-align: center !important;
+  font-size: 9px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.5px !important;
+  text-transform: uppercase !important;
+  padding: 4px 12px !important;
+}
