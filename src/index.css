@@ -1770,3 +1770,30 @@ body { min-height: 100vh; background: var(--bg); }
   text-transform: uppercase !important;
   padding: 4px 12px !important;
 }
+
+/* ── Fix plan bar vertical alignment ── */
+.plan-bar {
+  height: 52px !important;
+  display: flex !important;
+  align-items: stretch !important;
+}
+.plan-bar-inner {
+  display: flex !important;
+  align-items: center !important;
+  width: 100% !important;
+}
+.formulary-tabs {
+  display: flex !important;
+  align-items: stretch !important;
+  height: 100% !important;
+}
+.formulary-tab,
+.formulary-tab.fl-tab,
+.formulary-tab.tx-tab,
+.formulary-tab.highlight-tab {
+  height: 52px !important;
+  display: flex !important;
+  align-items: center !important;
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
+}
