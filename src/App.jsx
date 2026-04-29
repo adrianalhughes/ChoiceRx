@@ -630,9 +630,11 @@ export default function App() {
           </HeaderTool>
 
           <HeaderTool label="Medication Protocols" color="#5EEAD4">
-            <div style={{fontSize:11,color:'#64748b',padding:'4px 0 8px',fontStyle:'italic'}}>
-              Google Drive links coming soon
-            </div>
+            <a href="https://sites.google.com/mysanitas.com/sanitaseducationsite/adults/endocrinology/diabetes-mellitus-resouces" target="_blank" rel="noopener noreferrer" className="tool-link" style={{borderColor:'rgba(94,234,212,0.2)'}}>
+              <div className="tool-link-name" style={{color:'#5EEAD4'}}>Learn the Clinical Protocols at the Sanitas Education Site</div>
+              <div className="tool-link-desc">Adults · Endocrinology · Diabetes &amp; more</div>
+              <ExtIcon />
+            </a>
           </HeaderTool>
         </div>
 
