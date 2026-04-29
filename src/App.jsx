@@ -556,213 +556,160 @@ export default function App() {
       </div>
 
       <main className="main-content">
+        <div className="split-layout">
 
-        <div className="panel-question">What are the coverage details?</div>
+          {/* ── Left: Formulary ── */}
+          <div className="formulary-panel">
+            <div className="panel-question">What are the coverage details?</div>
 
-        <div className="panel-search-wrap">
-          <SearchIcon className="search-icon" />
-          <input
-            className="search-input"
-            type="text"
-            placeholder="Search drug name..."
-            value={query}
-            onChange={e => setQuery(e.target.value)}
-            autoComplete="off"
-            spellCheck={false}
-          />
-          {query && <button className="search-clear" onClick={() => setQuery('')} aria-label="Clear">✕</button>}
-          {q && (
-            <div className="search-count">
-              {filtered.totalMatches === 0
-                ? 'No matches found'
-                : `${filtered.totalMatches} drug${filtered.totalMatches !== 1 ? 's' : ''} matched`}
-            </div>
-          )}
-        </div>
-
-        <div className={`tier-legend-inline plan-tiers-${activePlan.tiers}`}>
-          {(() => {
-            const labels = activePlan.tiers === 3 ? TIER_LABELS_3 : activePlan.tiers === 4 ? TIER_LABELS_4 : TIER_LABELS_6
-            const cutoff = activePlan.tiers === 3 ? 1 : activePlan.tiers === 4 ? 2 : 3
-            const lowTiers  = Object.entries(labels).filter(([t]) => Number(t) <= cutoff)
-            const highTiers = Object.entries(labels).filter(([t]) => Number(t) >  cutoff)
-            const lowLabel  = activePlan.tiers === 3 ? 'Tier 1 · Lower Cost' : activePlan.tiers === 4 ? 'Tiers 1–2 · Lower Cost' : 'Tiers 1–3 · Lower Cost'
-            const highLabel = activePlan.tiers === 3 ? 'Tiers 2–3 · Mid to Higher Cost' : activePlan.tiers === 4 ? 'Tiers 3–4 · Mid to Highest Cost' : 'Tiers 4–6 · Higher Cost'
-            return (
-              <>
-                <div style={{ flex: 1, marginRight: 6 }}>
-                  <div className="legend-group-label legend-group-label-low">{lowLabel}</div>
-                  <div style={{ display: 'flex' }}>
-                    {lowTiers.map(([t, label]) => (
-                      <div key={t} className="legend-item legend-item-low">
-                        <span className={`tier-badge tier-${t}`}>{t}</span>
-                        <span>{label}</span>
-                      </div>
-                    ))}
-                  </div>
+            <div className="panel-search-wrap">
+              <SearchIcon className="search-icon" />
+              <input
+                className="search-input"
+                type="text"
+                placeholder="Search drug name..."
+                value={query}
+                onChange={e => setQuery(e.target.value)}
+                autoComplete="off"
+                spellCheck={false}
+              />
+              {query && <button className="search-clear" onClick={() => setQuery('')} aria-label="Clear">✕</button>}
+              {q && (
+                <div className="search-count">
+                  {filtered.totalMatches === 0 ? 'No matches found' : `${filtered.totalMatches} drug${filtered.totalMatches !== 1 ? 's' : ''} matched`}
                 </div>
-                <div style={{ flex: 1 }}>
-                  <div className="legend-group-label legend-group-label-high">{highLabel}</div>
-                  <div style={{ display: 'flex' }}>
-                    {highTiers.map(([t, label]) => (
-                      <div key={t} className="legend-item legend-item-high">
-                        <span className={`tier-badge tier-${t}`}>{t}</span>
-                        <span>{label}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </>
-            )
-          })()}
-        </div>
-
-        <div className="condition-grid">
-          {filtered.conditions.map(c => (
-            <ConditionBlock
-              key={c.name}
-              name={c.name}
-              cleanDrugs={c.cleanDrugs}
-              restrictedDrugs={c.restrictedDrugs}
-              q={q}
-              forceOpen={c.forceOpen}
-            />
-          ))}
-        </div>
-
-        {q && filtered.totalMatches === 0 && (
-          <div className="not-found-state">
-            <div className="not-found-title">Drug not found in formulary</div>
-            <div className="not-found-actions">
-              <a href="https://www.goodrx.com" target="_blank" rel="noopener noreferrer" className="not-found-btn">Check GoodRx cash price →</a>
-              <a href="https://www.rxassist.org" target="_blank" rel="noopener noreferrer" className="not-found-btn">Search patient assistance programs →</a>
-              <a href="https://pharmacy.amazon.com/?ref_=pd_sl_OCI_XBV0_MD_e_YOR566_QTT071_dev_c&hvocijid=10259146375960946511--&hvexpln=135" target="_blank" rel="noopener noreferrer" className="not-found-btn">Check Amazon Pharmacy →</a>
+              )}
             </div>
-            <p className="not-found-sub">For help, contact a pharmacy team member.</p>
+
+            <div className={`tier-legend-inline plan-tiers-${activePlan.tiers}`}>
+              {(() => {
+                const labels = activePlan.tiers === 3 ? TIER_LABELS_3 : activePlan.tiers === 4 ? TIER_LABELS_4 : TIER_LABELS_6
+                const cutoff = activePlan.tiers === 3 ? 1 : activePlan.tiers === 4 ? 2 : 3
+                const lowTiers  = Object.entries(labels).filter(([t]) => Number(t) <= cutoff)
+                const highTiers = Object.entries(labels).filter(([t]) => Number(t) >  cutoff)
+                const lowLabel  = activePlan.tiers === 3 ? 'Tier 1 · Lower Cost' : activePlan.tiers === 4 ? 'Tiers 1–2 · Lower Cost' : 'Tiers 1–3 · Lower Cost'
+                const highLabel = activePlan.tiers === 3 ? 'Tiers 2–3 · Mid to Higher Cost' : activePlan.tiers === 4 ? 'Tiers 3–4 · Mid to Highest Cost' : 'Tiers 4–6 · Higher Cost'
+                return (
+                  <>
+                    <div style={{ flex: 1, marginRight: 6 }}>
+                      <div className="legend-group-label legend-group-label-low">{lowLabel}</div>
+                      <div style={{ display: 'flex' }}>
+                        {lowTiers.map(([t, label]) => (
+                          <div key={t} className="legend-item legend-item-low">
+                            <span className={`tier-badge tier-${t}`}>{t}</span>
+                            <span>{label}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                    <div style={{ flex: 1 }}>
+                      <div className="legend-group-label legend-group-label-high">{highLabel}</div>
+                      <div style={{ display: 'flex' }}>
+                        {highTiers.map(([t, label]) => (
+                          <div key={t} className="legend-item legend-item-high">
+                            <span className={`tier-badge tier-${t}`}>{t}</span>
+                            <span>{label}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </>
+                )
+              })()}
+            </div>
+
+            <div className="condition-grid">
+              {filtered.conditions.map(c => (
+                <ConditionBlock key={c.name} name={c.name} cleanDrugs={c.cleanDrugs} restrictedDrugs={c.restrictedDrugs} q={q} forceOpen={c.forceOpen} />
+              ))}
+            </div>
+
+            {q && filtered.totalMatches === 0 && (
+              <div className="not-found-state">
+                <div className="not-found-title">Drug not found in formulary</div>
+                <div className="not-found-actions">
+                  <a href="https://www.goodrx.com" target="_blank" rel="noopener noreferrer" className="not-found-btn">Check GoodRx cash price →</a>
+                  <a href="https://www.rxassist.org" target="_blank" rel="noopener noreferrer" className="not-found-btn">Search patient assistance programs →</a>
+                  <a href="https://pharmacy.amazon.com/?ref_=pd_sl_OCI_XBV0_MD_e_YOR566_QTT071_dev_c&hvocijid=10259146375960946511--&hvexpln=135" target="_blank" rel="noopener noreferrer" className="not-found-btn">Check Amazon Pharmacy →</a>
+                </div>
+                <p className="not-found-sub">For help, contact a pharmacy team member.</p>
+              </div>
+            )}
+
+            <div className="special-grid">
+              <NonPreferredBlock drugs={filtered.tier6} q={q} />
+              {activePlan.payer === 'Florida Blue' && <SpecialtyNotCoveredBlock q={q} />}
+            </div>
+            <NotCoveredBlock drugs={filtered.ncDrugs} appendixDrugs={filtered.ncAppend} q={q} />
           </div>
-        )}
 
-      </main>
+          {/* ── Right: Tools ── */}
+          <div className="tools-panel">
+            <div className="tools-panel-header">✦ Rx Tools</div>
 
-      <div className="rx-toolbar">
-        <div className="rx-toolbar-label">Rx Tools</div>
-        <div className="rx-toolbar-tools">
+            <ToolsSection label="💊 DTC (Cash)">
+              <a href="https://www.goodrx.com" target="_blank" rel="noopener noreferrer" className="tool-link">
+                <div className="tool-link-name">GoodRx</div>
+                <div className="tool-link-desc">Cash prices at local pharmacies</div>
+                <ExtIcon />
+              </a>
+              <a href="https://costplusdrugs.com" target="_blank" rel="noopener noreferrer" className="tool-link">
+                <div className="tool-link-name">Cost Plus Drugs</div>
+                <div className="tool-link-desc">Transparent-pricing mail pharmacy</div>
+                <ExtIcon />
+              </a>
+              <a href="https://trumprx.gov/" target="_blank" rel="noopener noreferrer" className="tool-link">
+                <div className="tool-link-name">TrumpRx</div>
+                <div className="tool-link-desc">Federally negotiated IRA prices</div>
+                <ExtIcon />
+              </a>
+              <a href="https://www.rxassist.org" target="_blank" rel="noopener noreferrer" className="tool-link">
+                <div className="tool-link-name">RxAssist</div>
+                <div className="tool-link-desc">Manufacturer PAPs for uninsured patients</div>
+                <ExtIcon />
+              </a>
+            </ToolsSection>
 
-          <ToolsBarSection label="💊" sublabel="Lower Price" color="#4ade80">
-            <a href="https://www.goodrx.com" target="_blank" rel="noopener noreferrer" className="tool-link">
-              <div className="tool-link-name">GoodRx</div>
-              <div className="tool-link-desc">Cash prices at local pharmacies</div>
-              <ExtIcon />
-            </a>
-            <a href="https://costplusdrugs.com" target="_blank" rel="noopener noreferrer" className="tool-link">
-              <div className="tool-link-name">Cost Plus Drugs</div>
-              <div className="tool-link-desc">Transparent-pricing mail pharmacy</div>
-              <ExtIcon />
-            </a>
-            <a href="https://trumprx.gov/" target="_blank" rel="noopener noreferrer" className="tool-link">
-              <div className="tool-link-name">TrumpRx</div>
-              <div className="tool-link-desc">Federally negotiated IRA prices</div>
-              <ExtIcon />
-            </a>
-            <a href="https://www.rxassist.org" target="_blank" rel="noopener noreferrer" className="tool-link">
-              <div className="tool-link-name">RxAssist</div>
-              <div className="tool-link-desc">Manufacturer PAPs for uninsured patients</div>
-              <ExtIcon />
-            </a>
-          </ToolsBarSection>
+            <ToolsSection label="📦 Mail Order Signup">
+              <a href="https://pharmacy.amazon.com/?ref_=pd_sl_OCI_XBV0_MD_e_YOR566_QTT071_dev_c&hvocijid=10259146375960946511--&hvexpln=135" target="_blank" rel="noopener noreferrer" className="tool-link amazon-tool">
+                <div className="tool-link-name" style={{color:'#FF9900'}}>Amazon Pharmacy</div>
+                <div className="tool-link-desc">Free home delivery on prescriptions</div>
+                <ExtIcon />
+              </a>
+            </ToolsSection>
 
-          <ToolsBarSection label="📦" sublabel="Mail-Order" color="#FF9900">
-            <a href="https://pharmacy.amazon.com/?ref_=pd_sl_OCI_XBV0_MD_e_YOR566_QTT071_dev_c&hvocijid=10259146375960946511--&hvexpln=135" target="_blank" rel="noopener noreferrer" className="tool-link amazon-tool">
-              <div className="tool-link-name" style={{color:'#FF9900'}}>Amazon Pharmacy</div>
-              <div className="tool-link-desc">Free home delivery on prescriptions</div>
-              <ExtIcon />
-            </a>
-          </ToolsBarSection>
+            <ToolsSection label="📋 ePA Portal">
+              <a href="https://oidc.covermymeds.com/login?return_url=%2Foauth%2Fauthorize%3Fclient_id%3D-QXKSuZr5mOEba23vs1QzqnlFiQFwSVj70BG2nrD3SI%26nonce%3Dd25026b0bd0b60612235a1de7a171bc9%26redirect_uri%3Dhttps%253A%252F%252Faccount.covermymeds.com%252Fauth%252Fcmm_oidc%252Fcallback%26response_type%3Dcode%26scope%3Dopenid%2520profile%2520email%2520offline_access%26state%3Db42ce2e4a3453a45e9dbf64760e84d73" target="_blank" rel="noopener noreferrer" className="tool-link cmm-tool">
+                <div className="tool-link-name" style={{color:'#FF8C00'}}>CoverMyMeds Portal</div>
+                <div className="tool-link-desc">Submit &amp; track PA requests</div>
+                <ExtIcon />
+              </a>
+              <a href="https://docs.google.com/document/d/1EsuVXqVm7wf1fea1gIxGZvqudmPOewjB/edit?usp=sharing" target="_blank" rel="noopener noreferrer" className="tool-link cmm-guide-tool">
+                <div className="tool-link-name" style={{color:'#e83480'}}>Help Guide</div>
+                <div className="tool-link-desc">Step-by-step tutorial</div>
+                <ExtIcon />
+              </a>
+              <PAInstructionsLink />
+            </ToolsSection>
 
-          <ToolsBarSection label="📋" sublabel="CoverMyMeds ePA" color="#FF8C00">
-            <a href="https://oidc.covermymeds.com/login?return_url=%2Foauth%2Fauthorize%3Fclient_id%3D-QXKSuZr5mOEba23vs1QzqnlFiQFwSVj70BG2nrD3SI%26nonce%3Dd25026b0bd0b60612235a1de7a171bc9%26redirect_uri%3Dhttps%253A%252F%252Faccount.covermymeds.com%252Fauth%252Fcmm_oidc%252Fcallback%26response_type%3Dcode%26scope%3Dopenid%2520profile%2520email%2520offline_access%26state%3Db42ce2e4a3453a45e9dbf64760e84d73" target="_blank" rel="noopener noreferrer" className="tool-link cmm-tool">
-              <div className="tool-link-name" style={{color:'#FF8C00'}}>CoverMyMeds Portal</div>
-              <div className="tool-link-desc">Submit &amp; track PA requests</div>
-              <ExtIcon />
-            </a>
-            <a href="https://docs.google.com/document/d/1EsuVXqVm7wf1fea1gIxGZvqudmPOewjB/edit?usp=sharing" target="_blank" rel="noopener noreferrer" className="tool-link cmm-guide-tool">
-              <div className="tool-link-name" style={{color:'#e83480'}}>Help Guide</div>
-              <div className="tool-link-desc">Step-by-step tutorial</div>
-              <ExtIcon />
-            </a>
-            <PAInstructionsLink />
-          </ToolsBarSection>
-
-          <ToolsBarSection label="📑" sublabel="Drug Lists" color="#4f8ef7">
             {activePlan.payer === 'Florida Blue' && (
-              <>
+              <ToolsSection label="📑 Specialty Drug Lists">
                 <a href="https://www.bcbsfl.com/DocumentLibrary/Providers/Content/RxF_Specialty_Table_Self.pdf" target="_blank" rel="noopener noreferrer" className="tool-link fl-tool">
-                  <div className="tool-link-name" style={{color:'#4a90d9'}}>Specialty Self-Administered</div>
-                  <div className="tool-link-desc">Florida Blue PDF</div>
+                  <div className="tool-link-name" style={{color:'#4a90d9'}}>Self-Admin Specialty</div>
+                  <div className="tool-link-desc">Florida Blue · PDF</div>
                   <ExtIcon />
                 </a>
                 <a href="https://www.bcbsfl.com/DocumentLibrary/Providers/Content/RxF_Specialty_Table_Prov.pdf" target="_blank" rel="noopener noreferrer" className="tool-link fl-tool">
-                  <div className="tool-link-name" style={{color:'#4a90d9'}}>Specialty Provider-Administered</div>
-                  <div className="tool-link-desc">Florida Blue PDF</div>
+                  <div className="tool-link-name" style={{color:'#4a90d9'}}>Provider-Admin Specialty</div>
+                  <div className="tool-link-desc">Florida Blue · PDF</div>
                   <ExtIcon />
                 </a>
-              </>
+              </ToolsSection>
             )}
-            {activePlan.payer === 'Florida Blue' && <SpecialtyNotCoveredBlock q={q} />}
-            <NotCoveredBlock drugs={filtered.ncDrugs} appendixDrugs={filtered.ncAppend} q={q} />
-          </ToolsBarSection>
+          </div>
 
         </div>
-      </div>
-
-      <div className="rx-sidebar">
-
-        <SidebarSection emoji="💊" sublabel="DTC (Cash)">
-          <a href="https://www.goodrx.com" target="_blank" rel="noopener noreferrer" className="tool-link">
-            <div className="tool-link-name">GoodRx</div>
-            <div className="tool-link-desc">Cash prices at local pharmacies</div>
-            <ExtIcon />
-          </a>
-          <a href="https://costplusdrugs.com" target="_blank" rel="noopener noreferrer" className="tool-link">
-            <div className="tool-link-name">Cost Plus Drugs</div>
-            <div className="tool-link-desc">Transparent-pricing mail pharmacy</div>
-            <ExtIcon />
-          </a>
-          <a href="https://trumprx.gov/" target="_blank" rel="noopener noreferrer" className="tool-link">
-            <div className="tool-link-name">TrumpRx</div>
-            <div className="tool-link-desc">Federally negotiated IRA prices</div>
-            <ExtIcon />
-          </a>
-          <a href="https://www.rxassist.org" target="_blank" rel="noopener noreferrer" className="tool-link">
-            <div className="tool-link-name">RxAssist</div>
-            <div className="tool-link-desc">Manufacturer PAPs for uninsured patients</div>
-            <ExtIcon />
-          </a>
-        </SidebarSection>
-
-        <SidebarSection emoji="📦" sublabel="Mail Order Signup">
-          <a href="https://pharmacy.amazon.com/?ref_=pd_sl_OCI_XBV0_MD_e_YOR566_QTT071_dev_c&hvocijid=10259146375960946511--&hvexpln=135" target="_blank" rel="noopener noreferrer" className="tool-link amazon-tool">
-            <div className="tool-link-name" style={{color:'#FF9900'}}>Amazon Pharmacy</div>
-            <div className="tool-link-desc">Free home delivery on prescriptions</div>
-            <ExtIcon />
-          </a>
-        </SidebarSection>
-
-        <SidebarSection emoji="📋" sublabel="ePA Portal">
-          <a href="https://oidc.covermymeds.com/login?return_url=%2Foauth%2Fauthorize%3Fclient_id%3D-QXKSuZr5mOEba23vs1QzqnlFiQFwSVj70BG2nrD3SI%26nonce%3Dd25026b0bd0b60612235a1de7a171bc9%26redirect_uri%3Dhttps%253A%252F%252Faccount.covermymeds.com%252Fauth%252Fcmm_oidc%252Fcallback%26response_type%3Dcode%26scope%3Dopenid%2520profile%2520email%2520offline_access%26state%3Db42ce2e4a3453a45e9dbf64760e84d73" target="_blank" rel="noopener noreferrer" className="tool-link cmm-tool">
-            <div className="tool-link-name" style={{color:'#FF8C00'}}>CoverMyMeds Portal</div>
-            <div className="tool-link-desc">Submit &amp; track PA requests</div>
-            <ExtIcon />
-          </a>
-          <a href="https://docs.google.com/document/d/1EsuVXqVm7wf1fea1gIxGZvqudmPOewjB/edit?usp=sharing" target="_blank" rel="noopener noreferrer" className="tool-link cmm-guide-tool">
-            <div className="tool-link-name" style={{color:'#e83480'}}>Help Guide</div>
-            <div className="tool-link-desc">Step-by-step tutorial</div>
-            <ExtIcon />
-          </a>
-          <PAInstructionsLink />
-        </SidebarSection>
-
-      </div>
+      </main>
 
       <footer className="app-footer">
         <a href="mailto:ahughes@mysanitas.com?subject=Sanitas Formulary — Feedback" className="footer-feedback">
