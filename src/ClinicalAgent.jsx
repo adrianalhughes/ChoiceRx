@@ -112,7 +112,7 @@ export default function ClinicalAgent({ activePlan }) {
     setMessages(newMessages)
     setLoading(true)
     try {
-      const res = await fetch('https://api.anthropic.com/v1/messages', {
+      const res = await fetch('/api/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -143,66 +143,68 @@ export default function ClinicalAgent({ activePlan }) {
       borderRadius: 12,
       display: 'flex',
       flexDirection: 'column',
-      height: 520,
       overflow: 'hidden',
+      marginBottom: 12,
     }}>
       {/* Header */}
       <div style={{
-        padding: '12px 16px 10px', background: '#1a2540',
+        padding: '10px 14px 8px', background: '#1a2540',
         borderBottom: '1px solid #263354', flexShrink: 0,
       }}>
-        <div style={{ fontSize: 13, fontWeight: 700, color: '#ffffff' }}>
+        <div style={{ fontSize: 12, fontWeight: 700, color: '#ffffff' }}>
           🧬 Claude's Clinical Knowledge
         </div>
-        <div style={{ fontSize: 10, color: '#64748b', marginTop: 2 }}>
-          Active plan: {activePlan.label} · Ask anything about coverage, pricing, or PA
+        <div style={{ fontSize: 10, color: '#64748b', marginTop: 1 }}>
+          {activePlan.label} · Coverage, pricing &amp; PA
         </div>
       </div>
 
-      {/* Messages */}
-      <div style={{ flex: 1, overflowY: 'auto', padding: '14px 14px 6px' }}>
-        {messages.length === 0 && (
-          <div>
-            <div style={{ fontSize: 11, color: '#475569', marginBottom: 10, lineHeight: 1.5 }}>
-              Try one of these questions:
-            </div>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 5 }}>
-              {EXAMPLE_QUESTIONS.map((q, i) => (
-                <button key={i} onClick={() => send(q)} style={{
-                  background: '#1a2540', border: '1px solid #263354',
-                  borderRadius: 8, padding: '7px 12px', cursor: 'pointer',
-                  fontSize: 11, color: '#94a3b8', textAlign: 'left',
-                  lineHeight: 1.4, fontFamily: 'DM Sans, sans-serif',
-                  transition: 'all 0.15s',
-                }}
-                onMouseEnter={e => { e.currentTarget.style.borderColor = '#4f8ef7'; e.currentTarget.style.color = '#e2e8f0' }}
-                onMouseLeave={e => { e.currentTarget.style.borderColor = '#263354'; e.currentTarget.style.color = '#94a3b8' }}
-                >
-                  {q}
-                </button>
+      {/* Messages — only shows when there are messages */}
+      {messages.length > 0 && (
+        <div style={{ maxHeight: 320, overflowY: 'auto', padding: '12px 14px 6px' }}>
+          {messages.map((m, i) => <Message key={i} msg={m} />)}
+          {loading && (
+            <div style={{ display: 'flex', gap: 5, padding: '6px 0', alignItems: 'center' }}>
+              <span style={{ fontSize: 11, color: '#475569' }}>Searching</span>
+              {[0,1,2].map(i => (
+                <div key={i} style={{
+                  width: 5, height: 5, borderRadius: '50%', background: '#4f8ef7',
+                  animation: `ckbounce 1s ease-in-out ${i * 0.15}s infinite`,
+                }} />
               ))}
             </div>
-          </div>
-        )}
-        {messages.map((m, i) => <Message key={i} msg={m} />)}
-        {loading && (
-          <div style={{ display: 'flex', gap: 5, padding: '8px 0', alignItems: 'center' }}>
-            <span style={{ fontSize: 11, color: '#475569' }}>Searching</span>
-            {[0,1,2].map(i => (
-              <div key={i} style={{
-                width: 5, height: 5, borderRadius: '50%', background: '#4f8ef7',
-                animation: `ckbounce 1s ease-in-out ${i * 0.15}s infinite`,
-              }} />
+          )}
+          <div ref={bottomRef} />
+        </div>
+      )}
+
+      {/* Example questions — only when no messages */}
+      {messages.length === 0 && (
+        <div style={{ padding: '10px 12px' }}>
+          <div style={{ fontSize: 10, color: '#475569', marginBottom: 7 }}>Try one of these:</div>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
+            {EXAMPLE_QUESTIONS.map((q, i) => (
+              <button key={i} onClick={() => send(q)} style={{
+                background: '#1a2540', border: '1px solid #263354',
+                borderRadius: 7, padding: '6px 10px', cursor: 'pointer',
+                fontSize: 11, color: '#94a3b8', textAlign: 'left',
+                lineHeight: 1.35, fontFamily: 'DM Sans, sans-serif',
+                transition: 'all 0.15s',
+              }}
+              onMouseEnter={e => { e.currentTarget.style.borderColor = '#4f8ef7'; e.currentTarget.style.color = '#e2e8f0' }}
+              onMouseLeave={e => { e.currentTarget.style.borderColor = '#263354'; e.currentTarget.style.color = '#94a3b8' }}
+              >
+                {q}
+              </button>
             ))}
           </div>
-        )}
-        <div ref={bottomRef} />
-      </div>
+        </div>
+      )}
 
-      {/* Input */}
+      {/* Input — always at bottom, no gap */}
       <div style={{
-        padding: '10px 12px', borderTop: '1px solid #263354',
-        flexShrink: 0, display: 'flex', gap: 8, alignItems: 'center',
+        padding: '8px 10px', borderTop: '1px solid #263354',
+        flexShrink: 0, display: 'flex', gap: 6, alignItems: 'center',
       }}>
         <input
           ref={inputRef}
@@ -212,14 +214,14 @@ export default function ClinicalAgent({ activePlan }) {
           placeholder="Ask a coverage or pricing question..."
           style={{
             flex: 1, background: '#1a2540', border: '1px solid #2e3d65',
-            borderRadius: 8, padding: '8px 12px',
+            borderRadius: 7, padding: '7px 11px',
             fontSize: 12, color: '#e2e8f0', fontFamily: 'DM Sans, sans-serif', outline: 'none',
           }}
         />
         <button onClick={() => send()} disabled={!input.trim() || loading} style={{
-          background: '#4f8ef7', border: 'none', borderRadius: 8,
-          width: 34, height: 34, cursor: 'pointer', color: '#fff',
-          fontSize: 15, display: 'flex', alignItems: 'center', justifyContent: 'center',
+          background: '#4f8ef7', border: 'none', borderRadius: 7,
+          width: 32, height: 32, cursor: 'pointer', color: '#fff',
+          fontSize: 14, display: 'flex', alignItems: 'center', justifyContent: 'center',
           opacity: (!input.trim() || loading) ? 0.4 : 1, flexShrink: 0,
         }}>↑</button>
       </div>
