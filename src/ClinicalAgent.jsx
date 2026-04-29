@@ -176,19 +176,16 @@ export default function ClinicalAgent({ activePlan }) {
         padding: '10px 14px 8px', background: '#1a2540',
         borderBottom: '1px solid #263354', flexShrink: 0,
       }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 2 }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 6 }}>
           <BenzeneIcon />
           <span style={{ fontSize: 12, fontWeight: 700, color: '#ffffff' }}>Claude's Clinical Knowledge</span>
-        </div>
-        <div style={{ fontSize: 10, color: '#64748b', marginBottom: 6 }}>
-          {activePlan.label} · Coverage, pricing &amp; PA
         </div>
         <div style={{
           fontSize: 10, color: '#fca5a5', lineHeight: 1.4,
           background: 'rgba(248,113,113,0.08)', border: '1px solid rgba(248,113,113,0.2)',
           borderRadius: 4, padding: '4px 8px',
         }}>
-          ⚠️ Do not enter patient-identifying information. For clinical reference only. Pending IT review.
+          ⚠️ Do not enter patient-identifying information.
         </div>
       </div>
 
