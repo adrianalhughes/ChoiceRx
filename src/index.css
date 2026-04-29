@@ -1895,3 +1895,48 @@ body { min-height: 100vh; background: var(--bg); }
 
 /* Add padding to main content so toolbar doesn't cover it */
 .main-content { padding-bottom: 88px !important; }
+
+/* ── Rx Toolbar — explicit colors, no color-mix ── */
+.rx-toolbar {
+  position: fixed !important;
+  bottom: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  z-index: 9999 !important;
+  background: #0d1526 !important;
+  border-top: 2px solid #1e2d4d !important;
+  padding: 0 24px !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 16px !important;
+  height: 64px !important;
+  box-shadow: 0 -4px 24px rgba(0,0,0,0.7) !important;
+}
+.tools-grid-btn {
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  padding: 10px 18px !important;
+  background: #1a2540 !important;
+  border: 1px solid #2e3d65 !important;
+  border-radius: 24px !important;
+  cursor: pointer !important;
+  font-family: 'DM Sans', sans-serif !important;
+  white-space: nowrap !important;
+}
+.tools-grid-label {
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  color: #ffffff !important;
+}
+.tools-grid-emoji { font-size: 18px !important; line-height: 1 !important; }
+
+/* Color per button on hover/open */
+.tools-grid-cell:nth-child(1) .tools-grid-btn:hover,
+.tools-grid-cell:nth-child(1).is-open .tools-grid-btn { background: rgba(74,222,128,0.15) !important; border-color: #4ade80 !important; box-shadow: 0 0 16px rgba(74,222,128,0.3) !important; }
+.tools-grid-cell:nth-child(2) .tools-grid-btn:hover,
+.tools-grid-cell:nth-child(2).is-open .tools-grid-btn { background: rgba(255,153,0,0.15) !important; border-color: #FF9900 !important; box-shadow: 0 0 16px rgba(255,153,0,0.3) !important; }
+.tools-grid-cell:nth-child(3) .tools-grid-btn:hover,
+.tools-grid-cell:nth-child(3).is-open .tools-grid-btn { background: rgba(255,140,0,0.15) !important; border-color: #FF8C00 !important; box-shadow: 0 0 16px rgba(255,140,0,0.3) !important; }
+.tools-grid-cell:nth-child(4) .tools-grid-btn:hover,
+.tools-grid-cell:nth-child(4).is-open .tools-grid-btn { background: rgba(79,142,247,0.15) !important; border-color: #4f8ef7 !important; box-shadow: 0 0 16px rgba(79,142,247,0.3) !important; }
