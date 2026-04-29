@@ -1948,3 +1948,66 @@ body { min-height: 100vh; background: var(--bg); }
   gap: 12px !important;
   flex-wrap: nowrap !important;
 }
+
+/* ── Hide bottom toolbar ── */
+.rx-toolbar { display: none !important; }
+.main-content { padding-bottom: 28px !important; }
+
+/* ── Right side tool panel ── */
+.rx-sidebar {
+  position: fixed;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 500;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 8px 0;
+}
+.rx-sidebar-cell { position: relative; }
+.rx-sidebar-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  width: 56px;
+  padding: 10px 6px;
+  background: #0d1526;
+  border: 1px solid #1e2d4d;
+  border-right: none;
+  border-radius: 8px 0 0 8px;
+  cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
+  transition: all 0.2s;
+}
+.rx-sidebar-btn:hover { background: #1a2540; border-color: #2e3d65; width: 60px; }
+.rx-sidebar-emoji { font-size: 20px; line-height: 1; }
+.rx-sidebar-label {
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  color: #94a3b8;
+  text-align: center;
+  line-height: 1.2;
+}
+.rx-sidebar-cell.is-open .rx-sidebar-btn { width: 60px; }
+.rx-sidebar-cell:nth-child(1).is-open .rx-sidebar-btn { background: rgba(74,222,128,0.15); border-color: #4ade80; box-shadow: -4px 0 16px rgba(74,222,128,0.25); }
+.rx-sidebar-cell:nth-child(2).is-open .rx-sidebar-btn { background: rgba(255,153,0,0.15); border-color: #FF9900; box-shadow: -4px 0 16px rgba(255,153,0,0.25); }
+.rx-sidebar-cell:nth-child(3).is-open .rx-sidebar-btn { background: rgba(255,140,0,0.15); border-color: #FF8C00; box-shadow: -4px 0 16px rgba(255,140,0,0.25); }
+.rx-sidebar-cell:nth-child(4).is-open .rx-sidebar-btn { background: rgba(79,142,247,0.15); border-color: #4f8ef7; box-shadow: -4px 0 16px rgba(79,142,247,0.25); }
+
+.rx-sidebar-dropdown {
+  position: absolute;
+  right: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+  min-width: 260px;
+  background: #1a2540;
+  border: 1px solid #2e3d65;
+  border-radius: var(--radius) 0 0 var(--radius);
+  padding: 12px;
+  z-index: 600;
+  box-shadow: -8px 0 32px rgba(0,0,0,0.5);
+}
