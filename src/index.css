@@ -1940,3 +1940,11 @@ body { min-height: 100vh; background: var(--bg); }
 .tools-grid-cell:nth-child(3).is-open .tools-grid-btn { background: rgba(255,140,0,0.15) !important; border-color: #FF8C00 !important; box-shadow: 0 0 16px rgba(255,140,0,0.3) !important; }
 .tools-grid-cell:nth-child(4) .tools-grid-btn:hover,
 .tools-grid-cell:nth-child(4).is-open .tools-grid-btn { background: rgba(79,142,247,0.15) !important; border-color: #4f8ef7 !important; box-shadow: 0 0 16px rgba(79,142,247,0.3) !important; }
+
+/* ── Toolbar spacing fix ── */
+.rx-toolbar-tools {
+  display: flex !important;
+  align-items: center !important;
+  gap: 12px !important;
+  flex-wrap: nowrap !important;
+}
