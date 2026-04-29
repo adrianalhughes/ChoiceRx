@@ -1,6 +1,27 @@
 import { useState, useRef, useEffect } from 'react'
 
-const EXAMPLE_QUESTIONS = [
+const BenzeneIcon = () => (
+  <svg width="22" height="22" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+    {/* Outer hexagon bonds */}
+    <polygon points="50,8 85,28 85,72 50,92 15,72 15,28" fill="none" stroke="url(#blueGrad)" strokeWidth="7" strokeLinejoin="round"/>
+    {/* Inner circle (delocalized electrons) */}
+    <circle cx="50" cy="50" r="20" fill="none" stroke="url(#greenGrad)" strokeWidth="5"/>
+    {/* Atom dots at vertices */}
+    {[[50,8],[85,28],[85,72],[50,92],[15,72],[15,28]].map(([x,y],i) => (
+      <circle key={i} cx={x} cy={y} r="5" fill={i % 2 === 0 ? '#4f8ef7' : '#4ade80'}/>
+    ))}
+    <defs>
+      <linearGradient id="blueGrad" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stopColor="#4f8ef7"/>
+        <stop offset="100%" stopColor="#7AADFF"/>
+      </linearGradient>
+      <linearGradient id="greenGrad" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stopColor="#4ade80"/>
+        <stop offset="100%" stopColor="#34d399"/>
+      </linearGradient>
+    </defs>
+  </svg>
+)
   "Is Jardiance covered on FL ValueScript Rx and at what tier?",
   "What are typical PA criteria for GLP-1s under UHC?",
   "My patient is uninsured — is there a PAP for Skyrizi?",
@@ -116,7 +137,7 @@ export default function ClinicalAgent({ activePlan }) {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          model: 'claude-sonnet-4-20250514',
+          model: 'claude-sonnet-4-6',
           max_tokens: 1000,
           system: SYSTEM_PROMPT + `\n\nActive plan: ${activePlan.label} (${activePlan.payer}, ${activePlan.tiers}-tier, effective ${activePlan.effective})`,
           tools: [{ type: 'web_search_20250305', name: 'web_search' }],
@@ -152,7 +173,7 @@ export default function ClinicalAgent({ activePlan }) {
         borderBottom: '1px solid #263354', flexShrink: 0,
       }}>
         <div style={{ fontSize: 12, fontWeight: 700, color: '#ffffff' }}>
-          🧬 Claude's Clinical Knowledge
+          <BenzeneIcon /> Claude's Clinical Knowledge
         </div>
         <div style={{ fontSize: 10, color: '#64748b', marginTop: 1 }}>
           {activePlan.label} · Coverage, pricing &amp; PA
