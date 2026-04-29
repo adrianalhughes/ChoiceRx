@@ -31,7 +31,7 @@ const EXAMPLE_QUESTIONS = [
   "When did the FDA approve Wegovy?",
 ]
 
-const SYSTEM_PROMPT = `You are Claude's Clinical Knowledge — a pharmacy clinical reference assistant embedded in Sanitas, a formulary reference tool used by clinical pharmacists and healthcare providers at a value-based care practice.
+const SYSTEM_PROMPT = `You are Sanitas Formulary Agent — a pharmacy clinical reference assistant embedded in Sanitas, a formulary reference tool used by clinical pharmacists and healthcare providers at a value-based care practice.
 
 You have access to four health plan formularies:
 - FL ValueScript Rx (Florida Blue, 6-tier)
@@ -178,7 +178,7 @@ export default function ClinicalAgent({ activePlan }) {
       }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 6 }}>
           <BenzeneIcon />
-          <span style={{ fontSize: 12, fontWeight: 700, color: '#ffffff' }}>Claude's Clinical Knowledge</span>
+          <span style={{ fontSize: 12, fontWeight: 700, color: '#ffffff' }}>Sanitas Formulary Agent</span>
         </div>
         <div style={{
           fontSize: 10, color: '#fca5a5', lineHeight: 1.4,

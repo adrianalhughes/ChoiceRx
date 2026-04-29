@@ -550,9 +550,9 @@ export default function App() {
           <div className="wordmark-sub">Pharmacy Resources<sup className="beta-sup">β</sup></div>
         </div>
 
-        {/* ── Bookmark tool buttons replacing tagline ── */}
+        {/* ── Bookmark tool buttons ── */}
         <div className="header-bookmarks">
-          <HeaderTool label="Does this Rx need a Prior Authorization?" color="#FF8C00">
+          <HeaderTool label="Prior Authorization" color="#FF8C00">
             <a href="https://oidc.covermymeds.com/login?return_url=%2Foauth%2Fauthorize%3Fclient_id%3D-QXKSuZr5mOEba23vs1QzqnlFiQFwSVj70BG2nrD3SI%26nonce%3Dd25026b0bd0b60612235a1de7a171bc9%26redirect_uri%3Dhttps%253A%252F%252Faccount.covermymeds.com%252Fauth%252Fcmm_oidc%252Fcallback%26response_type%3Dcode%26scope%3Dopenid%2520profile%2520email%2520offline_access%26state%3Db42ce2e4a3453a45e9dbf64760e84d73" target="_blank" rel="noopener noreferrer" className="tool-link cmm-tool">
               <div className="tool-link-name" style={{color:'#FF8C00'}}>CoverMyMeds Portal</div>
               <div className="tool-link-desc">Submit &amp; track PA requests</div>
@@ -566,7 +566,7 @@ export default function App() {
             <PAInstructionsLink />
           </HeaderTool>
 
-          <HeaderTool label="Financial Assistance?" color="#a855f7">
+          <HeaderTool label="Financial Assistance" color="#a855f7">
             <a href="https://www.rxassist.org" target="_blank" rel="noopener noreferrer" className="tool-link">
               <div className="tool-link-name">RxAssist</div>
               <div className="tool-link-desc">Manufacturer PAPs for uninsured patients</div>
@@ -574,7 +574,7 @@ export default function App() {
             </a>
           </HeaderTool>
 
-          <HeaderTool label="Cash Pricing" color="#4ade80">
+          <HeaderTool label="Cash Discounts" color="#4ade80">
             <a href="https://www.goodrx.com" target="_blank" rel="noopener noreferrer" className="tool-link">
               <div className="tool-link-name">GoodRx</div>
               <div className="tool-link-desc">Cash prices at local pharmacies</div>
@@ -592,7 +592,7 @@ export default function App() {
             </a>
           </HeaderTool>
 
-          <HeaderTool label="Mail Order" color="#FF9900">
+          <HeaderTool label="Delivery" color="#FF9900">
             <div className="tools-section-info">
               <div className="tools-info-row"><span className="tools-info-label">E-scribe</span><span className="tools-info-val">Amazon.com – Amazon Pharmacy</span></div>
               <div className="tools-info-row"><span className="tools-info-label">Fax</span><span className="tools-info-val">512-884-5981</span></div>
@@ -600,9 +600,28 @@ export default function App() {
             </div>
             <a href="https://pharmacy.amazon.com/?ref_=pd_sl_OCI_XBV0_MD_e_YOR566_QTT071_dev_c&hvocijid=10259146375960946511--&hvexpln=135" target="_blank" rel="noopener noreferrer" className="tool-link amazon-tool">
               <div className="tool-link-name" style={{color:'#FF9900'}}>Amazon Pharmacy</div>
-              <div className="tool-link-desc">Visit the mail order portal</div>
+              <div className="tool-link-desc">Free home delivery</div>
               <ExtIcon />
             </a>
+          </HeaderTool>
+
+          <HeaderTool label="SpecialtyRx" color="#4a90d9">
+            <a href="https://www.bcbsfl.com/DocumentLibrary/Providers/Content/RxF_Specialty_Table_Self.pdf" target="_blank" rel="noopener noreferrer" className="tool-link fl-tool">
+              <div className="tool-link-name" style={{color:'#4a90d9'}}>Self-Admin Specialty List</div>
+              <div className="tool-link-desc">Florida Blue · PDF</div>
+              <ExtIcon />
+            </a>
+            <a href="https://www.bcbsfl.com/DocumentLibrary/Providers/Content/RxF_Specialty_Table_Prov.pdf" target="_blank" rel="noopener noreferrer" className="tool-link fl-tool">
+              <div className="tool-link-name" style={{color:'#4a90d9'}}>Provider-Admin Specialty List</div>
+              <div className="tool-link-desc">Florida Blue · PDF</div>
+              <ExtIcon />
+            </a>
+          </HeaderTool>
+
+          <HeaderTool label="Medication Protocols" color="#5EEAD4">
+            <div style={{fontSize:11,color:'#64748b',padding:'4px 0 8px',fontStyle:'italic'}}>
+              Google Drive links coming soon
+            </div>
           </HeaderTool>
         </div>
 
@@ -729,81 +748,9 @@ export default function App() {
             <NotCoveredBlock drugs={filtered.ncDrugs} appendixDrugs={filtered.ncAppend} q={q} />
           </div>
 
-          {/* ── Right: Tools ── */}
+          {/* ── Right: Agent only ── */}
           <div className="tools-panel">
-            <div style={{fontSize:10,fontWeight:700,letterSpacing:'0.7px',textTransform:'uppercase',color:'#93c5fd',paddingBottom:10,borderBottom:'1px solid #263354',marginBottom:2}}>Resources</div>
-
             <ClinicalAgent activePlan={activePlan} />
-
-            <ToolsSection label="Does this Rx need a Prior Authorization?">
-              <a href="https://oidc.covermymeds.com/login?return_url=%2Foauth%2Fauthorize%3Fclient_id%3D-QXKSuZr5mOEba23vs1QzqnlFiQFwSVj70BG2nrD3SI%26nonce%3Dd25026b0bd0b60612235a1de7a171bc9%26redirect_uri%3Dhttps%253A%252F%252Faccount.covermymeds.com%252Fauth%252Fcmm_oidc%252Fcallback%26response_type%3Dcode%26scope%3Dopenid%2520profile%2520email%2520offline_access%26state%3Db42ce2e4a3453a45e9dbf64760e84d73" target="_blank" rel="noopener noreferrer" className="tool-link cmm-tool">
-                <div className="tool-link-name" style={{color:'#FF8C00'}}>CoverMyMeds Portal</div>
-                <div className="tool-link-desc">Submit &amp; track PA requests</div>
-                <ExtIcon />
-              </a>
-              <a href="https://docs.google.com/document/d/1EsuVXqVm7wf1fea1gIxGZvqudmPOewjB/edit?usp=sharing" target="_blank" rel="noopener noreferrer" className="tool-link cmm-guide-tool">
-                <div className="tool-link-name" style={{color:'#e83480'}}>Help Guide</div>
-                <div className="tool-link-desc">Step-by-step tutorial</div>
-                <ExtIcon />
-              </a>
-              <PAInstructionsLink />
-            </ToolsSection>
-
-            <ToolsSection label="May the patient qualify for financial assistance?">
-              <a href="https://www.rxassist.org" target="_blank" rel="noopener noreferrer" className="tool-link">
-                <div className="tool-link-name">Link to Patient Assistance Programs</div>
-                <div className="tool-link-desc">Manufacturer PAPs for uninsured &amp; underinsured patients</div>
-                <ExtIcon />
-              </a>
-            </ToolsSection>
-
-            {activePlan.payer === 'Florida Blue' && (
-              <ToolsSection label="Is this medication on the specialty list?">
-                <a href="https://www.bcbsfl.com/DocumentLibrary/Providers/Content/RxF_Specialty_Table_Self.pdf" target="_blank" rel="noopener noreferrer" className="tool-link fl-tool">
-                  <div className="tool-link-name" style={{color:'#4a90d9'}}>Self-Admin Specialty List</div>
-                  <div className="tool-link-desc">Florida Blue · PDF</div>
-                  <ExtIcon />
-                </a>
-                <a href="https://www.bcbsfl.com/DocumentLibrary/Providers/Content/RxF_Specialty_Table_Prov.pdf" target="_blank" rel="noopener noreferrer" className="tool-link fl-tool">
-                  <div className="tool-link-name" style={{color:'#4a90d9'}}>Provider-Admin Specialty List</div>
-                  <div className="tool-link-desc">Florida Blue · PDF</div>
-                  <ExtIcon />
-                </a>
-              </ToolsSection>
-            )}
-
-            <ToolsSection label="Compare with cash and discount pricing">
-              <a href="https://www.goodrx.com" target="_blank" rel="noopener noreferrer" className="tool-link">
-                <div className="tool-link-name">GoodRx</div>
-                <div className="tool-link-desc">Cash prices at local pharmacies</div>
-                <ExtIcon />
-              </a>
-              <a href="https://costplusdrugs.com" target="_blank" rel="noopener noreferrer" className="tool-link">
-                <div className="tool-link-name">Cost Plus Drugs</div>
-                <div className="tool-link-desc">Transparent-pricing mail pharmacy</div>
-                <ExtIcon />
-              </a>
-              <a href="https://trumprx.gov/" target="_blank" rel="noopener noreferrer" className="tool-link">
-                <div className="tool-link-name">TrumpRx</div>
-                <div className="tool-link-desc">Federally negotiated IRA prices</div>
-                <ExtIcon />
-              </a>
-            </ToolsSection>
-
-            <ToolsSection label="Get started with medication delivery">
-              <div className="tools-section-info">
-                <p style={{fontSize:11,color:'#94a3b8',marginBottom:8,lineHeight:1.6}}>Send prescriptions here <strong style={{color:'#e2e8f0'}}>(fastest option):</strong></p>
-                <div className="tools-info-row"><span className="tools-info-label">E-scribe</span><span className="tools-info-val">Amazon.com – Amazon Pharmacy Nationwide Home Delivery</span></div>
-                <div className="tools-info-row"><span className="tools-info-label">Fax</span><span className="tools-info-val">512-884-5981</span></div>
-                <div className="tools-info-row"><span className="tools-info-label">Address</span><span className="tools-info-val">4500 S Pleasant Valley Road, Suite 201, Austin, TX 78744</span></div>
-                <div className="tools-info-row"><span className="tools-info-label">Phone</span><span className="tools-info-val">855-206-3605</span></div>
-              </div>
-              <a href="https://pharmacy.amazon.com/?ref_=pd_sl_OCI_XBV0_MD_e_YOR566_QTT071_dev_c&hvocijid=10259146375960946511--&hvexpln=135" target="_blank" rel="noopener noreferrer" className="tool-link amazon-tool">
-                <div className="tool-link-name" style={{color:'#FF9900'}}>Amazon Pharmacy</div>
-                <div className="tool-link-desc">Visit the mail order portal</div>
-                <ExtIcon />
-              </a>
-            </ToolsSection>
           </div>
 
         </div>
