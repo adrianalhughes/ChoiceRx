@@ -2011,3 +2011,11 @@ body { min-height: 100vh; background: var(--bg); }
   z-index: 600;
   box-shadow: -8px 0 32px rgba(0,0,0,0.5);
 }
+
+/* ── Sidebar dropdown wider, no text truncation ── */
+.rx-sidebar-dropdown { min-width: 300px !important; }
+.rx-sidebar-dropdown .tool-link-name { white-space: normal !important; overflow: visible !important; text-overflow: unset !important; }
+
+/* ── Fix special-block chevron in sidebar context ── */
+.rx-sidebar-dropdown .special-block-chevron { display: inline !important; }
+.rx-sidebar-dropdown .special-block { margin-bottom: 4px !important; }
