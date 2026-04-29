@@ -646,7 +646,7 @@ export default function App() {
 
           {/* ── Right: Tools ── */}
           <div className="tools-panel">
-            <div className="tools-panel-header">✦ Provider Resources</div>
+            <div style={{fontSize:10,fontWeight:700,letterSpacing:'0.7px',textTransform:'uppercase',color:'#475569',paddingBottom:10,borderBottom:'1px solid #263354',marginBottom:2}}>Resources</div>
 
             <ClinicalAgent activePlan={activePlan} />
 

@@ -363,7 +363,7 @@ body { min-height: 100vh; background: var(--bg); }
 /* ── Collapsible tool sections ── */
 .tools-section-collapsible { border-bottom: 1px solid var(--border); }
 .tools-section-header { display: flex; align-items: center; justify-content: space-between; width: 100%; background: none; border: none; padding: 14px 0; cursor: pointer; font-family: 'DM Sans', sans-serif; text-align: left; }
-.tools-section-label { font-size: 13px; font-weight: 600; color: #64748b; transition: color 0.15s; }
+.tools-section-label { font-size: 13px; font-weight: 600; color: #ffffff; transition: color 0.15s; }
 .tools-section-chevron { font-size: 16px; color: #334155; margin-left: 8px; flex-shrink: 0; transition: color 0.15s; }
 .tools-section-collapsible.is-open .tools-section-label { color: #ffffff; }
 .tools-section-collapsible.is-open .tools-section-chevron { color: var(--blue); }
