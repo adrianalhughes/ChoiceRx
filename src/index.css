@@ -557,3 +557,15 @@ body { min-height: 100vh; background: var(--bg); }
   z-index: 300;
   box-shadow: 0 8px 32px rgba(0,0,0,0.5);
 }
+
+/* ── Active plan text — underlined white, no pill ── */
+.active-plan-text {
+  font-size: 13px;
+  font-weight: 600;
+  color: #ffffff;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  text-decoration-color: rgba(255,255,255,0.5);
+  letter-spacing: 0.1px;
+  padding-bottom: 14px;
+}

@@ -656,7 +656,7 @@ export default function App() {
             </div>
           )}
           {!tabsOpen && (
-            <span className="active-plan-chip">{activePlan.label}</span>
+            <span className="active-plan-text">{activePlan.label}</span>
           )}
         </div>
       </div>
