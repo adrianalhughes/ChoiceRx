@@ -1813,3 +1813,85 @@ body { min-height: 100vh; background: var(--bg); }
   padding-bottom: 14px !important;
   align-self: flex-end !important;
 }
+
+/* ── Sticky bottom Rx Toolbar ── */
+.rx-toolbar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 200;
+  background: #0d1526;
+  border-top: 1px solid #1e2d4d;
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  height: 64px;
+  box-shadow: 0 -4px 24px rgba(0,0,0,0.5);
+}
+.rx-toolbar-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #475569;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.rx-toolbar-tools {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* ── Toolbar tool buttons ── */
+.tools-grid-cell { position: relative; }
+.tools-grid-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 24px;
+  cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+.tools-grid-btn:hover {
+  background: color-mix(in srgb, var(--tool-color) 15%, transparent);
+  border-color: color-mix(in srgb, var(--tool-color) 50%, transparent);
+  box-shadow: 0 0 12px color-mix(in srgb, var(--tool-color) 30%, transparent);
+}
+.tools-grid-cell.is-open .tools-grid-btn {
+  background: color-mix(in srgb, var(--tool-color) 20%, transparent);
+  border-color: var(--tool-color);
+  box-shadow: 0 0 16px color-mix(in srgb, var(--tool-color) 40%, transparent);
+}
+.tools-grid-emoji { font-size: 18px; line-height: 1; }
+.tools-grid-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: #ffffff;
+  letter-spacing: 0.1px;
+}
+
+/* Dropdown opens UPWARD from toolbar */
+.tools-grid-cell .tools-bar-dropdown {
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 0;
+  top: auto;
+  min-width: 280px;
+  background: #1a2540;
+  border: 1px solid #2e3d65;
+  border-radius: var(--radius) var(--radius) var(--radius) var(--radius);
+  padding: 12px;
+  z-index: 300;
+  box-shadow: 0 -8px 32px rgba(0,0,0,0.5);
+}
+
+/* Add padding to main content so toolbar doesn't cover it */
+.main-content { padding-bottom: 88px !important; }

@@ -441,10 +441,10 @@ function PAInstructionsLink() {
   )
 }
 
-function ToolsBarSection({ label, sublabel, children }) {
+function ToolsBarSection({ label, sublabel, color = '#4f8ef7', children }) {
   const [open, setOpen] = useState(false)
   return (
-    <div className={`tools-grid-cell ${open ? 'is-open' : ''}`}>
+    <div className={`tools-grid-cell ${open ? 'is-open' : ''}`} style={{'--tool-color': color}}>
       <button className="tools-grid-btn" onClick={() => setOpen(o => !o)}>
         <span className="tools-grid-emoji">{label}</span>
         <span className="tools-grid-label">{sublabel}</span>
@@ -512,71 +512,6 @@ export default function App() {
         <div className="header-tagline">
           Formulary coverage, pricing tools, and PA resources{' '}
           <span className="tagline-accent">all in one place.</span>
-        </div>
-        <div className="header-tools-grid">
-          <ToolsBarSection label="💊" sublabel="Lower Price">
-            <a href="https://www.goodrx.com" target="_blank" rel="noopener noreferrer" className="tool-link">
-              <div className="tool-link-name">GoodRx</div>
-              <div className="tool-link-desc">Cash prices at local pharmacies</div>
-              <ExtIcon />
-            </a>
-            <a href="https://costplusdrugs.com" target="_blank" rel="noopener noreferrer" className="tool-link">
-              <div className="tool-link-name">Cost Plus Drugs</div>
-              <div className="tool-link-desc">Transparent-pricing mail pharmacy</div>
-              <ExtIcon />
-            </a>
-            <a href="https://trumprx.gov/" target="_blank" rel="noopener noreferrer" className="tool-link">
-              <div className="tool-link-name">TrumpRx</div>
-              <div className="tool-link-desc">Federally negotiated IRA prices</div>
-              <ExtIcon />
-            </a>
-            <a href="https://www.rxassist.org" target="_blank" rel="noopener noreferrer" className="tool-link">
-              <div className="tool-link-name">RxAssist</div>
-              <div className="tool-link-desc">Manufacturer PAPs for uninsured patients</div>
-              <ExtIcon />
-            </a>
-          </ToolsBarSection>
-
-          <ToolsBarSection label="📦" sublabel="Mail-Order">
-            <a href="https://pharmacy.amazon.com/?ref_=pd_sl_OCI_XBV0_MD_e_YOR566_QTT071_dev_c&hvocijid=10259146375960946511--&hvexpln=135" target="_blank" rel="noopener noreferrer" className="tool-link amazon-tool">
-              <div className="tool-link-name" style={{color:'#FF9900'}}>Amazon Pharmacy</div>
-              <div className="tool-link-desc">Free home delivery on prescriptions</div>
-              <ExtIcon />
-            </a>
-          </ToolsBarSection>
-
-          <ToolsBarSection label="📋" sublabel="CoverMyMeds ePA">
-            <a href="https://oidc.covermymeds.com/login?return_url=%2Foauth%2Fauthorize%3Fclient_id%3D-QXKSuZr5mOEba23vs1QzqnlFiQFwSVj70BG2nrD3SI%26nonce%3Dd25026b0bd0b60612235a1de7a171bc9%26redirect_uri%3Dhttps%253A%252F%252Faccount.covermymeds.com%252Fauth%252Fcmm_oidc%252Fcallback%26response_type%3Dcode%26scope%3Dopenid%2520profile%2520email%2520offline_access%26state%3Db42ce2e4a3453a45e9dbf64760e84d73" target="_blank" rel="noopener noreferrer" className="tool-link cmm-tool">
-              <div className="tool-link-name" style={{color:'#FF8C00'}}>CoverMyMeds Portal</div>
-              <div className="tool-link-desc">Submit &amp; track PA requests</div>
-              <ExtIcon />
-            </a>
-            <a href="https://docs.google.com/document/d/1EsuVXqVm7wf1fea1gIxGZvqudmPOewjB/edit?usp=sharing" target="_blank" rel="noopener noreferrer" className="tool-link cmm-guide-tool">
-              <div className="tool-link-name" style={{color:'#e83480'}}>Help Guide</div>
-              <div className="tool-link-desc">Step-by-step tutorial</div>
-              <ExtIcon />
-            </a>
-            <PAInstructionsLink />
-          </ToolsBarSection>
-
-          <ToolsBarSection label="📑" sublabel="Drug Lists">
-            {activePlan.payer === 'Florida Blue' && (
-              <>
-                <a href="https://www.bcbsfl.com/DocumentLibrary/Providers/Content/RxF_Specialty_Table_Self.pdf" target="_blank" rel="noopener noreferrer" className="tool-link fl-tool">
-                  <div className="tool-link-name" style={{color:'#4a90d9'}}>Specialty Self-Administered</div>
-                  <div className="tool-link-desc">Florida Blue PDF</div>
-                  <ExtIcon />
-                </a>
-                <a href="https://www.bcbsfl.com/DocumentLibrary/Providers/Content/RxF_Specialty_Table_Prov.pdf" target="_blank" rel="noopener noreferrer" className="tool-link fl-tool">
-                  <div className="tool-link-name" style={{color:'#4a90d9'}}>Specialty Provider-Administered</div>
-                  <div className="tool-link-desc">Florida Blue PDF</div>
-                  <ExtIcon />
-                </a>
-              </>
-            )}
-            {activePlan.payer === 'Florida Blue' && <SpecialtyNotCoveredBlock q={q} />}
-            <NotCoveredBlock drugs={filtered.ncDrugs} appendixDrugs={filtered.ncAppend} q={q} />
-          </ToolsBarSection>
         </div>
         <a href="mailto:ahughes@mysanitas.com?subject=Sanitas Formulary — Feedback" className="feedback-link">
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{marginRight:4,verticalAlign:'middle'}}>
@@ -691,6 +626,77 @@ export default function App() {
         )}
 
       </main>
+
+      <div className="rx-toolbar">
+        <div className="rx-toolbar-label">Rx Tools</div>
+        <div className="rx-toolbar-tools">
+
+          <ToolsBarSection label="💊" sublabel="Lower Price" color="#4ade80">
+            <a href="https://www.goodrx.com" target="_blank" rel="noopener noreferrer" className="tool-link">
+              <div className="tool-link-name">GoodRx</div>
+              <div className="tool-link-desc">Cash prices at local pharmacies</div>
+              <ExtIcon />
+            </a>
+            <a href="https://costplusdrugs.com" target="_blank" rel="noopener noreferrer" className="tool-link">
+              <div className="tool-link-name">Cost Plus Drugs</div>
+              <div className="tool-link-desc">Transparent-pricing mail pharmacy</div>
+              <ExtIcon />
+            </a>
+            <a href="https://trumprx.gov/" target="_blank" rel="noopener noreferrer" className="tool-link">
+              <div className="tool-link-name">TrumpRx</div>
+              <div className="tool-link-desc">Federally negotiated IRA prices</div>
+              <ExtIcon />
+            </a>
+            <a href="https://www.rxassist.org" target="_blank" rel="noopener noreferrer" className="tool-link">
+              <div className="tool-link-name">RxAssist</div>
+              <div className="tool-link-desc">Manufacturer PAPs for uninsured patients</div>
+              <ExtIcon />
+            </a>
+          </ToolsBarSection>
+
+          <ToolsBarSection label="📦" sublabel="Mail-Order" color="#FF9900">
+            <a href="https://pharmacy.amazon.com/?ref_=pd_sl_OCI_XBV0_MD_e_YOR566_QTT071_dev_c&hvocijid=10259146375960946511--&hvexpln=135" target="_blank" rel="noopener noreferrer" className="tool-link amazon-tool">
+              <div className="tool-link-name" style={{color:'#FF9900'}}>Amazon Pharmacy</div>
+              <div className="tool-link-desc">Free home delivery on prescriptions</div>
+              <ExtIcon />
+            </a>
+          </ToolsBarSection>
+
+          <ToolsBarSection label="📋" sublabel="CoverMyMeds ePA" color="#FF8C00">
+            <a href="https://oidc.covermymeds.com/login?return_url=%2Foauth%2Fauthorize%3Fclient_id%3D-QXKSuZr5mOEba23vs1QzqnlFiQFwSVj70BG2nrD3SI%26nonce%3Dd25026b0bd0b60612235a1de7a171bc9%26redirect_uri%3Dhttps%253A%252F%252Faccount.covermymeds.com%252Fauth%252Fcmm_oidc%252Fcallback%26response_type%3Dcode%26scope%3Dopenid%2520profile%2520email%2520offline_access%26state%3Db42ce2e4a3453a45e9dbf64760e84d73" target="_blank" rel="noopener noreferrer" className="tool-link cmm-tool">
+              <div className="tool-link-name" style={{color:'#FF8C00'}}>CoverMyMeds Portal</div>
+              <div className="tool-link-desc">Submit &amp; track PA requests</div>
+              <ExtIcon />
+            </a>
+            <a href="https://docs.google.com/document/d/1EsuVXqVm7wf1fea1gIxGZvqudmPOewjB/edit?usp=sharing" target="_blank" rel="noopener noreferrer" className="tool-link cmm-guide-tool">
+              <div className="tool-link-name" style={{color:'#e83480'}}>Help Guide</div>
+              <div className="tool-link-desc">Step-by-step tutorial</div>
+              <ExtIcon />
+            </a>
+            <PAInstructionsLink />
+          </ToolsBarSection>
+
+          <ToolsBarSection label="📑" sublabel="Drug Lists" color="#4f8ef7">
+            {activePlan.payer === 'Florida Blue' && (
+              <>
+                <a href="https://www.bcbsfl.com/DocumentLibrary/Providers/Content/RxF_Specialty_Table_Self.pdf" target="_blank" rel="noopener noreferrer" className="tool-link fl-tool">
+                  <div className="tool-link-name" style={{color:'#4a90d9'}}>Specialty Self-Administered</div>
+                  <div className="tool-link-desc">Florida Blue PDF</div>
+                  <ExtIcon />
+                </a>
+                <a href="https://www.bcbsfl.com/DocumentLibrary/Providers/Content/RxF_Specialty_Table_Prov.pdf" target="_blank" rel="noopener noreferrer" className="tool-link fl-tool">
+                  <div className="tool-link-name" style={{color:'#4a90d9'}}>Specialty Provider-Administered</div>
+                  <div className="tool-link-desc">Florida Blue PDF</div>
+                  <ExtIcon />
+                </a>
+              </>
+            )}
+            {activePlan.payer === 'Florida Blue' && <SpecialtyNotCoveredBlock q={q} />}
+            <NotCoveredBlock drugs={filtered.ncDrugs} appendixDrugs={filtered.ncAppend} q={q} />
+          </ToolsBarSection>
+
+        </div>
+      </div>
 
       <footer className="app-footer">
         <a href="mailto:ahughes@mysanitas.com?subject=Sanitas Formulary — Feedback" className="footer-feedback">
