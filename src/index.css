@@ -1688,3 +1688,17 @@ body { min-height: 100vh; background: var(--bg); }
 .formulary-tab.tx-tab .tab-name,
 .formulary-tab.highlight-tab .tab-name { color: inherit !important; font-weight: 500 !important; }
 .formulary-tab .tab-date { display: none !important; }
+
+/* ── Fix tab vertical alignment ── */
+.plan-bar-inner { align-items: center !important; }
+.formulary-tabs { align-items: center !important; }
+.formulary-tab { align-items: center !important; height: 36px !important; }
+.most-used-badge { 
+  display: block !important;
+  position: absolute !important;
+  bottom: -8px !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  white-space: nowrap !important;
+}
+.formulary-tab { position: relative !important; padding-bottom: 10px !important; }
