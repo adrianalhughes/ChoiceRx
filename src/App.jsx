@@ -762,27 +762,6 @@ export default function App() {
           <PAInstructionsLink />
         </SidebarSection>
 
-        <SidebarSection emoji="📑" sublabel="Drug Lists">
-          {activePlan.payer === 'Florida Blue' && (
-            <>
-              <a href="https://www.bcbsfl.com/DocumentLibrary/Providers/Content/RxF_Specialty_Table_Self.pdf" target="_blank" rel="noopener noreferrer" className="tool-link fl-tool">
-                <div className="tool-link-name" style={{color:'#4a90d9'}}>Self-Admin Specialty</div>
-                <div className="tool-link-desc">Florida Blue · PDF</div>
-                <ExtIcon />
-              </a>
-              <a href="https://www.bcbsfl.com/DocumentLibrary/Providers/Content/RxF_Specialty_Table_Prov.pdf" target="_blank" rel="noopener noreferrer" className="tool-link fl-tool">
-                <div className="tool-link-name" style={{color:'#4a90d9'}}>Provider-Admin Specialty</div>
-                <div className="tool-link-desc">Florida Blue · PDF</div>
-                <ExtIcon />
-              </a>
-              <div className="tool-link-subhead">Not Covered</div>
-              <SpecialtyNotCoveredBlock q={q} />
-            </>
-          )}
-          <div className="tool-link-subhead">All Plans</div>
-          <NotCoveredBlock drugs={filtered.ncDrugs} appendixDrugs={filtered.ncAppend} q={q} />
-        </SidebarSection>
-
       </div>
 
       <footer className="app-footer">
