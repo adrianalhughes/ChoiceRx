@@ -22,6 +22,8 @@ const BenzeneIcon = () => (
     </defs>
   </svg>
 )
+
+const EXAMPLE_QUESTIONS = [
   "Is Jardiance covered on FL ValueScript Rx and at what tier?",
   "What are typical PA criteria for GLP-1s under UHC?",
   "My patient is uninsured — is there a PAP for Skyrizi?",
