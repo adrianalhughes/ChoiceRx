@@ -1,5 +1,6 @@
 import DiabetesDashboard from './DiabetesDashboard'
 import ClinicalAgent from './ClinicalAgent'
+import AccessGate from './AccessGate'
 import uhcTexas from './data/uhc_texas.json'
 import uhcTexasEssential from './data/uhc_texas_essential.json'
 import { useState, useMemo } from 'react'
