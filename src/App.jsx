@@ -593,7 +593,6 @@ export default function App() {
                 className={`formulary-tab ${activePlan.id === plan.id ? 'active' : ''} ${plan.txTab ? 'tx-tab' : 'fl-tab'}`}
                 onClick={() => { setActivePlan(plan); setQuery('') }}>
                 <span className="tab-name">{plan.label}</span>
-                {plan.id === 'bcbsfl' && <span className="most-used-badge">Most Used</span>}
               </button>
             ))}
           </div>
