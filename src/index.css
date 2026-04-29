@@ -1702,3 +1702,41 @@ body { min-height: 100vh; background: var(--bg); }
   white-space: nowrap !important;
 }
 .formulary-tab { position: relative !important; padding-bottom: 10px !important; }
+
+/* ── Tab complete rewrite — text + underline only ── */
+.formulary-tab,
+.formulary-tab.fl-tab,
+.formulary-tab.tx-tab,
+.formulary-tab.highlight-tab {
+  background: none !important;
+  border: none !important;
+  border-bottom: 2px solid transparent !important;
+  border-radius: 0 !important;
+  padding: 0 16px !important;
+  height: 52px !important;
+  color: #64748b !important;
+  font-size: 13px !important;
+  font-weight: 500 !important;
+  position: static !important;
+  display: flex !important;
+  align-items: center !important;
+}
+.formulary-tab:hover,
+.formulary-tab.fl-tab:hover,
+.formulary-tab.tx-tab:hover,
+.formulary-tab.highlight-tab:hover {
+  color: #e2e8f0 !important;
+  background: none !important;
+  border-color: transparent !important;
+}
+.formulary-tab.active,
+.formulary-tab.fl-tab.active,
+.formulary-tab.tx-tab.active,
+.formulary-tab.highlight-tab.active {
+  color: #ffffff !important;
+  background: none !important;
+  border-bottom: 2px solid #4f8ef7 !important;
+}
+.formulary-tab .tab-name,
+.formulary-tab .tab-date { display: inline !important; }
+.formulary-tab .tab-date { display: none !important; }
