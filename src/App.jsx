@@ -638,7 +638,6 @@ export default function App() {
 
             <div className="special-grid">
               <NonPreferredBlock drugs={filtered.tier6} q={q} />
-              {activePlan.payer === 'Florida Blue' && <SpecialtyNotCoveredBlock q={q} />}
             </div>
             <NotCoveredBlock drugs={filtered.ncDrugs} appendixDrugs={filtered.ncAppend} q={q} />
           </div>
