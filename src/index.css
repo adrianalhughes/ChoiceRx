@@ -2019,3 +2019,46 @@ body { min-height: 100vh; background: var(--bg); }
 /* ── Fix special-block chevron in sidebar context ── */
 .rx-sidebar-dropdown .special-block-chevron { display: inline !important; }
 .rx-sidebar-dropdown .special-block { margin-bottom: 4px !important; }
+
+/* ── Tools section question header ── */
+.tools-section-question {
+  font-size: 12px;
+  font-weight: 600;
+  color: #ffffff;
+  margin-bottom: 10px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #1e2d4d;
+  line-height: 1.4;
+}
+
+/* ── Mail order info block ── */
+.tools-section-info {
+  background: #0d1526;
+  border: 1px solid #1e2d4d;
+  border-radius: var(--radius);
+  padding: 10px 12px;
+  margin-bottom: 10px;
+}
+.tools-info-row {
+  display: flex;
+  gap: 8px;
+  align-items: baseline;
+  margin-bottom: 5px;
+  font-size: 11px;
+  line-height: 1.4;
+}
+.tools-info-row:last-child { margin-bottom: 0; }
+.tools-info-label {
+  font-size: 9px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  color: #4f8ef7;
+  flex-shrink: 0;
+  min-width: 50px;
+}
+.tools-info-val {
+  color: #e2e8f0;
+  font-size: 11px;
+  line-height: 1.4;
+}

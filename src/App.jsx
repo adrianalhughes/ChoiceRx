@@ -671,14 +671,23 @@ export default function App() {
             </ToolsSection>
 
             <ToolsSection label="📦 Mail Order Signup">
+              <div className="tools-section-question">How do I sign a patient up for Mail Order?</div>
+              <div className="tools-section-info">
+                <p style={{fontSize:11,color:'#94a3b8',marginBottom:8,lineHeight:1.6}}>Send your prescriptions here <strong style={{color:'#e2e8f0'}}>(fastest option):</strong></p>
+                <div className="tools-info-row"><span className="tools-info-label">E-scribe</span><span className="tools-info-val">Amazon.com – Amazon Pharmacy Nationwide Home Delivery</span></div>
+                <div className="tools-info-row"><span className="tools-info-label">Fax</span><span className="tools-info-val">512-884-5981</span></div>
+                <div className="tools-info-row"><span className="tools-info-label">Address</span><span className="tools-info-val">4500 S Pleasant Valley Road, Suite 201, Austin, TX 78744-2911</span></div>
+                <div className="tools-info-row"><span className="tools-info-label">Phone</span><span className="tools-info-val">855-206-3605</span></div>
+              </div>
               <a href="https://pharmacy.amazon.com/?ref_=pd_sl_OCI_XBV0_MD_e_YOR566_QTT071_dev_c&hvocijid=10259146375960946511--&hvexpln=135" target="_blank" rel="noopener noreferrer" className="tool-link amazon-tool">
                 <div className="tool-link-name" style={{color:'#FF9900'}}>Amazon Pharmacy</div>
-                <div className="tool-link-desc">Free home delivery on prescriptions</div>
+                <div className="tool-link-desc">Visit the mail order portal</div>
                 <ExtIcon />
               </a>
             </ToolsSection>
 
             <ToolsSection label="📋 ePA Portal">
+              <div className="tools-section-question">Rx needs a Prior Authorization?</div>
               <a href="https://oidc.covermymeds.com/login?return_url=%2Foauth%2Fauthorize%3Fclient_id%3D-QXKSuZr5mOEba23vs1QzqnlFiQFwSVj70BG2nrD3SI%26nonce%3Dd25026b0bd0b60612235a1de7a171bc9%26redirect_uri%3Dhttps%253A%252F%252Faccount.covermymeds.com%252Fauth%252Fcmm_oidc%252Fcallback%26response_type%3Dcode%26scope%3Dopenid%2520profile%2520email%2520offline_access%26state%3Db42ce2e4a3453a45e9dbf64760e84d73" target="_blank" rel="noopener noreferrer" className="tool-link cmm-tool">
                 <div className="tool-link-name" style={{color:'#FF8C00'}}>CoverMyMeds Portal</div>
                 <div className="tool-link-desc">Submit &amp; track PA requests</div>
@@ -694,6 +703,7 @@ export default function App() {
 
             {activePlan.payer === 'Florida Blue' && (
               <ToolsSection label="📑 Specialty Drug Lists">
+                <div className="tools-section-question">What Specialty Medications are Covered?</div>
                 <a href="https://www.bcbsfl.com/DocumentLibrary/Providers/Content/RxF_Specialty_Table_Self.pdf" target="_blank" rel="noopener noreferrer" className="tool-link fl-tool">
                   <div className="tool-link-name" style={{color:'#4a90d9'}}>Self-Admin Specialty</div>
                   <div className="tool-link-desc">Florida Blue · PDF</div>
