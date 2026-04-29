@@ -78,7 +78,7 @@ body { min-height: 100vh; background: var(--bg); }
   padding: 0 24px;
   height: 52px;
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   position: sticky;
   top: 58px;
   z-index: 95;
@@ -88,7 +88,7 @@ body { min-height: 100vh; background: var(--bg); }
   margin: 0;
   width: 100%;
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   gap: 16px;
 }
 .formulary-label {
@@ -1796,4 +1796,20 @@ body { min-height: 100vh; background: var(--bg); }
   align-items: center !important;
   margin-bottom: 0 !important;
   padding-bottom: 0 !important;
+}
+
+/* ── Tabs sit at bottom of bar with underline flush to border ── */
+.formulary-tab,
+.formulary-tab.fl-tab,
+.formulary-tab.tx-tab,
+.formulary-tab.highlight-tab {
+  height: auto !important;
+  padding: 14px 16px 12px !important;
+  margin-bottom: -1px !important;
+  display: flex !important;
+  align-items: center !important;
+}
+.bar-instruction {
+  padding-bottom: 14px !important;
+  align-self: flex-end !important;
 }
