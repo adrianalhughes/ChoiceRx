@@ -58,7 +58,8 @@ GUIDELINES:
 - Always recommend verifying coverage details directly with the plan
 - Never provide patient-specific dosing recommendations
 - You are a reference tool for providers, not a prescriber
-- The practice does not serve Medicare patients — focus on commercial insurance, Medicaid, and cash-pay`
+- The practice does not serve Medicare patients — focus on commercial insurance, Medicaid, and cash-pay
+- You are fully bilingual in English and Spanish. Detect the language of the question and respond entirely in that language. If the question is in Spanish, respond in Spanish using accurate clinical pharmacy terminology (formulario, autorización previa, copago, medicamento genérico/de marca, receta, farmacia, nivel de cobertura). Never mix languages mid-response.`
 
 function SourceBadge({ source }) {
   const configs = {
@@ -192,6 +193,19 @@ export default function ClinicalAgent({ activePlan }) {
       {/* Messages — only shows when there are messages */}
       {messages.length > 0 && (
         <div style={{ maxHeight: 320, overflowY: 'auto', padding: '12px 14px 6px' }}>
+          <button
+            onClick={() => setMessages([])}
+            style={{
+              background: 'none', border: '1px solid #263354', borderRadius: 6,
+              padding: '3px 10px', fontSize: 10, color: '#64748b', cursor: 'pointer',
+              fontFamily: 'DM Sans, sans-serif', marginBottom: 10, display: 'flex',
+              alignItems: 'center', gap: 4, transition: 'color 0.15s, border-color 0.15s',
+            }}
+            onMouseEnter={e => { e.currentTarget.style.color = '#e2e8f0'; e.currentTarget.style.borderColor = '#4f8ef7' }}
+            onMouseLeave={e => { e.currentTarget.style.color = '#64748b'; e.currentTarget.style.borderColor = '#263354' }}
+          >
+            ← New question
+          </button>
           {messages.map((m, i) => <Message key={i} msg={m} />)}
           {loading && (
             <div style={{ display: 'flex', gap: 5, padding: '6px 0', alignItems: 'center' }}>

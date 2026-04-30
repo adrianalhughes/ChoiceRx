@@ -567,6 +567,11 @@ export default function App() {
           </HeaderTool>
 
           <HeaderTool label="Cash Discounts" color="#4ade80">
+            <a href="https://docs.google.com/spreadsheets/d/1FvY54ZzkuLdAmFtbs4lZI42Pcd5z-Q4b/edit?usp=sharing&ouid=105603016175522070259&rtpof=true&sd=true" target="_blank" rel="noopener noreferrer" className="tool-link" style={{borderColor:'rgba(74,222,128,0.4)',background:'rgba(74,222,128,0.06)'}}>
+              <div className="tool-link-name" style={{color:'#4ade80'}}>Sav-Rx</div>
+              <div className="tool-link-desc">At participating Sanitas dispensing locations</div>
+              <ExtIcon />
+            </a>
             <a href="https://www.goodrx.com" target="_blank" rel="noopener noreferrer" className="tool-link">
               <div className="tool-link-name">GoodRx</div>
               <div className="tool-link-desc">Cash prices at local pharmacies</div>
