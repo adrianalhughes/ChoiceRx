@@ -743,13 +743,7 @@ export default function App() {
 
             {q && filtered.totalMatches === 0 && (
               <div className="not-found-state">
-                <div className="not-found-title">Drug not found in formulary</div>
-                <div className="not-found-actions">
-                  <a href="https://www.goodrx.com" target="_blank" rel="noopener noreferrer" className="not-found-btn">Check GoodRx cash price →</a>
-                  <a href="https://www.rxassist.org" target="_blank" rel="noopener noreferrer" className="not-found-btn">Search patient assistance programs →</a>
-                  <a href="https://pharmacy.amazon.com/?ref_=pd_sl_OCI_XBV0_MD_e_YOR566_QTT071_dev_c&hvocijid=10259146375960946511--&hvexpln=135" target="_blank" rel="noopener noreferrer" className="not-found-btn">Check Amazon Pharmacy →</a>
-                </div>
-                <p className="not-found-sub">For help, contact a pharmacy team member.</p>
+                <div className="not-found-title">No results found</div>
               </div>
             )}
 
