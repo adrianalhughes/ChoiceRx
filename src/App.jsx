@@ -539,7 +539,7 @@ export default function App() {
       <header className="app-header">
         <div>
           <div className="wordmark">Sanitas</div>
-          <div className="wordmark-sub">Pharmacy Resources<sup className="beta-sup">β</sup></div>
+          <div className="wordmark-sub">Pharmacy Web App<sup className="beta-sup">β</sup></div>
         </div>
 
         {/* ── Bookmark tool buttons ── */}

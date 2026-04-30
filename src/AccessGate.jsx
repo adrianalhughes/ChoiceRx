@@ -39,7 +39,7 @@ export default function AccessGate({ children }) {
             Sanitas
           </div>
           <div style={{ fontSize: 11, color: '#475569', letterSpacing: '0.5px' }}>
-            Pharmacy Resources<sup style={{ color: '#4f8ef7', fontSize: 9 }}>β</sup>
+            Pharmacy Web App<sup style={{ color: '#4f8ef7', fontSize: 9 }}>β</sup>
           </div>
         </div>
 
