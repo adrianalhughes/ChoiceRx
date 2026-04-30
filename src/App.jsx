@@ -744,6 +744,10 @@ export default function App() {
             {q && filtered.totalMatches === 0 && (
               <div className="not-found-state">
                 <div className="not-found-title">No results found</div>
+                <div className="not-found-actions">
+                  <a href="https://www.goodrx.com" target="_blank" rel="noopener noreferrer" className="not-found-btn">Check GoodRx cash price →</a>
+                  <a href="https://www.rxassist.org" target="_blank" rel="noopener noreferrer" className="not-found-btn">Search patient assistance programs →</a>
+                </div>
               </div>
             )}
 
