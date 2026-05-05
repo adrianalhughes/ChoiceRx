@@ -424,79 +424,28 @@ function SpecialtyNotCoveredBlock({ q }) {
   )
 }
 
-function PAInstructionsLink() {
+function SidebarSection({ title, children }) {
+  const [open, setOpen] = useState(false)
   return (
-    <a href="https://www.myprime.com/en/forms/coverage-determination/prior-authorization.html" target="_blank" rel="noopener noreferrer" className="tool-link fl-tool">
-      <div className="tool-link-name" style={{color:'#4a90d9'}}>PA Program Summaries &amp; Fax Forms</div>
-      <div className="tool-link-desc">Florida Blue · MyPrime</div>
+    <div className={`sbnav-section${open ? ' open' : ''}`}>
+      <button className="sbnav-header" onClick={() => setOpen(o => !o)}>
+        <span className="sbnav-label">{title}</span>
+        <ChevronRight className="sbnav-chevron" />
+      </button>
+      {open && <div className="sbnav-body">{children}</div>}
+    </div>
+  )
+}
+
+function SidebarLink({ href, name, desc }) {
+  return (
+    <a href={href} target="_blank" rel="noopener noreferrer" className="sbnav-link">
+      <span className="sbnav-link-text">
+        <span className="sbnav-link-name">{name}</span>
+        {desc && <span className="sbnav-link-desc">{desc}</span>}
+      </span>
       <ExtIcon />
     </a>
-  )
-}
-
-function HeaderTool({ label, color = '#4f8ef7', children }) {
-  const [open, setOpen] = useState(false)
-  return (
-    <div className="header-tool-wrap" style={{'--tool-color': color}}>
-      <button
-        className={`header-tool-btn ${open ? 'is-open' : ''}`}
-        onClick={() => setOpen(o => !o)}
-      >
-        {label}
-      </button>
-      {open && (
-        <div className="header-tool-dropdown">
-          <div className="tools-links">{children}</div>
-        </div>
-      )}
-    </div>
-  )
-}
-
-function SidebarSection({ emoji, sublabel, children }) {
-  const [open, setOpen] = useState(false)
-  return (
-    <div className={`rx-sidebar-cell ${open ? 'is-open' : ''}`}>
-      <button className="rx-sidebar-btn" onClick={() => setOpen(o => !o)}>
-        <span className="rx-sidebar-emoji">{emoji}</span>
-        <span className="rx-sidebar-label">{sublabel}</span>
-      </button>
-      {open && (
-        <div className="rx-sidebar-dropdown">
-          <div className="tools-links">{children}</div>
-        </div>
-      )}
-    </div>
-  )
-}
-
-function ToolsBarSection({ label, sublabel, color = '#4f8ef7', children }) {
-  const [open, setOpen] = useState(false)
-  return (
-    <div className={`tools-grid-cell ${open ? 'is-open' : ''}`} style={{'--tool-color': color}}>
-      <button className="tools-grid-btn" onClick={() => setOpen(o => !o)}>
-        <span className="tools-grid-emoji">{label}</span>
-        <span className="tools-grid-label">{sublabel}</span>
-      </button>
-      {open && (
-        <div className="tools-bar-dropdown">
-          <div className="tools-links">{children}</div>
-        </div>
-      )}
-    </div>
-  )
-}
-
-function ToolsSection({ label, children }) {
-  const [open, setOpen] = useState(false)
-  return (
-    <div className={`tools-section-collapsible ${open ? 'is-open' : ''}`}>
-      <button className="tools-section-header" onClick={() => setOpen(o => !o)}>
-        <span className="tools-section-label">{label}</span>
-        <span className="tools-section-chevron">{open ? '▾' : '›'}</span>
-      </button>
-      {open && <div className="tools-section-body tools-links">{children}</div>}
-    </div>
   )
 }
 
@@ -541,107 +490,6 @@ export default function App() {
           <div className="wordmark-sub">Pharmacy Web App<sup className="beta-sup">β</sup></div>
         </div>
 
-        {/* ── Bookmark tool buttons ── */}
-        <div className="header-bookmarks">
-          <HeaderTool label="Prior Authorization" color="#FF8C00">
-            <a href="https://oidc.covermymeds.com/login?return_url=%2Foauth%2Fauthorize%3Fclient_id%3D-QXKSuZr5mOEba23vs1QzqnlFiQFwSVj70BG2nrD3SI%26nonce%3Dd25026b0bd0b60612235a1de7a171bc9%26redirect_uri%3Dhttps%253A%252F%252Faccount.covermymeds.com%252Fauth%252Fcmm_oidc%252Fcallback%26response_type%3Dcode%26scope%3Dopenid%2520profile%2520email%2520offline_access%26state%3Db42ce2e4a3453a45e9dbf64760e84d73" target="_blank" rel="noopener noreferrer" className="tool-link cmm-tool">
-              <div className="tool-link-name" style={{color:'#FF8C00'}}>CoverMyMeds Portal</div>
-              <div className="tool-link-desc">Submit &amp; track PA requests</div>
-              <ExtIcon />
-            </a>
-            <a href="https://docs.google.com/document/d/1EsuVXqVm7wf1fea1gIxGZvqudmPOewjB/edit?usp=sharing" target="_blank" rel="noopener noreferrer" className="tool-link cmm-guide-tool">
-              <div className="tool-link-name" style={{color:'#e83480'}}>Help Guide</div>
-              <div className="tool-link-desc">Step-by-step tutorial</div>
-              <ExtIcon />
-            </a>
-            <PAInstructionsLink />
-          </HeaderTool>
-
-          <HeaderTool label="Financial Assistance" color="#a855f7">
-            <a href="https://www.rxassist.org" target="_blank" rel="noopener noreferrer" className="tool-link">
-              <div className="tool-link-name">RxAssist</div>
-              <div className="tool-link-desc">Manufacturer PAPs for uninsured patients</div>
-              <ExtIcon />
-            </a>
-          </HeaderTool>
-
-          <HeaderTool label="Cash Discounts" color="#4ade80">
-            <a href="https://docs.google.com/spreadsheets/d/1FvY54ZzkuLdAmFtbs4lZI42Pcd5z-Q4b/edit?usp=sharing&ouid=105603016175522070259&rtpof=true&sd=true" target="_blank" rel="noopener noreferrer" className="tool-link" style={{borderColor:'rgba(74,222,128,0.4)',background:'rgba(74,222,128,0.06)'}}>
-              <div className="tool-link-name" style={{color:'#4ade80'}}>Sav-Rx</div>
-              <div className="tool-link-desc">At participating Sanitas dispensing locations</div>
-              <ExtIcon />
-            </a>
-            <a href="https://www.goodrx.com" target="_blank" rel="noopener noreferrer" className="tool-link">
-              <div className="tool-link-name">GoodRx</div>
-              <div className="tool-link-desc">Cash prices at local pharmacies</div>
-              <ExtIcon />
-            </a>
-            <a href="https://costplusdrugs.com" target="_blank" rel="noopener noreferrer" className="tool-link">
-              <div className="tool-link-name">Cost Plus Drugs</div>
-              <div className="tool-link-desc">Transparent-pricing mail pharmacy</div>
-              <ExtIcon />
-            </a>
-            <a href="https://trumprx.gov/" target="_blank" rel="noopener noreferrer" className="tool-link">
-              <div className="tool-link-name">TrumpRx</div>
-              <div className="tool-link-desc">Federally negotiated IRA prices</div>
-              <ExtIcon />
-            </a>
-          </HeaderTool>
-
-          <HeaderTool label="Delivery" color="#FF9900">
-            <div className="tools-section-info">
-              <div className="tools-info-row"><span className="tools-info-label">E-scribe</span><span className="tools-info-val">Amazon.com – Amazon Pharmacy</span></div>
-              <div className="tools-info-row"><span className="tools-info-label">Fax</span><span className="tools-info-val">512-884-5981</span></div>
-              <div className="tools-info-row"><span className="tools-info-label">Address</span><span className="tools-info-val">4500 S Pleasant Valley Road, Suite 201, Austin, TX 78744-2911</span></div>
-              <div className="tools-info-row"><span className="tools-info-label">Phone</span><span className="tools-info-val">855-206-3605</span></div>
-            </div>
-            <a href="https://pharmacy.amazon.com/?ref_=pd_sl_OCI_XBV0_MD_e_YOR566_QTT071_dev_c&hvocijid=10259146375960946511--&hvexpln=135" target="_blank" rel="noopener noreferrer" className="tool-link amazon-tool">
-              <div className="tool-link-name" style={{color:'#FF9900'}}>Amazon Pharmacy</div>
-              <div className="tool-link-desc">Free home delivery</div>
-              <ExtIcon />
-            </a>
-          </HeaderTool>
-
-          <HeaderTool label="SpecialtyRx" color="#4a90d9">
-            <a href="https://www.bcbsfl.com/DocumentLibrary/Providers/Content/RxF_Specialty_Table_Self.pdf" target="_blank" rel="noopener noreferrer" className="tool-link fl-tool">
-              <div className="tool-link-name" style={{color:'#4a90d9'}}>Self-Admin Specialty List</div>
-              <div className="tool-link-desc">Florida Blue · PDF</div>
-              <ExtIcon />
-            </a>
-            <a href="https://www.bcbsfl.com/DocumentLibrary/Providers/Content/RxF_Specialty_Table_Prov.pdf" target="_blank" rel="noopener noreferrer" className="tool-link fl-tool">
-              <div className="tool-link-name" style={{color:'#4a90d9'}}>Provider-Admin Specialty List</div>
-              <div className="tool-link-desc">Florida Blue · PDF</div>
-              <ExtIcon />
-            </a>
-          </HeaderTool>
-
-          <HeaderTool label="Low Cost Drugs" color="#5EEAD4">
-            <div style={{fontSize:11,color:'#94a3b8',marginBottom:8,lineHeight:1.5}}>
-              Florida Blue preferred drug lists with lower cost options for common conditions.
-            </div>
-            <a href="https://www.bcbsfl.com/DocumentLibrary/Providers/Content/RxF_ConditionCare.pdf" target="_blank" rel="noopener noreferrer" className="tool-link fl-tool">
-              <div className="tool-link-name" style={{color:'#5EEAD4'}}>FL Blue Condition Care List</div>
-              <div className="tool-link-desc">Depression · Diabetes · Blood Pressure · Cholesterol · Respiratory · PDF</div>
-              <ExtIcon />
-            </a>
-          </HeaderTool>
-
-          <HeaderTool label="Medication Protocols" color="#5EEAD4">
-            <a href="https://sites.google.com/mysanitas.com/sanitaseducationsite/adults/endocrinology/diabetes-mellitus-resouces" target="_blank" rel="noopener noreferrer" className="tool-link" style={{borderColor:'rgba(94,234,212,0.2)'}}>
-              <div className="tool-link-name" style={{color:'#5EEAD4'}}>Learn the Clinical Protocols at the Sanitas Education Site</div>
-              <div className="tool-link-desc">Adults · Endocrinology · Diabetes &amp; more</div>
-              <ExtIcon />
-            </a>
-          </HeaderTool>
-        </div>
-
-        <a href="mailto:ahughes@mysanitas.com?subject=Sanitas Formulary — Feedback" className="feedback-link">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{marginRight:4,verticalAlign:'middle'}}>
-            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
-            <polyline points="22,6 12,13 2,6"/>
-          </svg>
-          Report an issue
-        </a>
       </header>
 
       {/* ── Plan selector — collapsible ── */}
@@ -651,9 +499,10 @@ export default function App() {
             className="plan-toggle-btn"
             onClick={() => setTabsOpen(o => !o)}
           >
-            <span>Choose the plan formulary</span>
+            Choose the plan formulary
             <span className="plan-toggle-chevron">{tabsOpen ? '▾' : '›'}</span>
           </button>
+          {!tabsOpen && <span className="plan-separator">·</span>}
           {tabsOpen && (
             <div className="formulary-tabs">
               {PLANS.map(plan => (
@@ -750,15 +599,66 @@ export default function App() {
               </div>
             )}
 
-            <div className="special-grid">
-              <NonPreferredBlock drugs={filtered.tier6} q={q} />
-            </div>
-            <NotCoveredBlock drugs={filtered.ncDrugs} appendixDrugs={filtered.ncAppend} q={q} />
           </div>
 
-          {/* ── Right: Agent only ── */}
+          {/* ── Right: Agent + Sidebar nav ── */}
           <div className="tools-panel">
             <ClinicalAgent activePlan={activePlan} />
+            <nav className="sidebar-nav">
+              <div className="sidebar-nav-head">Resources</div>
+
+              <SidebarSection title="Protocols">
+                <SidebarLink
+                  href="https://sites.google.com/mysanitas.com/sanitaseducationsite/adults/endocrinology/diabetes-mellitus-resouces"
+                  name="Sanitas Education Site"
+                  desc="Medication protocols · Endocrinology · Adults"
+                />
+              </SidebarSection>
+
+              <SidebarSection title="Prior Authorizations">
+                <SidebarLink
+                  href="https://oidc.covermymeds.com/login?return_url=%2Foauth%2Fauthorize%3Fclient_id%3D-QXKSuZr5mOEba23vs1QzqnlFiQFwSVj70BG2nrD3SI%26nonce%3Dd25026b0bd0b60612235a1de7a171bc9%26redirect_uri%3Dhttps%253A%252F%252Faccount.covermymeds.com%252Fauth%252Fcmm_oidc%252Fcallback%26response_type%3Dcode%26scope%3Dopenid%2520profile%2520email%2520offline_access%26state%3Db42ce2e4a3453a45e9dbf64760e84d73"
+                  name="CoverMyMeds Portal"
+                  desc="Submit & track PA requests"
+                />
+                <SidebarLink
+                  href="https://docs.google.com/document/d/1EsuVXqVm7wf1fea1gIxGZvqudmPOewjB/edit?usp=sharing"
+                  name="CoverMyMeds Help Guide"
+                  desc="Step-by-step tutorial"
+                />
+                <SidebarLink
+                  href="https://www.myprime.com/en/forms/coverage-determination/prior-authorization.html"
+                  name="PA Summaries & Fax Forms"
+                  desc="Florida Blue · MyPrime"
+                />
+              </SidebarSection>
+
+              <SidebarSection title="Discounts & Affordability Programs">
+                <SidebarLink href="https://www.goodrx.com" name="GoodRx" desc="Cash prices at local pharmacies" />
+                <SidebarLink
+                  href="https://docs.google.com/spreadsheets/d/1FvY54ZzkuLdAmFtbs4lZI42Pcd5z-Q4b/edit?usp=sharing&ouid=105603016175522070259&rtpof=true&sd=true"
+                  name="Sav-Rx"
+                  desc="At participating Sanitas dispensing locations"
+                />
+                <SidebarLink href="https://costplusdrugs.com" name="Cost Plus Drugs" desc="Transparent-pricing mail pharmacy" />
+                <SidebarLink href="https://trumprx.gov/" name="TrumpRx" desc="Federally negotiated IRA prices" />
+                <SidebarLink href="https://www.rxassist.org" name="RxAssist" desc="Manufacturer PAPs for uninsured patients" />
+                <SidebarLink
+                  href="https://www.bcbsfl.com/DocumentLibrary/Providers/Content/RxF_ConditionCare.pdf"
+                  name="FL Blue Condition Care List"
+                  desc="Generic options for common conditions · PDF"
+                />
+              </SidebarSection>
+
+              <SidebarSection title="Off-Formulary Drugs">
+                <NonPreferredBlock drugs={filtered.tier6} q={q} />
+                <NotCoveredBlock drugs={filtered.ncDrugs} appendixDrugs={filtered.ncAppend} q={q} />
+              </SidebarSection>
+
+            </nav>
+            <a href="mailto:ahughes@mysanitas.com?subject=Sanitas Formulary — Feedback" className="sidebar-feedback">
+              Report an issue
+            </a>
           </div>
 
         </div>
