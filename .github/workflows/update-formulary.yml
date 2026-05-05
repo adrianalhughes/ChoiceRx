@@ -1,0 +1,39 @@
+name: Monthly Formulary Update
+
+on:
+  schedule:
+    - cron: '0 10 2 * *'  # 2nd of each month at 10:00 UTC (6am ET)
+  workflow_dispatch:        # allow manual runs from the Actions tab
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install -r scripts/requirements.txt
+
+      - name: Run formulary updater
+        run: python scripts/update_formulary.py
+
+      - name: Commit and push if changed
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add src/data/
+          if git diff --cached --quiet; then
+            echo "No formulary changes — skipping commit"
+          else
+            git commit -m "chore: auto-update formulary data $(date +'%Y-%m')"
+            git push
+          fi
