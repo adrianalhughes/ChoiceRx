@@ -7,6 +7,7 @@ import bcbsfl from './data/bcbsfl.json'
 import simplechoice from './data/simplechoice.json'
 import notCovered from './data/not_covered.json'
 import specialtySelf from './data/specialty_self.json'
+import stepTherapy from './data/step_therapy.json'
 
 const PLANS = [
   { id: 'bcbsfl',              label: 'FL ValueScript Rx',          plan: 'Florida Blue',     payer: 'Florida Blue',     effective: 'April 2026', tiers: 6, data: bcbsfl,           highlight: true  },
@@ -35,6 +36,70 @@ const TIER_LABELS_3 = {
 
 const SHEETS_URL = 'https://docs.google.com/spreadsheets/d/1ZYoF3KZVVOARGSa6zn2IVXfG9Lz31m0qykO37kUndwo/edit?usp=sharing'
 const SOURCE_URL = 'https://www.floridablue.com/members/tools-resources/pharmacy/medication-guide'
+
+const STANDARD_CATEGORY_NAMES = [
+  'Anti-Infectives',
+  'Biologicals',
+  'Antineoplastics',
+  'Endocrine',
+  'Cardiovascular',
+  'Respiratory',
+  'Gastrointestinal',
+  'Genitourinary',
+  'Central Nervous System',
+  'Analgesics & Anesthetics',
+  'Neuromuscular',
+  'Nutritional',
+  'Hematologic',
+  'Topical',
+  'Miscellaneous',
+]
+
+const MONTH_INDEX = {
+  january: 0, february: 1, march: 2, april: 3, may: 4, june: 5,
+  july: 6, august: 7, september: 8, october: 9, november: 10, december: 11,
+}
+
+function parseMonthYear(value) {
+  if (!value || typeof value !== 'string') return null
+  const match = value.trim().match(/^([A-Za-z]+)\s+(\d{4})$/)
+  if (!match) return null
+  const month = MONTH_INDEX[match[1].toLowerCase()]
+  const year = Number(match[2])
+  if (month === undefined || Number.isNaN(year)) return null
+  return new Date(year, month, 1).getTime()
+}
+
+function extractPlanUpdateLabel(plan) {
+  const data = plan?.data
+  if (data && !Array.isArray(data) && typeof data === 'object') {
+    const candidates = [data.last_updated, data.lastUpdated, data.updated_at, data.as_of, data.effective]
+      .filter(v => typeof v === 'string' && v.trim().length > 0)
+    if (candidates[0]) return candidates[0].trim()
+  }
+  return plan?.effective
+}
+
+function getStandardCategoryName(conditionName) {
+  const c = (conditionName || '').toLowerCase()
+
+  if (/(antiinfect|antibacter|antiviral|antifung|antimycobacter|antiparasit)/.test(c)) return 'Anti-Infectives'
+  if (/(immunological|vaccin|biologic|immune system)/.test(c)) return 'Biologicals'
+  if (/(antineoplast|cancer)/.test(c)) return 'Antineoplastics'
+  if (/(hormonal|diabetes|thyroid|endocrin|infertility|metabolic bone)/.test(c)) return 'Endocrine'
+  if (/(cardiovascular|anticoagul|antiplatelet|blood pressure|cholesterol|heart|circulation)/.test(c)) return 'Cardiovascular'
+  if (/(respiratory|pulmonary|anaphylaxis|allergies, cough, cold)/.test(c)) return 'Respiratory'
+  if (/(gastrointestinal|inflammatory bowel|bowel|intestine|stomach|ulcer|acid reflux|antiemetic)/.test(c)) return 'Gastrointestinal'
+  if (/(genitourinary|prostate|bladder|sexual dysfunction|kidney)/.test(c)) return 'Genitourinary'
+  if (/(central nervous system|antidepress|antipsych|bipolar|sleep disorder|anxiolytic|anticonvuls|antimigraine|antiparkinson|antidementia|attention deficit)/.test(c)) return 'Central Nervous System'
+  if (/(analgesic|anesthe|pain|inflammation)/.test(c)) return 'Analgesics & Anesthetics'
+  if (/(skeletal muscle relax|antimyasthenic|neuromuscular|myasthenia)/.test(c)) return 'Neuromuscular'
+  if (/(electrolytes|vitamins|nutrition|supplies|glucose monitoring)/.test(c)) return 'Nutritional'
+  if (/(blood disorders|hematolog)/.test(c)) return 'Hematologic'
+  if (/(dermatological|ophthalmic|otic|dental and oral|skin|eye|ear|mouth|throat|topical)/.test(c)) return 'Topical'
+
+  return 'Miscellaneous'
+}
 
 // ── Regulatory Updates ─────────────────────────────────────────────────────
 const UPDATES = [
@@ -247,19 +312,58 @@ const ExtIcon = () => (
   </svg>
 )
 
+const ST_PDF_URL = 'https://www.bcbsfl.com/DocumentLibrary/Providers/Content/Rx_ResponsibleSteps.pdf'
+
+function lookupStepTherapy(drugName) {
+  return stepTherapy[drugName.toUpperCase()] || null
+}
+
 function DrugRow({ drug, q, showFlags }) {
+  const [expanded, setExpanded] = useState(false)
   const flags = showFlags ? [drug.pa && 'PA', drug.st && 'ST', drug.ql && 'QL'].filter(Boolean) : []
+  const stDrugs = showFlags && drug.st ? lookupStepTherapy(drug.name) : null
+
   return (
-    <tr>
-      <td className="drug-name">{highlight(drug.name, q)}</td>
-      <td style={{ textAlign: 'center' }}><span className={`tier-badge tier-${drug.tier}`}>{drug.tier}</span></td>
-      {showFlags && (
-        <>
-          <td><div className="flags">{flags.map(f => <span key={f} className={`flag-chip flag-${f}`}>{f}</span>)}</div></td>
-          <td>{drug.ql_detail && <span className="ql-detail">{drug.ql_detail}</span>}</td>
-        </>
+    <>
+      <tr
+        className={drug.st && showFlags ? 'drug-row-clickable' : ''}
+        onClick={drug.st && showFlags ? () => setExpanded(e => !e) : undefined}
+      >
+        <td className="drug-name">{highlight(drug.name, q)}</td>
+        <td style={{ textAlign: 'center' }}><span className={`tier-badge tier-${drug.tier}`}>{drug.tier}</span></td>
+        {showFlags && (
+          <>
+            <td><div className="flags">{flags.map(f => <span key={f} className={`flag-chip flag-${f}`}>{f}</span>)}</div></td>
+            <td>
+              {drug.ql_detail && <span className="ql-detail">{drug.ql_detail}</span>}
+              {drug.st && <span className="st-row-chevron">{expanded ? '▾' : '›'}</span>}
+            </td>
+          </>
+        )}
+      </tr>
+      {expanded && drug.st && showFlags && (
+        <tr className="st-detail-row">
+          <td colSpan={4} className="st-detail-cell">
+            <div className="st-detail-inner">
+              <span className="st-detail-label">Step Therapy Required</span>
+              {stDrugs ? (
+                <>
+                  <span className="st-must-try-label">Must try first:</span>
+                  <ul className="st-first-line-list">
+                    {stDrugs.map((d, i) => <li key={i}>{d}</li>)}
+                  </ul>
+                </>
+              ) : (
+                <span className="st-no-data">Step therapy required — </span>
+              )}
+              <a href={ST_PDF_URL} target="_blank" rel="noopener noreferrer" className="st-criteria-link">
+                View full criteria <ExtIcon />
+              </a>
+            </div>
+          </td>
+        </tr>
       )}
-    </tr>
+    </>
   )
 }
 
@@ -302,7 +406,7 @@ function ConditionBlock({ name, cleanDrugs, restrictedDrugs, q, forceOpen }) {
             <>
               <div className="section-banner req-banner banner-open" style={{pointerEvents:'none'}}>
                 <ChevronRight className="banner-chevron" />
-                <span className="banner-label">Restrictions Apply</span>
+                <span className="banner-label">Coverage Criteria</span>
                 <span className="banner-count">{restrictedDrugs.length}</span>
               </div>
               <table className="drug-table">
@@ -456,16 +560,34 @@ export default function App() {
 
   const q = query.trim().toLowerCase()
 
+  const formularyLastUpdated = useMemo(() => {
+    const datedPlans = PLANS
+      .map(plan => {
+        const effective = extractPlanUpdateLabel(plan)
+        return { effective, ts: parseMonthYear(effective) }
+      })
+      .filter(plan => plan.ts !== null)
+      .sort((a, b) => b.ts - a.ts)
+    return datedPlans[0]?.effective || 'Unknown'
+  }, [])
+
   const filtered = useMemo(() => {
-    const conditions = activePlan.data.map(c => ({
-      name: c.condition,
-      cleanDrugs:      q ? c.clean.filter(d => d.name.toLowerCase().includes(q))      : c.clean,
-      restrictedDrugs: q ? c.restricted.filter(d => d.name.toLowerCase().includes(q)) : c.restricted,
-      forceOpen: q ? (
-        c.clean.some(d => d.name.toLowerCase().includes(q)) ||
-        c.restricted.some(d => d.name.toLowerCase().includes(q))
-      ) : false,
-    }))
+    const grouped = new Map(
+      STANDARD_CATEGORY_NAMES.map(name => [name, { name, cleanDrugs: [], restrictedDrugs: [], forceOpen: false }])
+    )
+    activePlan.data.forEach(c => {
+      const category = getStandardCategoryName(c.condition)
+      const group = grouped.get(category)
+      if (!group) return
+      const cleanDrugs = q ? c.clean.filter(d => d.name.toLowerCase().includes(q)) : c.clean
+      const restrictedDrugs = q ? c.restricted.filter(d => d.name.toLowerCase().includes(q)) : c.restricted
+      if (cleanDrugs.length > 0) group.cleanDrugs.push(...cleanDrugs)
+      if (restrictedDrugs.length > 0) group.restrictedDrugs.push(...restrictedDrugs)
+      if (q && (cleanDrugs.length > 0 || restrictedDrugs.length > 0)) group.forceOpen = true
+    })
+    const conditions = STANDARD_CATEGORY_NAMES
+      .map(name => grouped.get(name))
+      .filter(group => group && (group.cleanDrugs.length + group.restrictedDrugs.length > 0))
 
     const allTier6 = activePlan.data
       .flatMap(c => [...c.clean.filter(d => d.tier === 6), ...c.restricted.filter(d => d.tier === 6)])
@@ -495,13 +617,16 @@ export default function App() {
       {/* ── Plan selector — collapsible ── */}
       <div className="plan-bar">
         <div className="plan-bar-inner">
-          <button
-            className="plan-toggle-btn"
-            onClick={() => setTabsOpen(o => !o)}
-          >
-            Choose the plan formulary
-            <span className="plan-toggle-chevron">{tabsOpen ? '▾' : '›'}</span>
-          </button>
+          <div className="plan-heading-stack">
+            <button
+              className="plan-toggle-btn"
+              onClick={() => setTabsOpen(o => !o)}
+            >
+              Choose the plan formulary
+              <span className="plan-toggle-chevron">{tabsOpen ? '▾' : '›'}</span>
+            </button>
+            <div className="plan-last-updated">Last Updated: {formularyLastUpdated}</div>
+          </div>
           {!tabsOpen && <span className="plan-separator">·</span>}
           {tabsOpen && (
             <div className="formulary-tabs">
@@ -545,7 +670,6 @@ export default function App() {
                 </div>
               )}
             </div>
-
             <div className={`tier-legend-inline plan-tiers-${activePlan.tiers}`}>
               {(() => {
                 const labels = activePlan.tiers === 3 ? TIER_LABELS_3 : activePlan.tiers === 4 ? TIER_LABELS_4 : TIER_LABELS_6
@@ -556,9 +680,9 @@ export default function App() {
                 const highLabel = activePlan.tiers === 3 ? 'Tiers 2–3 · Mid to Higher Cost' : activePlan.tiers === 4 ? 'Tiers 3–4 · Mid to Highest Cost' : 'Tiers 4–6 · Higher Cost'
                 return (
                   <>
-                    <div style={{ flex: 1, marginRight: 6 }}>
+                    <div className="legend-group">
                       <div className="legend-group-label legend-group-label-low">{lowLabel}</div>
-                      <div style={{ display: 'flex' }}>
+                      <div className="legend-tier-row">
                         {lowTiers.map(([t, label]) => (
                           <div key={t} className="legend-item legend-item-low">
                             <span className={`tier-badge tier-${t}`}>{t}</span>
@@ -567,9 +691,9 @@ export default function App() {
                         ))}
                       </div>
                     </div>
-                    <div style={{ flex: 1 }}>
+                    <div className="legend-group">
                       <div className="legend-group-label legend-group-label-high">{highLabel}</div>
-                      <div style={{ display: 'flex' }}>
+                      <div className="legend-tier-row">
                         {highTiers.map(([t, label]) => (
                           <div key={t} className="legend-item legend-item-high">
                             <span className={`tier-badge tier-${t}`}>{t}</span>
@@ -583,9 +707,18 @@ export default function App() {
               })()}
             </div>
 
+            <div className="covered-rx-header">Covered Rx by Category</div>
+
             <div className="condition-grid">
               {filtered.conditions.map(c => (
-                <ConditionBlock key={c.name} name={c.name} cleanDrugs={c.cleanDrugs} restrictedDrugs={c.restrictedDrugs} q={q} forceOpen={c.forceOpen} />
+                <ConditionBlock
+                  key={c.name}
+                  name={c.name === 'Central Nervous System' ? 'CNS' : c.name}
+                  cleanDrugs={c.cleanDrugs}
+                  restrictedDrugs={c.restrictedDrugs}
+                  q={q}
+                  forceOpen={c.forceOpen}
+                />
               ))}
             </div>
 

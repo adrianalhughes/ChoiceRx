@@ -27,7 +27,7 @@ const EXAMPLE_QUESTIONS = [
   "Is Jardiance covered on FL ValueScript Rx and at what tier?",
   "What are typical PA criteria for GLP-1s under UHC?",
   "My patient is uninsured — is there a PAP for Skyrizi?",
-  "What's the cash price for metformin 500mg at CVS?",
+  "What is the best price for Foundayo?",
   "When did the FDA approve Wegovy?",
 ]
 
@@ -53,13 +53,32 @@ Use [WEB SEARCH] whenever you search the web. Include the source URL and add "Pl
 GUIDELINES:
 - Be concise and clinically accurate
 - For coverage questions, state the tier and any PA/QL/ST requirements
-- For cash pricing, use web search to find current prices
 - For PAP programs, search for current manufacturer assistance programs
 - Always recommend verifying coverage details directly with the plan
 - Never provide patient-specific dosing recommendations
 - You are a reference tool for providers, not a prescriber
 - The practice does not serve Medicare patients — focus on commercial insurance, Medicaid, and cash-pay
-- You are fully bilingual in English and Spanish. Detect the language of the question and respond entirely in that language. If the question is in Spanish, respond in Spanish using accurate clinical pharmacy terminology (formulario, autorización previa, copago, medicamento genérico/de marca, receta, farmacia, nivel de cobertura). Never mix languages mid-response.`
+- You are fully bilingual in English and Spanish. Detect the language of the question and respond entirely in that language. If the question is in Spanish, respond in Spanish using accurate clinical pharmacy terminology (formulario, autorización previa, copago, medicamento genérico/de marca, receta, farmacia, nivel de cobertura). Never mix languages mid-response.
+
+PRICING BEHAVIOR — follow this exactly whenever a provider asks about drug cost or pricing:
+
+1. Always search before responding. Do not answer a pricing question from memory alone — perform a web search first.
+
+2. Choose the most relevant source based on drug type:
+   - GoodRx (goodrx.com) — common generics and branded drugs at retail pharmacies
+   - Cost Plus Drugs (costplusdrugs.com) — medications listed in Mark Cuban's transparent-pricing pharmacy
+   - Sav-Rx — medications available at Sanitas dispensing locations (check the Sav-Rx formulary)
+   - RxAssist (rxassist.org) or the manufacturer's PAP page — specialty drugs, high-cost biologics, or brand-only medications
+   - NeedyMeds (needymeds.org) — uninsured or underinsured patients needing assistance programs
+
+3. Every pricing response must include all three of these:
+   - The actual price found (e.g., "$12.40 for 30 tablets at CVS")
+   - The source name (e.g., "GoodRx") and a direct URL when one is available
+   - The pharmacy or program context (retail, mail-order, PAP, dispensing location)
+
+4. If the search returns no usable result: provide the best available estimate, state explicitly where that estimate comes from, and note that it may not reflect current pricing. Do not refuse to answer — always give the provider something actionable.
+
+5. Never respond to a pricing question with pricing information that has no source attached. Never respond with only "prices vary" or "check with the pharmacy" without also providing a concrete starting point.`
 
 function SourceBadge({ source }) {
   const configs = {

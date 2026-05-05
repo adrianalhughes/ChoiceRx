@@ -64,6 +64,9 @@ UHC_PLANS = [
     {"id": "uhc_texas_essential", "type": "essential", "out": "uhc_texas_essential.json", "tiers": 4, "parser": "uhc_4tier"},
 ]
 
+# ── Florida Blue Step Therapy ──────────────────────────────────────────────────
+ST_PDF_URL = "https://www.bcbsfl.com/DocumentLibrary/Providers/Content/Rx_ResponsibleSteps.pdf"
+
 # ── Shared helpers ─────────────────────────────────────────────────────────────
 def pdf_hash(path):
     return hashlib.md5(open(path, "rb").read()).hexdigest()
@@ -343,6 +346,64 @@ def parse_uhc(pdf_path):
             output.append({"condition": cat, "clean": d["clean"], "restricted": d["restricted"]})
     return output
 
+# ── Step Therapy parser ────────────────────────────────────────────────────────
+def parse_step_therapy(pdf_path):
+    """Parse the FL Blue Responsible Steps PDF.
+
+    Returns a dict mapping uppercase drug name → list of required first-line drugs.
+    The PDF is a two-column table: column 0 = target drug, column 1 = step requirements.
+    Falls back to word-row heuristics when pdfplumber table extraction yields nothing.
+    """
+    result = {}
+
+    # Header-like strings to skip
+    SKIP_NAMES = {"drug name", "medication", "brand name", "product", "drug"}
+    # Separators used within a cell to list multiple alternatives
+    SEP = re.compile(r"\s*[,;]\s*|\s+(?:OR|AND)\s+|\n+")
+
+    def add_entry(raw_name, raw_reqs):
+        name = raw_name.strip()
+        reqs_text = raw_reqs.strip()
+        if not name or not reqs_text:
+            return
+        if name.lower() in SKIP_NAMES:
+            return
+        drugs = [d.strip() for d in SEP.split(reqs_text) if d.strip() and len(d.strip()) > 1]
+        if drugs:
+            result[name.upper()] = drugs
+
+    with pdfplumber.open(pdf_path) as pdf:
+        for page in pdf.pages:
+            # ── Attempt 1: pdfplumber table extraction ──
+            tables = page.extract_tables({"vertical_strategy": "lines", "horizontal_strategy": "lines"})
+            if not tables:
+                tables = page.extract_tables()
+            for table in (tables or []):
+                for row in table:
+                    if not row or len(row) < 2:
+                        continue
+                    name_cell = " ".join((row[0] or "").split())
+                    req_cell  = " ".join(" ".join(str(c or "") for c in row[1:]).split())
+                    add_entry(name_cell, req_cell)
+
+            # ── Attempt 2: word-row heuristic (catches text-only PDFs) ──
+            # Only run if table extraction found nothing for this page
+            if not any(tables):
+                words = page.extract_words(x_tolerance=4, y_tolerance=4)
+                rows_by_y = defaultdict(list)
+                for w in words:
+                    rows_by_y[round(w["top"] / 5) * 5].append(w)
+                page_w = page.width
+                mid = page_w * 0.45
+                for y in sorted(rows_by_y):
+                    ws = sorted(rows_by_y[y], key=lambda w: w["x0"])
+                    left  = " ".join(w["text"] for w in ws if w["x0"] < mid).strip()
+                    right = " ".join(w["text"] for w in ws if w["x0"] >= mid).strip()
+                    add_entry(left, right)
+
+    return result
+
+
 # ── Main ───────────────────────────────────────────────────────────────────────
 def main():
     updated = []
@@ -399,6 +460,27 @@ def main():
                 updated.append(plan["id"])
         except Exception as e:
             print(f"  ERROR: {e}")
+
+    print("\n=== Step Therapy PDF ===")
+    print(f"\n[step_therapy] {ST_PDF_URL}")
+    st_pdf_path = tmp / "step_therapy.pdf"
+    try:
+        download_pdf(ST_PDF_URL, st_pdf_path)
+        print("  Parsing...")
+        st_data = parse_step_therapy(st_pdf_path)
+        out_path = DATA_DIR / "step_therapy.json"
+        old_hash = hashlib.md5(open(out_path, "rb").read()).hexdigest() if out_path.exists() else ""
+        new_json = json.dumps(st_data, indent=2, sort_keys=True)
+        new_hash = hashlib.md5(new_json.encode()).hexdigest()
+        if old_hash == new_hash:
+            print("  No change — skipping")
+        else:
+            with open(out_path, "w") as f:
+                f.write(new_json)
+            print(f"  Updated: {len(st_data)} drugs with step therapy requirements")
+            updated.append("step_therapy")
+    except Exception as e:
+        print(f"  ERROR: {e}")
 
     print(f"\n=== Done. Updated: {updated or 'none'} ===")
     # Exit code 0 even if nothing updated — GitHub Actions won't fail
