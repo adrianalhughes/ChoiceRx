@@ -314,51 +314,110 @@ const ExtIcon = () => (
 
 const ST_PDF_URL = 'https://www.bcbsfl.com/DocumentLibrary/Providers/Content/Rx_ResponsibleSteps.pdf'
 
-function lookupStepTherapy(drugName) {
-  return stepTherapy[drugName.toUpperCase()] || null
+function normalizeDrugName(value) {
+  return (value || '')
+    .toLowerCase()
+    .replace(/([a-z])(\d)/g, '$1 $2')
+    .replace(/(\d)([a-z])/g, '$1 $2')
+    .replace(/[^a-z0-9]+/g, ' ')
+    .trim()
+}
+
+function stripParentheticalText(value) {
+  return (value || '').replace(/\([^)]*\)/g, ' ').replace(/\s+/g, ' ').trim()
+}
+
+function matchesBrandName(drugName, query) {
+  const normalizedQuery = normalizeDrugName(query)
+  if (!normalizedQuery) return false
+
+  const leadingBrand = getLeadingBrandCandidate(drugName)
+  if (!leadingBrand) return false
+  const normalizedBrand = normalizeDrugName(leadingBrand)
+  return normalizedBrand === normalizedQuery || normalizedBrand.includes(normalizedQuery)
+}
+
+function getLeadingBrandCandidate(drugName) {
+  if (!drugName || !drugName.includes(' - ')) return null
+  const leading = drugName.split(' - ')[0].trim()
+  if (!leading) return null
+  return leading
+}
+
+const STEP_THERAPY_ENTRIES = Object.entries(stepTherapy).map(([key, prerequisites]) => ({
+  key,
+  normalizedKey: normalizeDrugName(key),
+  prerequisites,
+}))
+
+function lookupStepTherapyByTerm(term, { allowContains = true } = {}) {
+  if (!term) return null
+  const normalizedTerm = normalizeDrugName(term)
+  if (!normalizedTerm) return null
+
+  for (const entry of STEP_THERAPY_ENTRIES) {
+    if (entry.normalizedKey === normalizedTerm) return entry.prerequisites
+  }
+
+  if (allowContains) {
+    // Fallback for close variants (e.g., extra descriptors around target name)
+    for (const entry of STEP_THERAPY_ENTRIES) {
+      if (normalizedTerm.includes(entry.normalizedKey) || entry.normalizedKey.includes(normalizedTerm)) {
+        return entry.prerequisites
+      }
+    }
+  }
+  return null
+}
+
+function lookupStepTherapyForDrug(drugName) {
+  if (!drugName) return null
+  const canonicalDrugName = stripParentheticalText(drugName)
+
+  // 1) Exact full-string match on canonical (no parenthetical aliases)
+  const fullMatch = lookupStepTherapyByTerm(canonicalDrugName, { allowContains: false })
+  if (fullMatch) return fullMatch
+
+  // 2) Explicit leading brand patterns (e.g., "FARXIGA - ...")
+  const leadingBrand = getLeadingBrandCandidate(drugName)
+  if (leadingBrand) {
+    const leadingMatch = lookupStepTherapyByTerm(leadingBrand, { allowContains: false })
+    if (leadingMatch) return leadingMatch
+  }
+
+  return null
+}
+
+function lookupStepTherapyForQuery(query) {
+  if (!query) return null
+  return lookupStepTherapyByTerm(query)
 }
 
 function DrugRow({ drug, q, showFlags }) {
-  const [expanded, setExpanded] = useState(false)
-  const flags = showFlags ? [drug.pa && 'PA', drug.st && 'ST', drug.ql && 'QL'].filter(Boolean) : []
-  const stDrugs = showFlags && drug.st ? lookupStepTherapy(drug.name) : null
+  const stDrugs = lookupStepTherapyForDrug(drug.name)
+  const showStepTherapy = Boolean(showFlags && drug.st && stDrugs)
+  const formattedQlDetail = (showFlags && drug.ql && drug.ql_detail)
+    ? `${drug.ql_detail.replace(/\//g, ' per ')}`
+    : ''
 
   return (
     <>
-      <tr
-        className={drug.st && showFlags ? 'drug-row-clickable' : ''}
-        onClick={drug.st && showFlags ? () => setExpanded(e => !e) : undefined}
-      >
+      <tr>
         <td className="drug-name">{highlight(drug.name, q)}</td>
         <td style={{ textAlign: 'center' }}><span className={`tier-badge tier-${drug.tier}`}>{drug.tier}</span></td>
         {showFlags && (
-          <>
-            <td><div className="flags">{flags.map(f => <span key={f} className={`flag-chip flag-${f}`}>{f}</span>)}</div></td>
-            <td>
-              {drug.ql_detail && <span className="ql-detail">{drug.ql_detail}</span>}
-              {drug.st && <span className="st-row-chevron">{expanded ? '▾' : '›'}</span>}
-            </td>
-          </>
+          <td>{formattedQlDetail && <span className="ql-detail">{formattedQlDetail}</span>}</td>
         )}
       </tr>
-      {expanded && drug.st && showFlags && (
+      {showStepTherapy && (
         <tr className="st-detail-row">
-          <td colSpan={4} className="st-detail-cell">
+          <td colSpan={showFlags ? 3 : 2} className="st-detail-cell">
             <div className="st-detail-inner">
-              <span className="st-detail-label">Step Therapy Required</span>
-              {stDrugs ? (
-                <>
-                  <span className="st-must-try-label">Must try first:</span>
-                  <ul className="st-first-line-list">
-                    {stDrugs.map((d, i) => <li key={i}>{d}</li>)}
-                  </ul>
-                </>
-              ) : (
-                <span className="st-no-data">Step therapy required — </span>
-              )}
-              <a href={ST_PDF_URL} target="_blank" rel="noopener noreferrer" className="st-criteria-link">
-                View full criteria <ExtIcon />
-              </a>
+              <span className="st-detail-label">Step Therapy (ST) Required</span>
+              <span className="st-subtitle">Conditionally covered — must try first:</span>
+              <ul className="st-first-line-list">
+                {stDrugs.map((d, i) => <li key={i}>{d}</li>)}
+              </ul>
             </div>
           </td>
         </tr>
@@ -413,8 +472,7 @@ function ConditionBlock({ name, cleanDrugs, restrictedDrugs, q, forceOpen }) {
                 <thead><tr>
                   <th>Drug Name</th>
                   <th className="center" style={{width:48}}>Tier</th>
-                  <th style={{width:90}}>Criteria</th>
-                  <th>Quantity Limit Detail</th>
+                  <th>Quantity Limit (QL)</th>
                 </tr></thead>
                 <tbody>{restrictedDrugs.map((d,i) => <DrugRow key={i} drug={d} q={q} showFlags={true} />)}</tbody>
               </table>
@@ -444,8 +502,7 @@ function NonPreferredBlock({ drugs, q }) {
             <thead><tr>
               <th>Drug Name</th>
               <th className="center" style={{width:48}}>Tier</th>
-              <th style={{width:90}}>Criteria</th>
-              <th>Quantity Limit Detail</th>
+              <th>Quantity Limit (QL)</th>
             </tr></thead>
             <tbody>{drugs.map((d,i) => <DrugRow key={i} drug={d} q={q} showFlags={true} />)}</tbody>
           </table>
@@ -572,6 +629,12 @@ export default function App() {
   }, [])
 
   const filtered = useMemo(() => {
+    const useBrandOnlyMatching = q
+      ? activePlan.data.some(c =>
+        [...c.clean, ...c.restricted].some(d => matchesBrandName(d.name, q))
+      )
+      : false
+
     const grouped = new Map(
       STANDARD_CATEGORY_NAMES.map(name => [name, { name, cleanDrugs: [], restrictedDrugs: [], forceOpen: false }])
     )
@@ -579,8 +642,12 @@ export default function App() {
       const category = getStandardCategoryName(c.condition)
       const group = grouped.get(category)
       if (!group) return
-      const cleanDrugs = q ? c.clean.filter(d => d.name.toLowerCase().includes(q)) : c.clean
-      const restrictedDrugs = q ? c.restricted.filter(d => d.name.toLowerCase().includes(q)) : c.restricted
+      const cleanDrugs = q
+        ? c.clean.filter(d => useBrandOnlyMatching ? matchesBrandName(d.name, q) : d.name.toLowerCase().includes(q))
+        : c.clean
+      const restrictedDrugs = q
+        ? c.restricted.filter(d => useBrandOnlyMatching ? matchesBrandName(d.name, q) : d.name.toLowerCase().includes(q))
+        : c.restricted
       if (cleanDrugs.length > 0) group.cleanDrugs.push(...cleanDrugs)
       if (restrictedDrugs.length > 0) group.restrictedDrugs.push(...restrictedDrugs)
       if (q && (cleanDrugs.length > 0 || restrictedDrugs.length > 0)) group.forceOpen = true
@@ -596,10 +663,11 @@ export default function App() {
     const ncDrugs  = q ? notCovered.main.filter(d => d.toLowerCase().includes(q))     : notCovered.main
     const ncAppend = q ? notCovered.appendix.filter(d => d.toLowerCase().includes(q)) : notCovered.appendix
 
-    const totalMatches = conditions.reduce((s, c) => s + c.cleanDrugs.length + c.restrictedDrugs.length, 0)
-      + ncDrugs.length
+    const formularyMatches = conditions.reduce((s, c) => s + c.cleanDrugs.length + c.restrictedDrugs.length, 0)
+    const totalMatches = formularyMatches + ncDrugs.length
 
-    return { conditions, tier6: allTier6, ncDrugs, ncAppend, totalMatches }
+    const stepTherapyQuery = q ? lookupStepTherapyForQuery(query) : null
+    return { conditions, tier6: allTier6, ncDrugs, ncAppend, totalMatches, formularyMatches, stepTherapyQuery }
   }, [activePlan.data, q])
 
   const [tabsOpen, setTabsOpen] = useState(false)
@@ -666,7 +734,7 @@ export default function App() {
               {query && <button className="search-clear" onClick={() => setQuery('')} aria-label="Clear">✕</button>}
               {q && (
                 <div className="search-count">
-                  {filtered.totalMatches === 0 ? 'No matches found' : `${filtered.totalMatches} drug${filtered.totalMatches !== 1 ? 's' : ''} matched`}
+                  {filtered.formularyMatches === 0 ? 'No formulary matches found' : `${filtered.formularyMatches} formulary drug${filtered.formularyMatches !== 1 ? 's' : ''} matched`}
                 </div>
               )}
             </div>
@@ -707,7 +775,7 @@ export default function App() {
               })()}
             </div>
 
-            <div className="covered-rx-header">Covered Rx by Category</div>
+            <div className="panel-question covered-rx-header">Covered Rx by Category</div>
 
             <div className="condition-grid">
               {filtered.conditions.map(c => (
@@ -722,13 +790,24 @@ export default function App() {
               ))}
             </div>
 
-            {q && filtered.totalMatches === 0 && (
+            {q && filtered.formularyMatches === 0 && (
               <div className="not-found-state">
-                <div className="not-found-title">No results found</div>
-                <div className="not-found-actions">
-                  <a href="https://www.goodrx.com" target="_blank" rel="noopener noreferrer" className="not-found-btn">Check GoodRx cash price →</a>
-                  <a href="https://www.rxassist.org" target="_blank" rel="noopener noreferrer" className="not-found-btn">Search patient assistance programs →</a>
-                </div>
+                {filtered.stepTherapyQuery ? (
+                  <>
+                    <div className="not-found-title">{query.trim()} — Step Therapy Required</div>
+                    <div className="st-subtitle">Conditionally covered — must try first:</div>
+                    <ul className="st-first-line-list not-found-st-list">
+                      {filtered.stepTherapyQuery.map((d, i) => <li key={i}>{d}</li>)}
+                    </ul>
+                  </>
+                ) : (
+                  <>
+                    <div className="not-found-title">No results found</div>
+                    <div className="not-found-actions">
+                      <a href={ST_PDF_URL} target="_blank" rel="noopener noreferrer" className="not-found-btn">View full criteria <ExtIcon /></a>
+                    </div>
+                  </>
+                )}
               </div>
             )}
 

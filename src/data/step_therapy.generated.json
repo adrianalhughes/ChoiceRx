@@ -20,47 +20,14 @@
   "AMBIEN CR": [
     "Previous use of a generic non-benzodiazepine hypnotic such as eszopiclone, zaleplon, or zolpidem IR or ER tablet"
   ],
-  "APLENZIN": [
-    "Previous use of a generic version of ANY of the following: bupropion, citalopram, desvenlafaxine succinate ER (generic Pristiq), duloxetine, escitalopram (tablets, solution), fluoxetine, fluvoxamine, mirtazapine, paroxetine, sertraline, venlafaxine, venlafaxine ER or vilazodone"
-  ],
-  "BUPROPION 450 MG XL": [
-    "Previous use of a generic version of ANY of the following: bupropion, citalopram, desvenlafaxine succinate ER (generic Pristiq), duloxetine, escitalopram (tablets, solution), fluoxetine, fluvoxamine, mirtazapine, paroxetine, sertraline, venlafaxine, venlafaxine ER or vilazodone"
+  "AND TRANSMITTER)": [
+    "Current use of insulin or insulin combination product"
   ],
   "AURYXIA": [
     "Previous use of EITHER a generic iron supplement, OR a non-targeted generic calcium-containing phosphate binder (such as calcium acetate, calcium carbonate, calcium carbonate-magnesium acetate, lanthanum carbonate, sevelamer HCl, or sevelamer carbonate)"
   ],
   "BELSOMRA": [
     "Previous use of a generic non-benzodiazepine hypnotic such as eszopiclone, zaleplon, or zolpidem IR or ER tablet"
-  ],
-  "CELEXA": [
-    "Previous use of a generic version of ANY of the following: bupropion, citalopram, desvenlafaxine succinate ER (generic Pristiq), duloxetine, escitalopram (tablets, solution), fluoxetine, fluvoxamine, mirtazapine, paroxetine, sertraline, venlafaxine, venlafaxine ER or vilazodone"
-  ],
-  "CITALOPRAM 30 MG CAPSULE": [
-    "Previous use of a generic version of ANY of the following: bupropion, citalopram, desvenlafaxine succinate ER (generic Pristiq), duloxetine, escitalopram (tablets, solution), fluoxetine, fluvoxamine, mirtazapine, paroxetine, sertraline, venlafaxine, venlafaxine ER or vilazodone"
-  ],
-  "DESVENLAFAXINE ER": [
-    "Previous use of a generic version of ANY of the following: bupropion, citalopram, desvenlafaxine succinate ER (generic Pristiq), duloxetine, escitalopram (tablets, solution), fluoxetine, fluvoxamine, mirtazapine, paroxetine, sertraline, venlafaxine, venlafaxine ER or vilazodone"
-  ],
-  "EFFEXOR XR": [
-    "Previous use of a generic version of ANY of the following: bupropion, citalopram, desvenlafaxine succinate ER (generic Pristiq), duloxetine, escitalopram (tablets, solution), fluoxetine, fluvoxamine, mirtazapine, paroxetine, sertraline, venlafaxine, venlafaxine ER or vilazodone"
-  ],
-  "ESCITALOPRAM 15 MG CAPSULE": [
-    "Previous use of a generic version of ANY of the following: bupropion, citalopram, desvenlafaxine succinate ER (generic Pristiq), duloxetine, escitalopram (tablets, solution), fluoxetine, fluvoxamine, mirtazapine, paroxetine, sertraline, venlafaxine, venlafaxine ER or vilazodone"
-  ],
-  "EXXUA": [
-    "Previous use of a generic version of ANY of the following: bupropion, citalopram, desvenlafaxine succinate ER (generic Pristiq), duloxetine, escitalopram (tablets, solution), fluoxetine, fluvoxamine, mirtazapine, paroxetine, sertraline, venlafaxine, venlafaxine ER or vilazodone"
-  ],
-  "FETZIMA": [
-    "Previous use of a generic version of ANY of the following: bupropion, citalopram, desvenlafaxine succinate ER (generic Pristiq), duloxetine, escitalopram (tablets, solution), fluoxetine, fluvoxamine, mirtazapine, paroxetine, sertraline, venlafaxine, venlafaxine ER or vilazodone"
-  ],
-  "FLUOXETINE 60 MG": [
-    "Previous use of a generic version of ANY of the following: bupropion, citalopram, desvenlafaxine succinate ER (generic Pristiq), duloxetine, escitalopram (tablets, solution), fluoxetine, fluvoxamine, mirtazapine, paroxetine, sertraline, venlafaxine, venlafaxine ER or vilazodone"
-  ],
-  "FLUOXETINE 90 MG WEEKLY": [
-    "Previous use of a generic version of ANY of the following: bupropion, citalopram, desvenlafaxine succinate ER (generic Pristiq), duloxetine, escitalopram (tablets, solution), fluoxetine, fluvoxamine, mirtazapine, paroxetine, sertraline, venlafaxine, venlafaxine ER or vilazodone"
-  ],
-  "FORFIVO XL": [
-    "Previous use of a generic version of ANY of the following: bupropion, citalopram, desvenlafaxine succinate ER (generic Pristiq), duloxetine, escitalopram (tablets, solution), fluoxetine, fluvoxamine, mirtazapine, paroxetine, sertraline, venlafaxine, venlafaxine ER or vilazodone"
   ],
   "BETAMETHASONE VALERATE 0.1% LOTION": [
     "Previous use of two or more generic versions of ANY of the following: alclometasone dipropionate 0.05% cream, desonide 0.05% cream/lotion, fluocinolone acetonide 0.01% cream/oil/solution, triamcinolone acetonide 0.025% cream"
@@ -77,9 +44,6 @@
   "CORDRAN 4 MCG/CM2 TAPE": [
     "Previous use of two or more generic versions of ANY of the following: betamethasone dipropionate (augmented) 0.05% lotion/ointment, clobetasol propionate 0.05% cream/foam/gel/lotion/ ointment/shampoo/solution/spray, fluocinonide 0.1% cream, halobetasol propionate 0.05% cream/ointment"
   ],
-  "CYMBALTA": [
-    "Previous use of generic bupropion, citalopram, desvenlafaxine ER, duloxetine, escitalopram (tablets, solution), fluoxetine, fluvoxamine, mirtazapine, paroxetine, sertraline, trazodone, venlafaxine, venlafaxine ER, or vilazodone; OR (if for neuropathic pain) previous use of generic amitriptyline, desipramine, duloxetine, gabapentin, imipramine, or nortriptyline; OR (if for fibromyalgia) previous use of generic amitriptyline, cyclobenzaprine, desipramine, duloxetine, gabapentin, imipramine, nortriptyline, or tramadol; OR (if for chronic musculoskeletal pain) previous use of generic acetaminophen, amitriptyline, cyclobenzaprine, desipramine, duloxetine, gabapentin, imipramine, nortriptyline, NSAID (oral or topical), or tramadol"
-  ],
   "DAPAGLIFLOZIN": [
     "Current or previous use of brand or generic versions of insulin, metformin, ACE inhibitor, angiotensin receptor blocker (ARB), angiotensin receptor-neprilysin inhibitor (ANRI) (e.g., Entresto), If channel inhibitor (e.g., Corlanor), aldosterone antagonist, beta blocker, isosorbide dinitrate, or hydralazine alone or part of a combination product"
   ],
@@ -89,7 +53,7 @@
   "DERMA-SMOOTHE 0.01% BODY OIL/SCALP OIL": [
     "Previous use of two or more generic versions of ANY of the following: alclometasone dipropionate 0.05% cream, desonide 0.05% cream/lotion, fluocinolone acetonide 0.01% cream/oil/solution, triamcinolone acetonide 0.025% cream"
   ],
-  "DEXCOM G6": [
+  "DEXCOM G6 AND G7 SYSTEMS (RECEIVER": [
     "Current use of insulin or insulin combination product"
   ],
   "DIPROLENE 0.05% OINTMENT": [
@@ -119,10 +83,7 @@
   "FREESTYLE LIBRE": [
     "Current use of insulin or insulin combination product"
   ],
-  "FREESTYLE LIBRE 2": [
-    "Current use of insulin or insulin combination product"
-  ],
-  "FREESTYLE LIBRE 3 SYSTEMS (READER": [
+  "FREESTYLE LIBRE 2 AND FREESTYLE LIBRE 3 SYSTEMS (READER AND SENSOR)": [
     "Current use of insulin or insulin combination product"
   ],
   "FROVA": [
@@ -130,9 +91,6 @@
   ],
   "FROVATRIPTAN": [
     "Previous use of ANY of the following generic triptans: eletriptan, naratriptan, rizatriptan, sumatriptan, zolmitriptan or zolmitriptan ODT"
-  ],
-  "G7 SYSTEMS (RECEIVER": [
-    "Current use of insulin or insulin combination product"
   ],
   "GABAPENTIN ONCE-DAILY (GENERIC GRALISE)": [
     "Previous use of generic immediate-release gabapentin"
@@ -191,42 +149,6 @@
   "KERENDIA": [
     "Previous use of any product containing a sodium- glucose cotransporter-2 (SGLT2) inhibitor [such as Farxiga, Jardiance, Synjardy, Synjardy XR, Glyxambi, Trijardy XR]"
   ],
-  "LEXAPRO": [
-    "Previous use of a generic version of ANY of the following: bupropion, citalopram, desvenlafaxine succinate ER (generic Pristiq), duloxetine, escitalopram (tablets, solution), fluoxetine, fluvoxamine, mirtazapine, paroxetine, sertraline, venlafaxine, venlafaxine ER or vilazodone"
-  ],
-  "PAROXETINE ORAL SUSPENSION": [
-    "Previous use of a generic version of ANY of the following: bupropion, citalopram, desvenlafaxine succinate ER (generic Pristiq), duloxetine, escitalopram (tablets, solution), fluoxetine, fluvoxamine, mirtazapine, paroxetine, sertraline, venlafaxine, venlafaxine ER or vilazodone"
-  ],
-  "PAXIL": [
-    "Previous use of a generic version of ANY of the following: bupropion, citalopram, desvenlafaxine succinate ER (generic Pristiq), duloxetine, escitalopram (tablets, solution), fluoxetine, fluvoxamine, mirtazapine, paroxetine, sertraline, venlafaxine, venlafaxine ER or vilazodone"
-  ],
-  "PAXIL CR": [
-    "Previous use of a generic version of ANY of the following: bupropion, citalopram, desvenlafaxine succinate ER (generic Pristiq), duloxetine, escitalopram (tablets, solution), fluoxetine, fluvoxamine, mirtazapine, paroxetine, sertraline, venlafaxine, venlafaxine ER or vilazodone"
-  ],
-  "PRISTIQ": [
-    "Previous use of a generic version of ANY of the following: bupropion, citalopram, desvenlafaxine succinate ER (generic Pristiq), duloxetine, escitalopram (tablets, solution), fluoxetine, fluvoxamine, mirtazapine, paroxetine, sertraline, venlafaxine, venlafaxine ER or vilazodone"
-  ],
-  "PROZAC": [
-    "Previous use of a generic version of ANY of the following: bupropion, citalopram, desvenlafaxine succinate ER (generic Pristiq), duloxetine, escitalopram (tablets, solution), fluoxetine, fluvoxamine, mirtazapine, paroxetine, sertraline, venlafaxine, venlafaxine ER or vilazodone"
-  ],
-  "REMERON": [
-    "Previous use of a generic version of ANY of the following: bupropion, citalopram, desvenlafaxine succinate ER (generic Pristiq), duloxetine, escitalopram (tablets, solution), fluoxetine, fluvoxamine, mirtazapine, paroxetine, sertraline, venlafaxine, venlafaxine ER or vilazodone"
-  ],
-  "REMERON SOLTAB": [
-    "Previous use of a generic version of ANY of the following: bupropion, citalopram, desvenlafaxine succinate ER (generic Pristiq), duloxetine, escitalopram (tablets, solution), fluoxetine, fluvoxamine, mirtazapine, paroxetine, sertraline, venlafaxine, venlafaxine ER or vilazodone"
-  ],
-  "SERTRALINE CAPSULES": [
-    "Previous use of a generic version of ANY of the following: bupropion, citalopram, desvenlafaxine succinate ER (generic Pristiq), duloxetine, escitalopram (tablets, solution), fluoxetine, fluvoxamine, mirtazapine, paroxetine, sertraline, venlafaxine, venlafaxine ER or vilazodone"
-  ],
-  "TRINTELLIX": [
-    "Previous use of a generic version of ANY of the following: bupropion, citalopram, desvenlafaxine succinate ER (generic Pristiq), duloxetine, escitalopram (tablets, solution), fluoxetine, fluvoxamine, mirtazapine, paroxetine, sertraline, venlafaxine, venlafaxine ER or vilazodone"
-  ],
-  "VENLAFAXINE ER 112.5 MG TABLET": [
-    "Previous use of a generic version of ANY of the following: bupropion, citalopram, desvenlafaxine succinate ER (generic Pristiq), duloxetine, escitalopram (tablets, solution), fluoxetine, fluvoxamine, mirtazapine, paroxetine, sertraline, venlafaxine, venlafaxine ER or vilazodone"
-  ],
-  "VIIBRYD": [
-    "Previous use of a generic version of ANY of the following: bupropion, citalopram, desvenlafaxine succinate ER (generic Pristiq), duloxetine, escitalopram (tablets, solution), fluoxetine, fluvoxamine, mirtazapine, paroxetine, sertraline, venlafaxine, venlafaxine ER or vilazodone"
-  ],
   "LOW POTENCY (GROUP 6) ALCLOMETASONE DIPROPIONATE 0.05% OINTMENT": [
     "Previous use of two or more generic versions of ANY of the following: alclometasone dipropionate 0.05% cream, desonide 0.05% cream/lotion, fluocinolone acetonide 0.01% cream/oil/solution, triamcinolone acetonide 0.025% cream"
   ],
@@ -239,7 +161,7 @@
   "LUNESTA": [
     "Previous use of a generic non-benzodiazepine hypnotic such as eszopiclone, zaleplon, or zolpidem IR or ER tablet"
   ],
-  "LYRICA": [
+  "LYRICA AND PREGABALIN ER": [
     "Previous use of generic pregabalin IR"
   ],
   "LYRICA CR": [
@@ -266,9 +188,6 @@
   "PIMECROLIMUS CREAM": [
     "Previous use of a topical corticosteroid or topical corticosteroid combination product including but not limited to ANY of the following products: betamethasone, clobetasol, desonide, desoximetasone, fluocinolone, fluocinonide, hydrocortisone, triamcinolone, diflorasone, or mometasone."
   ],
-  "PREGABALIN ER": [
-    "Previous use of generic pregabalin IR"
-  ],
   "QTERN": [
     "Current or previous use of brand or generic versions of insulin or metformin, alone or part of a combination product"
   ],
@@ -294,9 +213,6 @@
     "Current or previous use of brand or generic versions of insulin or metformin, alone or part of a combination product"
   ],
   "SENSOR": [
-    "Current use of insulin or insulin combination product"
-  ],
-  "SENSOR)": [
     "Current use of insulin or insulin combination product"
   ],
   "SILENOR": [
@@ -341,9 +257,6 @@
   "TRADJENTA": [
     "Current or previous use of brand or generic versions of insulin or metformin, alone or part of a combination product"
   ],
-  "TRANSMITTER)": [
-    "Current use of insulin or insulin combination product"
-  ],
   "TREXIMET": [
     "Previous use of ANY of the following generic triptans: eletriptan, naratriptan, rizatriptan, sumatriptan, zolmitriptan or zolmitriptan ODT"
   ],
@@ -355,15 +268,6 @@
   ],
   "VELPHORO": [
     "Previous use of BOTH a non-targeted generic phosphate binder (such as calcium acetate, calcium carbonate, calcium carbonate-magnesium acetate, lanthanum carbonate, sevelamer HCl, or sevelamer carbonate) AND Auryxia"
-  ],
-  "WELLBUTRIN SR": [
-    "Previous use of a generic version of ANY of the following: bupropion, citalopram, desvenlafaxine succinate ER (generic Pristiq), duloxetine, escitalopram (tablets, solution), fluoxetine, fluvoxamine, mirtazapine, paroxetine, sertraline, venlafaxine, venlafaxine ER or vilazodone"
-  ],
-  "WELLBUTRIN XL": [
-    "Previous use of a generic version of ANY of the following: bupropion, citalopram, desvenlafaxine succinate ER (generic Pristiq), duloxetine, escitalopram (tablets, solution), fluoxetine, fluvoxamine, mirtazapine, paroxetine, sertraline, venlafaxine, venlafaxine ER or vilazodone"
-  ],
-  "ZOLOFT": [
-    "Previous use of a generic version of ANY of the following: bupropion, citalopram, desvenlafaxine succinate ER (generic Pristiq), duloxetine, escitalopram (tablets, solution), fluoxetine, fluvoxamine, mirtazapine, paroxetine, sertraline, venlafaxine, venlafaxine ER or vilazodone"
   ],
   "XIGDUO XR": [
     "Current or previous use of brand or generic versions of insulin or metformin, alone or part of a combination product"

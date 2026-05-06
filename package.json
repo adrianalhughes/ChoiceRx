@@ -5,7 +5,9 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "responsible-steps:build": "python3 scripts/build_responsible_steps.py --download",
+    "responsible-steps:audit": "python3 scripts/audit_responsible_steps.py --download"
   },
   "dependencies": {
     "react": "^18.2.0",

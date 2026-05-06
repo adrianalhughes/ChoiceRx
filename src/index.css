@@ -284,11 +284,7 @@ body { min-height: 100vh; background: var(--bg); }
   align-items: start;
 }
 .covered-rx-header {
-  font-size: 16px;
-  font-weight: 700;
-  color: #ffffff;
-  margin: 0 0 14px;
-  line-height: 1.2;
+  margin: 4px 0 12px;
 }
 @media (max-width: 1200px) { .condition-grid { grid-template-columns: repeat(2,1fr); } }
 @media (max-width: 700px)  { .condition-grid { grid-template-columns: 1fr; } }
@@ -342,17 +338,18 @@ body { min-height: 100vh; background: var(--bg); }
 .req-banner   .banner-count { background: rgba(251,191,36,0.1); color: #FBBF24; }
 
 /* ── Drug table ── */
-.drug-table { width: 100%; border-collapse: collapse; font-size: 12.5px; }
-.drug-table th { padding: 7px 16px; text-align: left; font-size: 10px; font-weight: 700; letter-spacing: 0.6px; text-transform: uppercase; color: var(--text-muted); background: var(--bg-3); border-bottom: 1px solid var(--border); }
+.drug-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+.drug-table th { padding: 8px 16px; text-align: left; font-size: 11px; font-weight: 700; letter-spacing: 0.6px; text-transform: uppercase; color: var(--text-muted); background: var(--bg-3); border-bottom: 1px solid var(--border); }
 .drug-table th.center { text-align: center; }
-.drug-table td { padding: 8px 16px; border-bottom: 1px solid rgba(38,51,84,0.6); vertical-align: middle; color: var(--text); }
+.drug-table td { padding: 10px 16px; border-bottom: 1px solid rgba(38,51,84,0.6); vertical-align: middle; color: var(--text); }
 .drug-table tr:last-child td { border-bottom: none; }
 .drug-table tr:hover td { background: rgba(79,142,247,0.03); }
-.drug-name { line-height: 1.45; font-size: 12.5px; }
-.drug-name mark { background: rgba(251,191,36,0.25); color: #FDE68A; border-radius: 2px; padding: 0 2px; }
+.drug-name { line-height: 1.45; font-size: 14px; }
+.drug-name mark { background: rgba(251,191,36,0.25); color: #FDE68A; border-radius: 2px; padding: 0 2px; font-weight: 700; }
 
 /* ── Tier badge ── */
-.tier-badge { display: inline-flex; align-items: center; justify-content: center; font-family: 'DM Mono', monospace; font-size: 11px; font-weight: 600; width: 26px; height: 26px; border-radius: 7px; }
+.tier-badge { display: inline-flex; align-items: center; justify-content: center; font-family: 'DM Mono', monospace; font-size: 12px; font-weight: 700; width: 28px; height: 28px; border-radius: 7px; }
+.drug-table .tier-badge { color: #fcd34d !important; }
 .tier-1 { background: var(--t1-bg); color: var(--t1-fg); }
 .tier-2 { background: var(--t2-bg); color: var(--t2-fg); }
 .tier-3 { background: var(--t3-bg); color: var(--t3-fg); }
@@ -362,11 +359,11 @@ body { min-height: 100vh; background: var(--bg); }
 
 /* ── Flags ── */
 .flags { display: flex; gap: 4px; flex-wrap: wrap; justify-content: center; }
-.flag-chip { font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 4px; letter-spacing: 0.4px; }
+.flag-chip { font-size: 11px; font-weight: 700; padding: 3px 8px; border-radius: 4px; letter-spacing: 0.4px; }
 .flag-PA { background: var(--pa-bg); color: var(--pa-fg); }
 .flag-ST { background: var(--st-bg); color: var(--st-fg); }
 .flag-QL { background: var(--ql-bg); color: var(--ql-fg); }
-.ql-detail { font-size: 11px; color: var(--text-muted); font-family: 'DM Mono', monospace; }
+.ql-detail { font-size: 12px; color: #fcd34d; font-family: 'DM Mono', monospace; }
 
 /* ── Special notes ── */
 .special-note { padding: 9px 16px; font-size: 11px; line-height: 1.55; border-bottom: 1px solid var(--border); color: var(--text-muted); }
@@ -725,20 +722,24 @@ body { min-height: 100vh; background: var(--bg); }
 }
 
 .st-detail-label {
-  font-size: 10px;
+  font-size: 11px;
   font-weight: 700;
   letter-spacing: 0.5px;
   text-transform: uppercase;
   color: var(--st-fg);
 }
 
-.st-must-try-label { font-size: 11px; font-weight: 600; color: var(--text-mid); }
+.st-subtitle { font-size: 11px; font-style: italic; color: var(--text-muted); }
 
 .st-first-line-list { list-style: none; display: flex; flex-direction: column; gap: 3px; padding-left: 8px; }
-.st-first-line-list li { font-size: 11.5px; color: var(--text); }
+.st-first-line-list li { font-size: 13px; color: #fcd34d; }
 .st-first-line-list li::before { content: '·'; color: var(--st-fg); margin-right: 6px; }
 
-.st-no-data { font-size: 11px; color: var(--text-muted); }
+.st-no-data { font-size: 12px; color: var(--text-muted); }
 
-.st-criteria-link { font-size: 11px; color: var(--blue-bright); text-decoration: none; align-self: flex-start; margin-top: 2px; }
+.st-criteria-link { font-size: 12px; color: var(--blue-bright); text-decoration: none; align-self: flex-start; margin-top: 2px; }
 .st-criteria-link:hover { text-decoration: underline; }
+
+.not-found-st-list {
+  margin-top: 6px;
+}
