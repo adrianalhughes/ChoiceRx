@@ -1,5 +1,5 @@
 import DiabetesDashboard from './DiabetesDashboard'
-import ClinicalAgent from './ClinicalAgent'
+import FormularyAssistant from './FormularyAssistant'
 import uhcTexas from './data/uhc_texas.json'
 import uhcTexasEssential from './data/uhc_texas_essential.json'
 import { useState, useMemo } from 'react'
@@ -7,7 +7,13 @@ import bcbsfl from './data/bcbsfl.json'
 import simplechoice from './data/simplechoice.json'
 import notCovered from './data/not_covered.json'
 import specialtySelf from './data/specialty_self.json'
-import stepTherapy from './data/step_therapy.json'
+import {
+  normalizeDrugName,
+  getLeadingBrandCandidate,
+  matchesBrandName,
+  lookupStepTherapyForDrug,
+  lookupStepTherapyForQuery,
+} from './formularyHelpers'
 
 const PLANS = [
   { id: 'bcbsfl',              label: 'FL ValueScript Rx',          plan: 'Florida Blue',     payer: 'Florida Blue',     effective: 'April 2026', tiers: 6, data: bcbsfl,           highlight: true  },
@@ -313,85 +319,6 @@ const ExtIcon = () => (
 )
 
 const ST_PDF_URL = 'https://www.bcbsfl.com/DocumentLibrary/Providers/Content/Rx_ResponsibleSteps.pdf'
-
-function normalizeDrugName(value) {
-  return (value || '')
-    .toLowerCase()
-    .replace(/([a-z])(\d)/g, '$1 $2')
-    .replace(/(\d)([a-z])/g, '$1 $2')
-    .replace(/[^a-z0-9]+/g, ' ')
-    .trim()
-}
-
-function stripParentheticalText(value) {
-  return (value || '').replace(/\([^)]*\)/g, ' ').replace(/\s+/g, ' ').trim()
-}
-
-function matchesBrandName(drugName, query) {
-  const normalizedQuery = normalizeDrugName(query)
-  if (!normalizedQuery) return false
-
-  const leadingBrand = getLeadingBrandCandidate(drugName)
-  if (!leadingBrand) return false
-  const normalizedBrand = normalizeDrugName(leadingBrand)
-  return normalizedBrand === normalizedQuery || normalizedBrand.includes(normalizedQuery)
-}
-
-function getLeadingBrandCandidate(drugName) {
-  if (!drugName || !drugName.includes(' - ')) return null
-  const leading = drugName.split(' - ')[0].trim()
-  if (!leading) return null
-  return leading
-}
-
-const STEP_THERAPY_ENTRIES = Object.entries(stepTherapy).map(([key, prerequisites]) => ({
-  key,
-  normalizedKey: normalizeDrugName(key),
-  prerequisites,
-}))
-
-function lookupStepTherapyByTerm(term, { allowContains = true } = {}) {
-  if (!term) return null
-  const normalizedTerm = normalizeDrugName(term)
-  if (!normalizedTerm) return null
-
-  for (const entry of STEP_THERAPY_ENTRIES) {
-    if (entry.normalizedKey === normalizedTerm) return entry.prerequisites
-  }
-
-  if (allowContains) {
-    // Fallback for close variants (e.g., extra descriptors around target name)
-    for (const entry of STEP_THERAPY_ENTRIES) {
-      if (normalizedTerm.includes(entry.normalizedKey) || entry.normalizedKey.includes(normalizedTerm)) {
-        return entry.prerequisites
-      }
-    }
-  }
-  return null
-}
-
-function lookupStepTherapyForDrug(drugName) {
-  if (!drugName) return null
-  const canonicalDrugName = stripParentheticalText(drugName)
-
-  // 1) Exact full-string match on canonical (no parenthetical aliases)
-  const fullMatch = lookupStepTherapyByTerm(canonicalDrugName, { allowContains: false })
-  if (fullMatch) return fullMatch
-
-  // 2) Explicit leading brand patterns (e.g., "FARXIGA - ...")
-  const leadingBrand = getLeadingBrandCandidate(drugName)
-  if (leadingBrand) {
-    const leadingMatch = lookupStepTherapyByTerm(leadingBrand, { allowContains: false })
-    if (leadingMatch) return leadingMatch
-  }
-
-  return null
-}
-
-function lookupStepTherapyForQuery(query) {
-  if (!query) return null
-  return lookupStepTherapyByTerm(query)
-}
 
 function DrugRow({ drug, q, showFlags }) {
   const stDrugs = lookupStepTherapyForDrug(drug.name)
@@ -813,9 +740,9 @@ export default function App() {
 
           </div>
 
-          {/* ── Right: Agent + Sidebar nav ── */}
+          {/* ── Right: Assistant + Sidebar nav ── */}
           <div className="tools-panel">
-            <ClinicalAgent activePlan={activePlan} />
+            <FormularyAssistant activePlan={activePlan} />
             <nav className="sidebar-nav">
               <div className="sidebar-nav-head">Resources</div>
 
