@@ -34,8 +34,7 @@ const EXAMPLE_QUESTIONS = [
   "Why wasn't Jardiance covered?",
 ]
 
-const NOT_FOUND =
-  "This drug or topic wasn't found in the current plan data. Try searching the formulary directly above."
+const NOT_FOUND = 'Answer cannot be found.'
 
 const TIER_LABELS_4 = {
   1: 'Lower-Cost (Generic)',
@@ -504,54 +503,48 @@ export default function FormularyAssistant({ activePlan }) {
           borderTop: '1px solid #263354',
           flexShrink: 0,
           display: 'flex',
-          flexDirection: 'column',
           gap: 6,
+          alignItems: 'center',
         }}
       >
-        <div style={{ display: 'flex', gap: 6, alignItems: 'center' }}>
-          <input
-            value={input}
-            onChange={e => setInput(e.target.value)}
-            onKeyDown={e => e.key === 'Enter' && !e.shiftKey && send()}
-            placeholder="Ask about coverage, tiers, PA, or delivery resources…"
-            style={{
-              flex: 1,
-              background: '#1a2540',
-              border: '1px solid #2e3d65',
-              borderRadius: 7,
-              padding: '7px 11px',
-              fontSize: 12,
-              color: '#e2e8f0',
-              fontFamily: 'DM Sans, sans-serif',
-              outline: 'none',
-            }}
-          />
-          <button
-            type="button"
-            onClick={() => send()}
-            disabled={!input.trim()}
-            style={{
-              background: '#4f8ef7',
-              border: 'none',
-              borderRadius: 7,
-              width: 32,
-              height: 32,
-              cursor: 'pointer',
-              color: '#fff',
-              fontSize: 14,
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              opacity: !input.trim() ? 0.4 : 1,
-              flexShrink: 0,
-            }}
-          >
-            ↑
-          </button>
-        </div>
-        <div style={{ fontSize: 10, color: '#94a3b8', lineHeight: 1.35 }}>
-          Do not enter patient names or identifying information.
-        </div>
+        <input
+          value={input}
+          onChange={e => setInput(e.target.value)}
+          onKeyDown={e => e.key === 'Enter' && !e.shiftKey && send()}
+          style={{
+            flex: 1,
+            background: '#1a2540',
+            border: '1px solid #2e3d65',
+            borderRadius: 7,
+            padding: '7px 11px',
+            fontSize: 12,
+            color: '#e2e8f0',
+            fontFamily: 'DM Sans, sans-serif',
+            outline: 'none',
+          }}
+        />
+        <button
+          type="button"
+          onClick={() => send()}
+          disabled={!input.trim()}
+          style={{
+            background: '#4f8ef7',
+            border: 'none',
+            borderRadius: 7,
+            width: 32,
+            height: 32,
+            cursor: 'pointer',
+            color: '#fff',
+            fontSize: 14,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            opacity: !input.trim() ? 0.4 : 1,
+            flexShrink: 0,
+          }}
+        >
+          ↑
+        </button>
       </div>
     </div>
   )
