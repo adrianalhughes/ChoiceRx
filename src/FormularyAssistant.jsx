@@ -8,23 +8,9 @@ import {
   lookupStepTherapyForQuery,
 } from './formularyHelpers'
 
-const BenzeneIcon = () => (
-  <svg width="22" height="22" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <polygon points="50,8 85,28 85,72 50,92 15,72 15,28" fill="none" stroke="url(#fa-blueGrad)" strokeWidth="7" strokeLinejoin="round" />
-    <circle cx="50" cy="50" r="20" fill="none" stroke="url(#fa-greenGrad)" strokeWidth="5" />
-    {[[50, 8], [85, 28], [85, 72], [50, 92], [15, 72], [15, 28]].map(([x, y], i) => (
-      <circle key={i} cx={x} cy={y} r="5" fill={i % 2 === 0 ? '#4f8ef7' : '#4ade80'} />
-    ))}
-    <defs>
-      <linearGradient id="fa-blueGrad" x1="0" y1="0" x2="1" y2="1">
-        <stop offset="0%" stopColor="#4f8ef7" />
-        <stop offset="100%" stopColor="#7AADFF" />
-      </linearGradient>
-      <linearGradient id="fa-greenGrad" x1="0" y1="0" x2="1" y2="1">
-        <stop offset="0%" stopColor="#4ade80" />
-        <stop offset="100%" stopColor="#34d399" />
-      </linearGradient>
-    </defs>
+const ChatIcon = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" />
   </svg>
 )
 
@@ -67,7 +53,6 @@ const STOP_WORDS = new Set([
   'their', 'they', 'them', 'his', 'her', 'she', 'he', 'who', 'which', 'than', 'then', 'too', 'also', 'just', 'only', 'even', 'still', 'such',
 ])
 
-/** Same delivery-adjacent resources as sidebar (Sav-Rx + Cost Plus mail pricing). */
 const DELIVERY_RESOURCE_LINES = [
   'Sav-Rx — spreadsheet of medications available at participating Sanitas dispensing locations: https://docs.google.com/spreadsheets/d/1FvY54ZzkuLdAmFtbs4lZI42Pcd5z-Q4b/edit?usp=sharing&ouid=105603016175522070259&rtpof=true&sd=true',
   'Cost Plus Drugs — transparent mail-order pricing: https://costplusdrugs.com',
@@ -253,9 +238,7 @@ function buildDrugAnswer(activePlan, drug, intent, falsePremiseNegative) {
   }
 
   if (pa) parts.push('Prior authorization is required.')
-
   if (ql) parts.push(`Quantity limits: ${ql}.`)
-
   if (stFlag && stLines?.length) {
     const shown = stLines.slice(0, 3).map(l => shortenStLine(l, 220))
     parts.push(`Step therapy (condensed): ${shown.join(' ')}`)
@@ -282,7 +265,6 @@ function buildDeliveryAnswer() {
 function answerFormularyQuestion(rawQuery, activePlan) {
   const phrase = extractSearchPhrase(rawQuery)
   const phraseNorm = normalizeDrugName(phrase)
-
   const intent = detectIntent(rawQuery)
   let drugMatch = findBestDrug(phraseNorm, activePlan.data)
   if (!drugMatch && phraseNorm.length >= 4) {
@@ -294,77 +276,39 @@ function answerFormularyQuestion(rawQuery, activePlan) {
     }
   }
 
-  const deliveryEarly = wantsDeliveryOnly(rawQuery, phraseNorm, drugMatch?.score ?? 0)
-  if (deliveryEarly) return buildDeliveryAnswer()
+  if (wantsDeliveryOnly(rawQuery, phraseNorm, drugMatch?.score ?? 0)) return buildDeliveryAnswer()
 
   const nc = findNotCoveredMatch(phraseNorm)
-
-  if (drugMatch && nc) {
-    if (nc.score > drugMatch.score + 80) drugMatch = null
-  }
+  if (drugMatch && nc && nc.score > drugMatch.score + 80) drugMatch = null
 
   if (!drugMatch && nc) {
     return `${nc.name} appears on the imported not-covered exclusion list used by this reference — it is not treated as a covered formulary item in this dataset. Confirm with the plan for member-specific benefits.`
   }
 
   if (drugMatch) {
-    const falseNeg =
-      intent.negativeCoverage &&
-      drugMatch.drug.tier >= 1 &&
-      drugMatch.drug.tier <= 6
+    const falseNeg = intent.negativeCoverage && drugMatch.drug.tier >= 1 && drugMatch.drug.tier <= 6
     return buildDrugAnswer(activePlan, drugMatch.drug, intent, falseNeg)
   }
 
   const stOnly = buildStepTherapyOnlyAnswer(activePlan, phraseNorm || normalizeDrugName(rawQuery))
   if (stOnly) return stOnly
-
   if (intent.wantsDelivery) return buildDeliveryAnswer()
-
   return NOT_FOUND
 }
 
 function Message({ msg }) {
   if (msg.role === 'user') {
     return (
-      <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: 12 }}>
-        <div
-          style={{
-            background: 'rgba(79,142,247,0.18)',
-            border: '1px solid rgba(79,142,247,0.3)',
-            borderRadius: '12px 12px 2px 12px',
-            padding: '8px 14px',
-            fontSize: 13,
-            color: '#e2e8f0',
-            maxWidth: '85%',
-            lineHeight: 1.5,
-          }}
-        >
-          {msg.content}
-        </div>
+      <div className="fa-msg-user-wrap">
+        <div className="fa-msg-user">{msg.content}</div>
       </div>
     )
   }
-  return (
-    <div style={{ marginBottom: 14 }}>
-      <div
-        style={{
-          background: '#1a2540',
-          border: '1px solid #263354',
-          borderRadius: '2px 12px 12px 12px',
-          padding: '10px 14px',
-          fontSize: 13,
-          color: '#e2e8f0',
-          lineHeight: 1.6,
-          whiteSpace: 'pre-wrap',
-        }}
-      >
-        {msg.content}
-      </div>
-    </div>
-  )
+  return <div className="fa-msg-assistant">{msg.content}</div>
 }
 
 export default function FormularyAssistant({ activePlan }) {
+  const [open, setOpen] = useState(false)
   const [messages, setMessages] = useState([])
   const [input, setInput] = useState('')
   const bottomRef = useRef(null)
@@ -374,8 +318,8 @@ export default function FormularyAssistant({ activePlan }) {
   }, [activePlan.id])
 
   useEffect(() => {
-    if (bottomRef.current) bottomRef.current.scrollIntoView({ behavior: 'smooth' })
-  }, [messages])
+    if (open && bottomRef.current) bottomRef.current.scrollIntoView({ behavior: 'smooth' })
+  }, [messages, open])
 
   const send = text => {
     const userText = (text ?? input).trim()
@@ -391,161 +335,71 @@ export default function FormularyAssistant({ activePlan }) {
   }
 
   return (
-    <div
-      style={{
-        width: '100%',
-        background: '#0d1526',
-        border: '1px solid #263354',
-        borderRadius: 12,
-        display: 'flex',
-        flexDirection: 'column',
-        overflow: 'hidden',
-        marginBottom: 12,
-      }}
-    >
+    <>
       <div
-        style={{
-          padding: '10px 14px 8px',
-          background: '#1a2540',
-          borderBottom: '1px solid #263354',
-          flexShrink: 0,
-        }}
-      >
-        <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 4 }}>
-          <BenzeneIcon />
-          <span style={{ fontSize: 12, fontWeight: 700, color: '#ffffff' }}>Formulary Assistant</span>
-        </div>
-        <div style={{ paddingLeft: 28, display: 'flex', flexDirection: 'column', gap: 2 }}>
-          <div style={{ fontSize: 10, color: '#94a3b8', lineHeight: 1.4 }}>Searches your plan data locally</div>
-          <div style={{ fontSize: 9, color: '#64748b', lineHeight: 1.35 }}>Information is never sent to an external server</div>
-        </div>
-      </div>
+        className={`fa-overlay${open ? ' visible' : ''}`}
+        onClick={() => setOpen(false)}
+        aria-hidden={!open}
+      />
 
-      {messages.length > 0 && (
-        <div style={{ maxHeight: 320, overflowY: 'auto', padding: '12px 14px 6px' }}>
-          <button
-            type="button"
-            onClick={() => setMessages([])}
-            style={{
-              background: 'none',
-              border: '1px solid #263354',
-              borderRadius: 6,
-              padding: '3px 10px',
-              fontSize: 10,
-              color: '#64748b',
-              cursor: 'pointer',
-              fontFamily: 'DM Sans, sans-serif',
-              marginBottom: 10,
-              display: 'flex',
-              alignItems: 'center',
-              gap: 4,
-              transition: 'color 0.15s, border-color 0.15s',
-            }}
-            onMouseEnter={e => {
-              e.currentTarget.style.color = '#e2e8f0'
-              e.currentTarget.style.borderColor = '#4f8ef7'
-            }}
-            onMouseLeave={e => {
-              e.currentTarget.style.color = '#64748b'
-              e.currentTarget.style.borderColor = '#263354'
-            }}
-          >
-            ← New question
-          </button>
+      <div className={`fa-slide-panel${open ? ' open' : ''}`} role="dialog" aria-label="Formulary Assistant">
+        <div className="fa-panel-header">
+          <div className="fa-panel-header-top">
+            <span className="fa-panel-title">Formulary Assistant</span>
+            <button type="button" className="fa-panel-close" onClick={() => setOpen(false)} aria-label="Close">
+              ×
+            </button>
+          </div>
+          <div className="fa-panel-subtitle">Searches your plan data locally</div>
+          <div className="fa-panel-subtitle-muted">Information is never sent to an external server</div>
+        </div>
+
+        <div className="fa-panel-body">
+          {messages.length > 0 && (
+            <button type="button" className="fa-reset" onClick={() => setMessages([])}>
+              ← New question
+            </button>
+          )}
+          {messages.length === 0 && (
+            <>
+              <div className="fa-examples-label">Try one of these:</div>
+              {EXAMPLE_QUESTIONS.map((q, i) => (
+                <button key={i} type="button" className="fa-example-btn" onClick={() => onExampleClick(q)}>
+                  {q}
+                </button>
+              ))}
+            </>
+          )}
           {messages.map((m, i) => (
             <Message key={i} msg={m} />
           ))}
           <div ref={bottomRef} />
         </div>
-      )}
 
-      {messages.length === 0 && (
-        <div style={{ padding: '10px 12px' }}>
-          <div style={{ fontSize: 10, color: '#475569', marginBottom: 7 }}>Try one of these:</div>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
-            {EXAMPLE_QUESTIONS.map((q, i) => (
-              <button
-                key={i}
-                type="button"
-                onClick={() => onExampleClick(q)}
-                style={{
-                  background: '#1a2540',
-                  border: '1px solid #263354',
-                  borderRadius: 7,
-                  padding: '6px 10px',
-                  cursor: 'pointer',
-                  fontSize: 11,
-                  color: '#94a3b8',
-                  textAlign: 'left',
-                  lineHeight: 1.35,
-                  fontFamily: 'DM Sans, sans-serif',
-                  transition: 'all 0.15s',
-                }}
-                onMouseEnter={e => {
-                  e.currentTarget.style.borderColor = '#4f8ef7'
-                  e.currentTarget.style.color = '#e2e8f0'
-                }}
-                onMouseLeave={e => {
-                  e.currentTarget.style.borderColor = '#263354'
-                  e.currentTarget.style.color = '#94a3b8'
-                }}
-              >
-                {q}
-              </button>
-            ))}
-          </div>
+        <div className="fa-panel-input-row">
+          <input
+            className="fa-panel-input"
+            value={input}
+            onChange={e => setInput(e.target.value)}
+            onKeyDown={e => e.key === 'Enter' && !e.shiftKey && send()}
+            aria-label="Message to formulary assistant"
+          />
+          <button type="button" className="fa-panel-send" onClick={() => send()} disabled={!input.trim()}>
+            ↑
+          </button>
         </div>
-      )}
+      </div>
 
-      <div
-        style={{
-          padding: '8px 10px',
-          borderTop: '1px solid #263354',
-          flexShrink: 0,
-          display: 'flex',
-          gap: 6,
-          alignItems: 'center',
-        }}
-      >
-        <input
-          value={input}
-          onChange={e => setInput(e.target.value)}
-          onKeyDown={e => e.key === 'Enter' && !e.shiftKey && send()}
-          style={{
-            flex: 1,
-            background: '#1a2540',
-            border: '1px solid #2e3d65',
-            borderRadius: 7,
-            padding: '7px 11px',
-            fontSize: 12,
-            color: '#e2e8f0',
-            fontFamily: 'DM Sans, sans-serif',
-            outline: 'none',
-          }}
-        />
+      <div className="fa-fab-wrap">
         <button
           type="button"
-          onClick={() => send()}
-          disabled={!input.trim()}
-          style={{
-            background: '#4f8ef7',
-            border: 'none',
-            borderRadius: 7,
-            width: 32,
-            height: 32,
-            cursor: 'pointer',
-            color: '#fff',
-            fontSize: 14,
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            opacity: !input.trim() ? 0.4 : 1,
-            flexShrink: 0,
-          }}
+          className="fa-fab"
+          onClick={() => setOpen(o => !o)}
+          aria-label="Formulary Assistant"
         >
-          ↑
+          <ChatIcon />
         </button>
       </div>
-    </div>
+    </>
   )
 }

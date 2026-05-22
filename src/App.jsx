@@ -61,31 +61,6 @@ const STANDARD_CATEGORY_NAMES = [
   'Miscellaneous',
 ]
 
-const MONTH_INDEX = {
-  january: 0, february: 1, march: 2, april: 3, may: 4, june: 5,
-  july: 6, august: 7, september: 8, october: 9, november: 10, december: 11,
-}
-
-function parseMonthYear(value) {
-  if (!value || typeof value !== 'string') return null
-  const match = value.trim().match(/^([A-Za-z]+)\s+(\d{4})$/)
-  if (!match) return null
-  const month = MONTH_INDEX[match[1].toLowerCase()]
-  const year = Number(match[2])
-  if (month === undefined || Number.isNaN(year)) return null
-  return new Date(year, month, 1).getTime()
-}
-
-function extractPlanUpdateLabel(plan) {
-  const data = plan?.data
-  if (data && !Array.isArray(data) && typeof data === 'object') {
-    const candidates = [data.last_updated, data.lastUpdated, data.updated_at, data.as_of, data.effective]
-      .filter(v => typeof v === 'string' && v.trim().length > 0)
-    if (candidates[0]) return candidates[0].trim()
-  }
-  return plan?.effective
-}
-
 function getStandardCategoryName(conditionName) {
   const c = (conditionName || '').toLowerCase()
 
@@ -306,11 +281,6 @@ const ChevronRight = ({ className }) => (
     <polyline points="6 3 11 8 6 13" />
   </svg>
 )
-const SearchIcon = ({ className }) => (
-  <svg className={className} viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round">
-    <circle cx="6.5" cy="6.5" r="4.5" /><line x1="10.5" y1="10.5" x2="14" y2="14" />
-  </svg>
-)
 const ExtIcon = () => (
   <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"
     style={{width:11,height:11,display:'inline',marginLeft:4,verticalAlign:'middle'}}>
@@ -364,11 +334,17 @@ function ConditionBlock({ name, cleanDrugs, restrictedDrugs, q, forceOpen }) {
       <button className="condition-header" onClick={() => setOpen(o => !o)} aria-expanded={isOpen}>
         <ChevronRight className="chevron" />
         <span className="condition-name">{name}</span>
-        <div className="condition-meta">
-          {cleanDrugs.length > 0 && <span className="meta-pill clean">{cleanDrugs.length} open</span>}
-          {restrictedDrugs.length > 0 && <span className="meta-pill req">{restrictedDrugs.length} restriction</span>}
-        </div>
       </button>
+      {total > 0 && (
+        <div className="condition-ratio-bar" aria-hidden="true">
+          {cleanDrugs.length > 0 && (
+            <span className="condition-ratio-seg open" style={{ flex: cleanDrugs.length }} />
+          )}
+          {restrictedDrugs.length > 0 && (
+            <span className="condition-ratio-seg restricted" style={{ flex: restrictedDrugs.length }} />
+          )}
+        </div>
+      )}
 
       {isOpen && (
         <div className="condition-body">
@@ -512,28 +488,83 @@ function SpecialtyNotCoveredBlock({ q }) {
   )
 }
 
-function SidebarSection({ title, children }) {
-  const [open, setOpen] = useState(false)
+function ResourceLink({ href, name, desc }) {
   return (
-    <div className={`sbnav-section${open ? ' open' : ''}`}>
-      <button className="sbnav-header" onClick={() => setOpen(o => !o)}>
-        <span className="sbnav-label">{title}</span>
-        <ChevronRight className="sbnav-chevron" />
-      </button>
-      {open && <div className="sbnav-body">{children}</div>}
-    </div>
-  )
-}
-
-function SidebarLink({ href, name, desc }) {
-  return (
-    <a href={href} target="_blank" rel="noopener noreferrer" className="sbnav-link">
-      <span className="sbnav-link-text">
-        <span className="sbnav-link-name">{name}</span>
-        {desc && <span className="sbnav-link-desc">{desc}</span>}
+    <a href={href} target="_blank" rel="noopener noreferrer" className="resource-link">
+      <span className="resource-link-text">
+        <span className="resource-link-name">{name}</span>
+        {desc && <span className="resource-link-desc">{desc}</span>}
       </span>
       <ExtIcon />
     </a>
+  )
+}
+
+const RESOURCE_TABS = [
+  { id: 'protocols', label: 'Protocols', unavailable: true },
+  { id: 'pa', label: 'Prior Authorizations' },
+  { id: 'discounts', label: 'Discounts & Affordability' },
+  { id: 'off-formulary', label: 'Off-Formulary Drugs' },
+]
+
+function resourceTabTitle(tabId) {
+  return RESOURCE_TABS.find(t => t.id === tabId)?.label ?? 'Resources'
+}
+
+function ResourcesStrip({ activeTab, onTabChange, children }) {
+  const toggleTab = id => onTabChange(activeTab === id ? null : id)
+
+  return (
+    <div className="resources-sticky-wrap">
+      <div className="resources-toolbar">
+        <span className="resources-label">Resources</span>
+        <span className="resources-pointer" aria-hidden="true">
+          <span className="resources-pointer-btn">→</span>
+        </span>
+        <div className="resources-tab-strip" role="tablist" aria-label="Resource categories">
+          {RESOURCE_TABS.map(tab => (
+            <button
+              key={tab.id}
+              type="button"
+              role="tab"
+              aria-selected={activeTab === tab.id}
+              aria-expanded={activeTab === tab.id}
+              className={`resources-tab${activeTab === tab.id ? ' active' : ''}${tab.unavailable ? ' resources-tab--flagged' : ''}`}
+              onClick={() => toggleTab(tab.id)}
+            >
+              {tab.label}
+              {tab.unavailable && (
+                <sup className="resources-tab-dagger" title="Link temporarily unavailable">†</sup>
+              )}
+            </button>
+          ))}
+          <a
+            href="https://openevidence.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="resources-tab-link"
+          >
+            Open Evidence
+          </a>
+        </div>
+      </div>
+      {activeTab && (
+        <div className="resources-panel" role="tabpanel" aria-label={resourceTabTitle(activeTab)}>
+          <div className="resources-panel-header">
+            <span className="resources-panel-title">{resourceTabTitle(activeTab)}</span>
+            <button
+              type="button"
+              className="resources-panel-close"
+              onClick={() => onTabChange(null)}
+              aria-label="Close resources panel"
+            >
+              Close
+            </button>
+          </div>
+          <div className="resources-panel-body">{children}</div>
+        </div>
+      )}
+    </div>
   )
 }
 
@@ -543,17 +574,6 @@ export default function App() {
   const [query, setQuery] = useState('')
 
   const q = query.trim().toLowerCase()
-
-  const formularyLastUpdated = useMemo(() => {
-    const datedPlans = PLANS
-      .map(plan => {
-        const effective = extractPlanUpdateLabel(plan)
-        return { effective, ts: parseMonthYear(effective) }
-      })
-      .filter(plan => plan.ts !== null)
-      .sort((a, b) => b.ts - a.ts)
-    return datedPlans[0]?.effective || 'Unknown'
-  }, [])
 
   const filtered = useMemo(() => {
     const useBrandOnlyMatching = q
@@ -598,73 +618,157 @@ export default function App() {
   }, [activePlan.data, q])
 
   const [tabsOpen, setTabsOpen] = useState(false)
+  const [resourceTab, setResourceTab] = useState(null)
 
   return (
     <>
       <header className="app-header">
-        <div>
-          <div className="wordmark">Sanitas</div>
-          <div className="wordmark-sub">Pharmacy Web App<sup className="beta-sup">β</sup></div>
-        </div>
+        <h1 className="wordmark">
+          Sanitas Formulary Navigator<sup className="beta-sup">β</sup>
+        </h1>
 
       </header>
 
-      {/* ── Plan selector — collapsible ── */}
       <div className="plan-bar">
         <div className="plan-bar-inner">
-          <div className="plan-heading-stack">
-            <button
-              className="plan-toggle-btn"
-              onClick={() => setTabsOpen(o => !o)}
-            >
-              Choose the plan formulary
-              <span className="plan-toggle-chevron">{tabsOpen ? '▾' : '›'}</span>
-            </button>
-            <div className="plan-last-updated">Last Updated: {formularyLastUpdated}</div>
-          </div>
-          {!tabsOpen && <span className="plan-separator">·</span>}
-          {tabsOpen && (
-            <div className="formulary-tabs">
-              {PLANS.map(plan => (
-                <button key={plan.id}
-                  className={`formulary-tab ${activePlan.id === plan.id ? 'active' : ''} ${plan.txTab ? 'tx-tab' : 'fl-tab'}`}
-                  onClick={() => { setActivePlan(plan); setQuery(''); setTabsOpen(false) }}>
-                  <span className="tab-name">{plan.label}</span>
-                </button>
-              ))}
+          <button
+            type="button"
+            className={`plan-select-card${tabsOpen ? ' is-open' : ''}`}
+            onClick={() => setTabsOpen(o => !o)}
+            aria-expanded={tabsOpen}
+            aria-haspopup="listbox"
+          >
+            <span className="plan-select-eyebrow">Formulary plan</span>
+            <span className="plan-select-row">
+              <span className="plan-select-value">{activePlan.label}</span>
+              <span className="plan-select-chevron" aria-hidden="true">{tabsOpen ? '▾' : '▸'}</span>
+            </span>
+            <span className="plan-select-hint">{tabsOpen ? 'Select a plan below' : 'Click to change plan'}</span>
+          </button>
+          <div className="plan-bar-meta">
+            <div className="plan-meta-line">
+              <span className="plan-meta-label">Plan effective</span>
+              <span className="plan-meta-value">{activePlan.effective}</span>
             </div>
-          )}
-          {!tabsOpen && (
-            <span className="active-plan-text">{activePlan.label}</span>
-          )}
+            <div className="plan-meta-line plan-meta-line-sub">
+              <span className="plan-meta-label">Data refresh</span>
+              <span className="plan-meta-value">Monthly (2nd of each month) when payer files update</span>
+            </div>
+          </div>
         </div>
+        {tabsOpen && (
+          <div className="formulary-tabs" role="listbox" aria-label="Formulary plans">
+            {PLANS.map(plan => (
+              <button
+                key={plan.id}
+                type="button"
+                role="option"
+                aria-selected={activePlan.id === plan.id}
+                className={`formulary-tab ${activePlan.id === plan.id ? 'active' : ''} ${plan.txTab ? 'tx-tab' : 'fl-tab'}`}
+                onClick={() => { setActivePlan(plan); setQuery(''); setTabsOpen(false) }}
+              >
+                <span className="tab-name">{plan.label}</span>
+                <span className="tab-effective">{plan.effective}</span>
+              </button>
+            ))}
+          </div>
+        )}
       </div>
 
       <main className="main-content">
-        <div className="split-layout">
-
-          {/* ── Left: Formulary ── */}
           <div className="formulary-panel">
             <div className="panel-question">What are the coverage details?</div>
 
             <div className="panel-search-wrap">
-              <SearchIcon className="search-icon" />
-              <input
-                className="search-input"
-                type="text"
-                placeholder="Search drug name..."
-                value={query}
-                onChange={e => setQuery(e.target.value)}
-                autoComplete="off"
-                spellCheck={false}
-              />
-              {query && <button className="search-clear" onClick={() => setQuery('')} aria-label="Clear">✕</button>}
+              <form
+                className="panel-search-form"
+                onSubmit={e => e.preventDefault()}
+              >
+                <input
+                  className="search-input"
+                  type="text"
+                  placeholder="Search drug name..."
+                  value={query}
+                  onChange={e => setQuery(e.target.value)}
+                  autoComplete="off"
+                  spellCheck={false}
+                  aria-label="Search drug name"
+                />
+                <button type="submit" className="search-submit">Search</button>
+              </form>
+              {query && (
+                <button
+                  type="button"
+                  className="search-clear"
+                  onClick={() => setQuery('')}
+                  aria-label="Clear search"
+                >
+                  ✕
+                </button>
+              )}
               {q && (
                 <div className="search-count">
                   {filtered.formularyMatches === 0 ? 'No formulary matches found' : `${filtered.formularyMatches} formulary drug${filtered.formularyMatches !== 1 ? 's' : ''} matched`}
                 </div>
               )}
             </div>
+
+            <ResourcesStrip activeTab={resourceTab} onTabChange={setResourceTab}>
+              {resourceTab === 'protocols' && (
+                <div className="resource-unavailable">
+                  <p className="resource-unavailable-title">
+                    Sanitas Education Site<sup className="resources-tab-dagger">†</sup>
+                  </p>
+                  <p className="resource-unavailable-desc">
+                    The protocols site is under construction and the link is temporarily unavailable.
+                    Check back after the education site is republished.
+                  </p>
+                </div>
+              )}
+              {resourceTab === 'pa' && (
+                <>
+                  <ResourceLink
+                    href="https://oidc.covermymeds.com/login?return_url=%2Foauth%2Fauthorize%3Fclient_id%3D-QXKSuZr5mOEba23vs1QzqnlFiQFwSVj70BG2nrD3SI%26nonce%3Dd25026b0bd0b60612235a1de7a171bc9%26redirect_uri%3Dhttps%253A%252F%252Faccount.covermymeds.com%252Fauth%252Fcmm_oidc%252Fcallback%26response_type%3Dcode%26scope%3Dopenid%2520profile%2520email%2520offline_access%26state%3Db42ce2e4a3453a45e9dbf64760e84d73"
+                    name="CoverMyMeds Portal"
+                    desc="Submit & track PA requests"
+                  />
+                  <ResourceLink
+                    href="https://docs.google.com/document/d/1EsuVXqVm7wf1fea1gIxGZvqudmPOewjB/edit?usp=sharing"
+                    name="CoverMyMeds Help Guide"
+                    desc="Step-by-step tutorial"
+                  />
+                  <ResourceLink
+                    href="https://www.myprime.com/en/forms/coverage-determination/prior-authorization.html"
+                    name="PA Summaries & Fax Forms"
+                    desc="Florida Blue · MyPrime"
+                  />
+                </>
+              )}
+              {resourceTab === 'discounts' && (
+                <>
+                  <ResourceLink href="https://www.goodrx.com" name="GoodRx" desc="Cash prices at local pharmacies" />
+                  <ResourceLink
+                    href="https://docs.google.com/spreadsheets/d/1FvY54ZzkuLdAmFtbs4lZI42Pcd5z-Q4b/edit?usp=sharing&ouid=105603016175522070259&rtpof=true&sd=true"
+                    name="Sav-Rx"
+                    desc="At participating Sanitas dispensing locations"
+                  />
+                  <ResourceLink href="https://costplusdrugs.com" name="Cost Plus Drugs" desc="Transparent-pricing mail pharmacy" />
+                  <ResourceLink href="https://trumprx.gov/" name="TrumpRx" desc="Federally negotiated IRA prices" />
+                  <ResourceLink href="https://www.rxassist.org" name="RxAssist" desc="Manufacturer PAPs for uninsured patients" />
+                  <ResourceLink
+                    href="https://www.bcbsfl.com/DocumentLibrary/Providers/Content/RxF_ConditionCare.pdf"
+                    name="FL Blue Condition Care List"
+                    desc="Generic options for common conditions · PDF"
+                  />
+                </>
+              )}
+              {resourceTab === 'off-formulary' && (
+                <div className="resources-off-formulary">
+                  <NonPreferredBlock drugs={filtered.tier6} q={q} />
+                  <NotCoveredBlock drugs={filtered.ncDrugs} appendixDrugs={filtered.ncAppend} q={q} />
+                </div>
+              )}
+            </ResourcesStrip>
             <div className={`tier-legend-inline plan-tiers-${activePlan.tiers}`}>
               {(() => {
                 const labels = activePlan.tiers === 3 ? TIER_LABELS_3 : activePlan.tiers === 4 ? TIER_LABELS_4 : TIER_LABELS_6
@@ -738,72 +842,15 @@ export default function App() {
               </div>
             )}
 
-          </div>
-
-          {/* ── Right: Assistant + Sidebar nav ── */}
-          <div className="tools-panel">
-            <FormularyAssistant activePlan={activePlan} />
-            <nav className="sidebar-nav">
-              <div className="sidebar-nav-head">Resources</div>
-
-              <SidebarSection title="Protocols">
-                <SidebarLink
-                  href="https://sites.google.com/mysanitas.com/sanitaseducationsite/adults/endocrinology/diabetes-mellitus-resouces"
-                  name="Sanitas Education Site"
-                  desc="Medication protocols · Endocrinology · Adults"
-                />
-              </SidebarSection>
-
-              <SidebarSection title="Prior Authorizations">
-                <SidebarLink
-                  href="https://oidc.covermymeds.com/login?return_url=%2Foauth%2Fauthorize%3Fclient_id%3D-QXKSuZr5mOEba23vs1QzqnlFiQFwSVj70BG2nrD3SI%26nonce%3Dd25026b0bd0b60612235a1de7a171bc9%26redirect_uri%3Dhttps%253A%252F%252Faccount.covermymeds.com%252Fauth%252Fcmm_oidc%252Fcallback%26response_type%3Dcode%26scope%3Dopenid%2520profile%2520email%2520offline_access%26state%3Db42ce2e4a3453a45e9dbf64760e84d73"
-                  name="CoverMyMeds Portal"
-                  desc="Submit & track PA requests"
-                />
-                <SidebarLink
-                  href="https://docs.google.com/document/d/1EsuVXqVm7wf1fea1gIxGZvqudmPOewjB/edit?usp=sharing"
-                  name="CoverMyMeds Help Guide"
-                  desc="Step-by-step tutorial"
-                />
-                <SidebarLink
-                  href="https://www.myprime.com/en/forms/coverage-determination/prior-authorization.html"
-                  name="PA Summaries & Fax Forms"
-                  desc="Florida Blue · MyPrime"
-                />
-              </SidebarSection>
-
-              <SidebarSection title="Discounts & Affordability Programs">
-                <SidebarLink href="https://www.goodrx.com" name="GoodRx" desc="Cash prices at local pharmacies" />
-                <SidebarLink
-                  href="https://docs.google.com/spreadsheets/d/1FvY54ZzkuLdAmFtbs4lZI42Pcd5z-Q4b/edit?usp=sharing&ouid=105603016175522070259&rtpof=true&sd=true"
-                  name="Sav-Rx"
-                  desc="At participating Sanitas dispensing locations"
-                />
-                <SidebarLink href="https://costplusdrugs.com" name="Cost Plus Drugs" desc="Transparent-pricing mail pharmacy" />
-                <SidebarLink href="https://trumprx.gov/" name="TrumpRx" desc="Federally negotiated IRA prices" />
-                <SidebarLink href="https://www.rxassist.org" name="RxAssist" desc="Manufacturer PAPs for uninsured patients" />
-                <SidebarLink
-                  href="https://www.bcbsfl.com/DocumentLibrary/Providers/Content/RxF_ConditionCare.pdf"
-                  name="FL Blue Condition Care List"
-                  desc="Generic options for common conditions · PDF"
-                />
-              </SidebarSection>
-
-              <SidebarSection title="Off-Formulary Drugs">
-                <NonPreferredBlock drugs={filtered.tier6} q={q} />
-                <NotCoveredBlock drugs={filtered.ncDrugs} appendixDrugs={filtered.ncAppend} q={q} />
-              </SidebarSection>
-
-            </nav>
-            <a href="mailto:ahughes@mysanitas.com?subject=Sanitas Formulary — Feedback" className="sidebar-feedback">
+            <a href="mailto:ahughes@mysanitas.com?subject=Sanitas Formulary Navigator — Feedback" className="app-feedback">
               Report an issue
             </a>
           </div>
-
-        </div>
       </main>
 
-      <footer className="app-footer" style={{height:'8px',padding:0,border:'none'}} />
+      <FormularyAssistant activePlan={activePlan} />
+
+      <footer className="app-footer" style={{ height: '8px', padding: 0, border: 'none' }} />
     </>
   )
 }
