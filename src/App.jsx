@@ -677,7 +677,7 @@ export default function App() {
 
       <main className="main-content">
           <div className="formulary-panel">
-            <div className="panel-question">What are the coverage details?</div>
+            <div className="panel-question">What's on the formulary?</div>
 
             <div className="panel-search-wrap">
               <form
