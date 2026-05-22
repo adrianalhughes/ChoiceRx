@@ -65,13 +65,6 @@ body { min-height: 100vh; background: var(--bg); color: var(--text-body); }
   white-space: nowrap;
   line-height: 1.25;
 }
-.beta-sup {
-  font-size: 0.55em;
-  color: var(--blue-dark);
-  font-weight: 700;
-  margin-left: 2px;
-  vertical-align: super;
-}
 .access-gate-wordmark.wordmark { text-align: center; white-space: normal; }
 
 /* ── Plan bar ── */

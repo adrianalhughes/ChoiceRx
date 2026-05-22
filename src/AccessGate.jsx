@@ -25,7 +25,7 @@ export default function AccessGate({ children }) {
     <div className="access-gate-page">
       <div className="access-gate-card">
         <h1 className="access-gate-wordmark wordmark">
-          Sanitas Formulary Navigator<sup className="beta-sup">β</sup>
+          Quick-Search Formulary Navigator
         </h1>
 
         <div className="access-gate-desc">

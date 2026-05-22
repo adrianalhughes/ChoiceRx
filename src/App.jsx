@@ -624,7 +624,7 @@ export default function App() {
     <>
       <header className="app-header">
         <h1 className="wordmark">
-          Sanitas Formulary Navigator<sup className="beta-sup">β</sup>
+          Quick-Search Formulary Navigator
         </h1>
 
       </header>
@@ -842,7 +842,7 @@ export default function App() {
               </div>
             )}
 
-            <a href="mailto:ahughes@mysanitas.com?subject=Sanitas Formulary Navigator — Feedback" className="app-feedback">
+            <a href="mailto:ahughes@mysanitas.com?subject=Quick-Search Formulary Navigator — Feedback" className="app-feedback">
               Report an issue
             </a>
           </div>
