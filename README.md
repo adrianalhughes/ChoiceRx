@@ -2,7 +2,7 @@
 
 Formulary reference tool for value-based care settings.
 
-**Current formulary:** Florida Blue ValueScript Rx, April 2026
+**Current formulary:** Florida Blue ValueScript Rx, May 2026
 
 ## Deploy to Vercel
 

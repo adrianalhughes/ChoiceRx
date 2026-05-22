@@ -71,6 +71,18 @@ ST_PDF_URL = "https://www.bcbsfl.com/DocumentLibrary/Providers/Content/Rx_Respon
 def pdf_hash(path):
     return hashlib.md5(open(path, "rb").read()).hexdigest()
 
+def fl_drug_count(data):
+    return sum(len(c.get("clean", [])) + len(c.get("restricted", [])) for c in data)
+
+def assert_fl_parse_ok(plan_id, data):
+    """Reject bad parses so monthly automation cannot wipe the formulary."""
+    n_cond = len(data)
+    n_drugs = fl_drug_count(data)
+    if n_cond < 10 or n_drugs < 1000:
+        raise ValueError(
+            f"{plan_id}: parse looks wrong ({n_cond} categories, {n_drugs} drugs) — keeping existing JSON"
+        )
+
 def download_pdf(url, dest):
     headers = {"User-Agent": "Mozilla/5.0 (compatible; SanitasBot/1.0)"}
     r = requests.get(url, headers=headers, timeout=60)
@@ -418,6 +430,7 @@ def main():
             download_pdf(plan["url"], pdf_path)
             print("  Parsing...")
             data = parse_fl_6tier(pdf_path)
+            assert_fl_parse_ok(plan["id"], data)
             out_path = DATA_DIR / plan["out"]
             # Check if data actually changed
             old_hash = hashlib.md5(open(out_path, "rb").read()).hexdigest() if out_path.exists() else ""
