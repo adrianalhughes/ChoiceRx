@@ -645,16 +645,6 @@ export default function App() {
             </span>
             <span className="plan-select-hint">{tabsOpen ? 'Select a plan below' : 'Click to change plan'}</span>
           </button>
-          <div className="plan-bar-meta">
-            <div className="plan-meta-line">
-              <span className="plan-meta-label">Data refresh</span>
-              <span className="plan-meta-value">Manual</span>
-            </div>
-            <div className="plan-meta-line">
-              <span className="plan-meta-label">Developed</span>
-              <span className="plan-meta-value">May 2026</span>
-            </div>
-          </div>
         </div>
         {tabsOpen && (
           <div className="formulary-tabs" role="listbox" aria-label="Formulary plans">
