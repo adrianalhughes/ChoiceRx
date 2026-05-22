@@ -16,10 +16,10 @@ import {
 } from './formularyHelpers'
 
 const PLANS = [
-  { id: 'bcbsfl',              label: 'FL ValueScript Rx',          plan: 'Florida Blue',     payer: 'Florida Blue',     effective: 'May 2026', tiers: 6, data: bcbsfl,           highlight: true  },
-  { id: 'simplechoice',        label: 'FL ValueScript SimpleChoice', plan: 'Florida Blue',     payer: 'Florida Blue',     effective: 'May 2026', tiers: 6, data: simplechoice,      highlight: false },
-  { id: 'uhc_texas',           label: 'TX Advantage 3-Tier',         plan: 'UnitedHealthcare', payer: 'UnitedHealthcare', effective: 'May 2026',   tiers: 3, data: uhcTexas,          highlight: true,  txTab: true  },
-  { id: 'uhc_texas_essential', label: 'TX Essential 4-Tier',         plan: 'UnitedHealthcare', payer: 'UnitedHealthcare', effective: 'May 2026',   tiers: 4, data: uhcTexasEssential, highlight: true,  txTab: true  },
+  { id: 'bcbsfl',              label: 'FL ValueScript Rx',          plan: 'Florida Blue',     payer: 'Florida Blue',     tiers: 6, data: bcbsfl,           highlight: true  },
+  { id: 'simplechoice',        label: 'FL ValueScript SimpleChoice', plan: 'Florida Blue',     payer: 'Florida Blue',     tiers: 6, data: simplechoice,      highlight: false },
+  { id: 'uhc_texas',           label: 'TX Advantage 3-Tier',         plan: 'UnitedHealthcare', payer: 'UnitedHealthcare', tiers: 3, data: uhcTexas,          highlight: true,  txTab: true  },
+  { id: 'uhc_texas_essential', label: 'TX Essential 4-Tier',         plan: 'UnitedHealthcare', payer: 'UnitedHealthcare', tiers: 4, data: uhcTexasEssential, highlight: true,  txTab: true  },
 ]
 
 const TIER_LABELS_4 = {
@@ -647,12 +647,12 @@ export default function App() {
           </button>
           <div className="plan-bar-meta">
             <div className="plan-meta-line">
-              <span className="plan-meta-label">Plan effective</span>
-              <span className="plan-meta-value">{activePlan.effective}</span>
-            </div>
-            <div className="plan-meta-line plan-meta-line-sub">
               <span className="plan-meta-label">Data refresh</span>
-              <span className="plan-meta-value">Monthly (2nd of each month) when payer files update</span>
+              <span className="plan-meta-value">Manual</span>
+            </div>
+            <div className="plan-meta-line">
+              <span className="plan-meta-label">Developed</span>
+              <span className="plan-meta-value">May 2026</span>
             </div>
           </div>
         </div>
@@ -668,7 +668,6 @@ export default function App() {
                 onClick={() => { setActivePlan(plan); setQuery(''); setTabsOpen(false) }}
               >
                 <span className="tab-name">{plan.label}</span>
-                <span className="tab-effective">{plan.effective}</span>
               </button>
             ))}
           </div>
